@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "05C2946344E9B60D8C6CD9B9778FF3540A5A5F42",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3ADC569799870597776BF331DEA40B6C00080064" : 0,
+    "7AE800ED386E7850D93503B656247B3A70B8E302" : 0,
+    "05C2946344E9B60D8C6CD9B9778FF3540A5A5F42" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3E9C4A54-EA7B-467B-B1A0-EB1C2BE5AA59",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3ADC569799870597776BF331DEA40B6C00080064" : "CowaSmart%201.6\/Cowa\/Classes\/Tools\/GJCommon\/md5sum\/",
+    "7AE800ED386E7850D93503B656247B3A70B8E302" : "CowaSmart%20S1\/",
+    "05C2946344E9B60D8C6CD9B9778FF3540A5A5F42" : "CowaSmart%20R1\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Cowa",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Cowa.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "172.16.0.15:Fanren\/COWAROBOT_R1.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "05C2946344E9B60D8C6CD9B9778FF3540A5A5F42"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/shangyexin\/md5sum.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3ADC569799870597776BF331DEA40B6C00080064"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "172.16.0.15:Fanren\/CowaSmart.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7AE800ED386E7850D93503B656247B3A70B8E302"
+    }
+  ]
+}

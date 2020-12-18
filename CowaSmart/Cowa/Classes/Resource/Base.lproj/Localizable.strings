@@ -1,0 +1,365 @@
+/*
+ Localizable.strings
+ Cowa
+ 
+ Created by MX on 16/5/4.
+ Copyright © 2016年 MX. All rights reserved.
+ */
+welcome = "welcome";
+
+Recommend = "Recommend";
+//PageTitle
+PageTitleLocation = "Location";
+LocationPage = "Location";
+
+//登录注册页面
+//Account
+AccountPhone              = "Phone";
+AccountPassword           = "Password";
+/*AccountNewPassword        = "new password";*/
+/*AccountVerifyCode         = "verify code";*/
+AccountOldPassword        = "Old password";
+AccountReinputNewPassword = "reinput new password";
+AccountResetPwdSMS = "Sms code:";
+AccountRegister = "Register";
+AccountSignIn = "Log in";
+AccountPIN = "PIN";
+AccountSendPIN = "Send PIN";
+AccountSignUp = "Register";
+AccountEnterPhoneNumber = " Enter phone number";
+AccountEnterPassword = "Enter current password";
+AccountEnterNewPassword = "Enter new password";
+AccountEnterPINYouReceived = "Enter PIN you received";
+AccountForgotPassword = "Forgot password?";
+AccountResetPassword = "Reset Password";
+AccountName = "Name";
+AccountPhone = "Mobile:";
+AccountPassword = "Password:";
+AccountEnterYourName = "Enter your name";
+AccountResetPassword = "Reset Password";
+AccountCurrentPassword = "Original Password:";
+AccountNewPassword = "New Password:";
+AccountConfirmPassword = "Confirm Password";
+AccountSave = "Save";
+AccountFindPassword = "Find Password";
+AccountChangePassword = "Change Password";
+AccountCheckYourInput = "Please Check Your Input";
+Country = "Country/Regions";
+SelectCountryCode = "Country PhoneNum Code";
+InputPwdAgain = "Input Again:";
+NumAvoidLabel = "* Users need to add the country code before the number, like 8210****9898, don't add 0 behind country code";
+InputSmsCode = " Input PIN";
+ChangePWd = "Change PWD";
+FindPWD = "Reset PWD";
+
+//--侧滑菜单--
+//Menu
+MenuDeviceList = "Device List";
+MenuDeviceListAndSee = "Device List, See More";
+MenuMyAccount = "My Account";
+MenuSettings = "Settings";
+MenuProducts = "Products";
+MenuAbout = "About";
+MenuFAQ = "Product use";
+MenuSignOut = "Sign Out";
+MenuLanguage = "Language";
+MenuTemperatureUnit = "Temperature Unit";
+MenuDeviceShowAllDevice = "Device List &amp; Show All Device";
+
+BagUse = "Bag use";
+AppUse = "App use";
+
+//--设备列表--
+//Device
+DeviceBluetoothConnecting = "Bluetooth connecting";
+DeviceAddANewCOWA = "Add a new suitcase";
+DeviceRemoved = "Removed";
+DeviceRemoveFailed = "Remove Failed";
+DeviceModified = "Modified";
+DeviceModificationFailed = "Modification Failed";
+DeviceConfirm = "Confirm";
+DeviceConfirmToRemove = "Confirm to remove";
+DeviceRemoveThisDeviceFromDeviceList = "Remove this device from device list";
+DeviceDeviceName = "Device Name";
+DeviceDeviceMacAddress = "Mac Address";
+DeviceEnterTheDeviceName = "Enter the device name";
+DeviceSaved = "Saved";
+DeviceSaveFailed = "Save failed";
+DeviceUnowned = "xxx's bag";
+DeviceNotConnect = "No Device Connecting";
+DeviceChangeName = "Change Device Name";
+MacAddress = "MacAddress";
+
+//--相关设置--
+//SettingContent
+SettingContentWarning = "Warning";
+SettingContentWhenCOWALeaveTheSecurityRange = "When COWA leave the security range";
+SettingContentLightForGuest = "Light For Guest";
+SettingContentLightForGuestSetting = "Setting Light";
+SettingContentLanguage = "Language";
+SettingContentChinese = "中文";
+SettingContentEnglish = "English";
+SettingContentTemperatureUnit = "Temperature Unit";
+SettingContentC = "°C";
+SettingContentF = "°F";
+SettingContentdegreeCentigradeC = "degree centigrade °C";
+SettingContentFahrenheitDegreeF = "Fahrenheit degree °F";
+SettingDistanceSensorSwitch = "Distance Sensor switch";
+SettingAuto = "Lock";
+SettingMore = "More";
+SettingBagName = "Bag Name";
+SettingContentLightForGuestColorRed = "Red";
+SettingContentLightForGuestColorBlue = "Blue";
+SettingContentLightForGuestColorGreen = "Green";
+
+//--系统提示语--
+//SystemTip
+SystemTipSorryThatBLEIsNotSupportedByYourPhone = "Sorry that BLE is not supported by your phone";
+SystemTipSearchingDevice = "Searching Device…";
+SystemTipFailToRequestBluetoothPermission = "Fail to request bluetooth permission…";
+//Warning
+WarningBatteryLow = "Battery Low";
+WarningCowaFaraway = "woops！Your rover is lost";
+WarningCowaDisconnect = "Cowa Disconnect";
+
+//震动开关
+SnakeWarn = "Alarm";
+SnakeBreathe = "Reminder";
+
+//--首页弹窗信息--
+//HomeToast
+HomeToastitle_bluetooth = "Bluetooth";
+HomeToastitle_tip = "Tip";
+HomeToastitle_air_ticket = "Ticket";
+HomeToastitle_found_bags = "Discover bags";
+HomeToastitle_are_you_sure_exit_this_account = "Confirm to Sign Out?";
+HomeToastnow_none = "暂无";
+HomeToastopened = "Enabled";
+HomeToastno_open = "Disabled";
+HomeToastip_we_need_open_bluetooth_connect_bags = "为与行李箱正常通信请保持蓝牙开启";
+HomeToastip_when_bags_too_far_will_alarm = "当行李箱超过安全距离是发出警报";
+HomeToastip_can_pass_scan_ticket_add_alert = "可通过扫描添加机票和航程提醒";
+HomeToastip_affirmed_cant_scan_for_other_phone = "Each COWA can only be added to one device";
+HomeToastbtn_text_I_know = "OK";
+HomeToastbtn_text_scan_function_will_open = "扫描功能即将开启";
+HomeToastbtn_text_close_function = "Function Enabled";
+HomeToastbtn_text_open_function = "Function Disabled";
+HomeToastbtn_text_keep_open = "保持开启";
+HomeToastbtn_text_now_open = "立即开启";
+HomeToastbtn_text_cancel = "Cancel";
+HomeToastbtn_text_enter = "OK";
+HomeToastbtn_text_enter_add = "Confirm";
+HomeToastscanning_device = "Seaching Device";
+HomeToastno_found_device = "Device not found";
+HomeToastplz_insure_ble_open_and_near_bags = "Please keep Bluetooth on\\and put your mobile near COWAROBOT";
+HomeToastmate_new_bags = "add a new suitcase";
+HomeToastbig_lock = "Main Lock";
+HomeToastsmall_lock = "Side Lock";
+HomeKeepBlueConnect = "Please turn on your Bluetooth";
+HomeKeepMobileNearBag = "Pairing suitcase";
+HomePairBLE = "Pairing suitcase";
+
+ChangeNameVCName = "Bag Name";
+ChangeNameVCPim = "PIN Code";
+ChangeNameVCBtn = "Submit";
+ChangeNameVCNameTF = "Input Bag's Name";
+ChangeNameVCPinTF = "Input PIN Code";
+
+//--天气类别--
+//Weather
+WeatherBatteryRemainingCapacity = "Battery Remaining Capacity";
+WeatherAirplaneMode = "Airplane mode";
+WeatherAirQualityIsGood = "Air quality is good";
+WeatherAirQualityIsModerate = "Air quality is moderate";
+WeatherAirQualityIsUnhealthyForSensitiveGroups = "Air quality is unhealthy for sensitive groups";
+WeatherAirQualityIsUnhealthy = "Air quality is unhealthy";
+WeatherAirQualityIsVeryUnhealthy = "Air quality is very unhealthy";
+WeatherAirQualityIsHazardous = "Air quality is hazardous";
+WeatherSun = "Sun";
+
+//--snack提示信息--
+//SnackTip
+SnackTipEnabled = "Enabled";
+SnackTipDisabled = "Disabled";
+SnackTipDeviceAdded = "Device Added";
+SnackTipFailToAddDevice = "Fail to Add Device";
+SnackTipEnterYourPhoneNumber = "Enter your phone number";
+SnackTipEnterYourPassword = "Enter your password";
+SnackTipEnterThePINYouReceived = "Enter the PIN you received";
+SnackTipPINSent = "PIN sent";
+SnackTipFailToSentThePINPleaseRetryLater = "Fail to sent the PIN, please retry later";
+SnackTipWrongPIN = "Wrong PIN";
+SnackTipPasswordLengthMustBeOver6Numbers = "Password length must be over 6 numbers";
+SnackTipRegisterationCompleted = "Registeration Completed";
+SnackTipRegisterationFailed = "Registeration Failed";
+SnackTipPasswordReset = "Password Reset";
+SnackTipFailedToResetPassword = "Failed to reset password";
+SnackTipfailedToSignIn = "failed to sign in";
+SnackTipPleaseNameTheDevice = "Please name the device";
+
+// 温馨提示
+COWAROBOTAvoid = "COWAROBOT";
+AcceptSmsCode = "Accept Sms Code!";
+SmsCodeReplyFalse = "Sms Code Apply False, Retry Again Please!";
+RegisterOK = "Register Success!";
+RegisterFalse = "Register False, Retry Again Please!";
+AlreadyRegister = "Already Registered";
+SmsCheckFalse = "Sms Check False,Retry Again Please!";
+LoginFalse = "Login False, Check Your Network And Retry!";
+MissMatch = "The username and password mismatch!";
+CantfindUser = "You have not register !";
+AttentionSms = "Accept Sms Code!";
+ReplySmsFalse = "Sms Code Apply False, Retry Again Please!";
+SetPwdOK = "Password Reset Success!";
+SetPwdFalse = "Password Reset False!";
+BondAvoid = "To Make Sure Your Data Safety, Bond And Cancel Bond Must In NetWork Situation!";
+PwdAvoid = "Electronic Lock Can Only Be Used In Password Lock Close Situation!";
+LocationAvoid = "There Is No Lication Data In Local Database，Open NetWork To Get Data In Time!";
+ChangeNameVCFalse = "Make Sure You Have Input Your Bag's Name And PIN Code Both!";
+ChangeNameOK = "Change Success!";
+MoreBtnAction = "More Science Message Will Be Showed For A While, Please Wait!";
+ShowNotBond = "Your Bag And Your App Are Not In Paired, Please Bond First!";
+SmsCodeWrong = "SmsCode Is Wrong!";
+NumAvoid = "PhoneNum Must Like 'Country Num + PhoneNum', Such As 86159****4594 ";
+BondFalse = "Bond False, Please Try Again!";
+DownloadFile = "Downloading...";
+IsBonding = "Bonding...";
+IsCancelBonding = "Cancel Bonding...";
+NeedUpdateFile = "There Is New File For Bag, If Update Or Not?";
+Update = "Update";
+DontUpdate = "Don't";
+UpdateFileOK = "Complete";
+UpdateFileFalse = "False";
+BagIsNotYour = "The Bag Is Been Bonded By Another One";
+YouHasBondAnBag = "You Have Bonded Another Bag";
+JudgeBondState = "Initializing...";
+MyBag = "My Bag";
+UpdateLinkCantLink = "The Link For Update Can't Visit!";
+YouHaveNoBag = "You Have No Bag In Bond";
+CancelBondOK = "Cancel Bond OK";
+Bond = "Bind";
+AreYouSureCancelBond = "Are you sure cancel bond this bag";
+Sure = "Sure";
+CancelBond = "Cancel Bond";
+CheckUser = "To ensure your account security, please verify your operation first. Please enter the verification code received from the binding phone.";
+CountryLabel = "Country";
+CountryTFPH = "Such as '86''82'";
+SmsTFPH = "Input smscode";
+Get = "Send";
+Commite = "Commit";
+Wait = "Wait";
+FindYourPWD = "Find your password";
+AppUpdate = "App need update";
+BindBagOK = "Bind successfully";
+PleaseBondBag = "Please bind your suitcase";
+AplyBind = "Apply for binding";
+OpenDistanceAvoid = "Confirm turn on the distance alarm?";
+OpenDistanceDetai = "Send notification when the suitcase is beyond safe distance";
+BreathLamp = "LED";
+DistanceAlerm = "Proximity alarm";
+None = "No";
+LampColorSet = "Color Setting";
+BindSetting = "Binding Settings";
+DeleteFriends = "Delete...";
+SelectFriend = "Chosen Device";
+BagUse = "Suitcase Manual";
+AppUse = "APP Manual";
+MyBindBags = "My devices";
+CheckingAuth = "Authenticating";
+TheBagBeenBindAnother = "The suitcase has been bound by others";
+CheckingUpdate = "Checking updates";
+CloseDistanceAvoid = "Confirm turn off the distance alarm";
+CloseDistanceDetail = "Don't send notification when the suitcase is beyond safe distance";
+KeepConnecting = "Please keep the Bluetooth connected with suitcase when updating";
+GetPinButton = "Send";
+NoBagsAreScan = "No suitcase found";
+AddBindFriends = "Invite new suitcase user";
+AddingFriends = "Inviting";
+ChangeBagsName = "Rename the suitcase";
+ME = "Myself";
+LoginSuccess = "Login Success";
+HasNoUser = "Unregistered user";
+HasNoVersionInfo = "This is the latest version";
+AplyBondFalse = "Apply False";
+CancelBondFalse = "Unbind Failed";
+AuthSuccess = "Authorized successfully";
+AuthFalse = "Authorized failed";
+ExceptionViod = "Box seems to be dead, please try to reboot box and App";
+MobileNumver = "Mobile";
+InputNumber = "Input phone num";
+ReplyBindSub = "Please enter the verification code received by the host cell phone number";
+AddFriendSub = "Please input your friend's mobile number";
+ReplyBindAvoid = "You are about to apply for the control authorization to the suitcase owner, we will send the verification code to the owner";
+GiveUp= "Cancel";
+Edit = "Edit";
+Cancel = "Cancel";
+CancelBind = "Cancel Bind";
+RemoteCancelBind = "Remote Cancel Bind";
+MyFriends = "My Friends";
+Delete = "Delete";
+BoxNameCount = "Suitcase's name can't beyond 9 letters";
+FlyModeSub = "The suitcase will turn off after turn on fly mode";
+ShareList = "Share list";
+UserBag = "'S Suitcase";
+User = "User";
+FeedBack = "Feedback";
+AdviceFeed = "Feedbacks";
+MeetIssue = "(The problem type you encountered)";
+ChangeNameSub = "Input Suitcase Name";
+IssueText = "This is a sample text";
+BlueToothIssue = "Bluetooth problem";
+BindIssue = "Binding Sharing";
+LockIssue = "Smart Lock";
+HandleRing = "Bracelet";
+Wheel = "Active Wheels";
+Handler = "Handle";
+BLEConnect = "Bluetooth Connection";
+BoxIssue = "Suitcase problem";
+CommitOk = "Submitted successfully";
+CommitFalse = "Submission failed";
+IsCommiting = "Submitting";
+PermissonIssue = "Your using permission has expired";
+IssueType = "The problem types you have came across";
+ThxLabel = "We will take your valuable opinions seriously, thank you!";
+NoNetWorking = "check your network connection";
+HasNotLink = "Please pair your suitcase first";
+UpdateAvoid = "New firmware for S1, Upgrade?";
+YES = "Yes";
+NO = "No";
+UpdatingAvoid = "Attentiion: Please do not quit the app or run it in the background while the upgrade is going! Click “Confirm” to begin the upgrade.";
+UpdateComfirm = "Confirm";
+Rebooting = "Rebooting S1...";
+UpdateOK = "Congratulations! Upgrade Success!";
+Mingcheng = "Name:";
+MenuSignOutAvoid = "Confirm to Sign Out?";
+CloseSecuryLock = "Close coded lock";
+MyDevices = "My Suitcase";
+MyDevicesSub = "Device List View all other devices";
+parameterSet = "Parameter Setting";
+followDistanceSet = "Set your following distance";
+breathSet = "Set your LED breathing color";
+AlertAvoid = "Set your alarming distance";
+HasDisconnect = "oo far away from the suitcase, Bluetooth is disconnected";
+remoteControlButton = "telecontrol";
+remoteControlSwitch = "Do not stand in front of the main lock when turning on remote control";
+remoteControlDetail = "Please carefully use remote control in narrow or crowded space";
+pleaseCloseFollow = "Please Close Follow Mode";
+clickConnectCowa = "Pair with suitcase";
+
+OpenFlyMode = "Are you sure you want to open the Airplane Mode??";
+OpenFlySub = "The suitcase will be powered off after activate the Airplane Mode";
+
+AverageSpeed = "Average Speed";
+Mileage = "Accumulated Mileage";
+OpenFollow = "Start Follow";
+CloseFollow = "Stop Follow";
+Capcity = "Battery Capacity";
+AccountNameTFPH = "Nickname";
+
+ChangName = "Change Bag's Name And PIN Code";
+PleaseInput = "Please Input Name And PIN Code";
+NamePlacehold = "Bag's Name";
+PINPlacehold = "PIN Code";
+ChangeOK = "Change Success";
+//意见反馈
+AFaceBack = "Replies";

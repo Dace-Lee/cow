@@ -1,0 +1,346 @@
+/*
+ Localizable.strings
+ Cowa
+ 
+ Created by MX on 16/5/4.
+ Copyright © 2016年 MX. All rights reserved.
+ */
+
+welcome = "환영합니다";
+Recommend = "더 많은 제품 보기";
+
+PageTitleLocation = "GPS";
+LocationPage = "캐리어의 위치";
+
+//登录注册页面
+
+AccountPhone = "전화번호";
+AccountPassword = "비밀번호";
+AccountOldPassword = "이전 비밀번호";
+AccountReinputNewPassword = "비밀번호 확인";
+AccountResetPwdSMS = "인증번호:";
+AccountRegister = "회원가입";
+AccountSignIn = "로그인";
+AccountPIN = "PIN";
+AccountSendPIN = "PIN";
+AccountSignUp = "회원 가입";
+AccountEnterPhoneNumber = " 전화번호를 입력하세요";
+AccountEnterPassword = "비밀번호를 입력하세요";
+AccountEnterNewPassword = "새로운 비밀번호를 입력하세요";
+AccountEnterPINYouReceived = "수신 받은 인증번호를 입력하세요";
+AccountForgotPassword = "비밀번호 찾기";
+AccountResetPassword = "비밀번호 재설정";
+AccountName = "이름";
+AccountPhone = "전화번호:";
+AccountPassword = "비밀번호:";
+AccountEnterYourName = "사용자의 이름을 입력해주세요 ";
+AccountResetPassword = "비밀번호 재설정";
+AccountCurrentPassword = "기존 비밀번호:";
+AccountNewPassword = "새 비밀번호:";
+AccountConfirmPassword = "새 비밀번호 확인";
+AccountSave = "저장";
+AccountFindPassword = "Find Password";
+AccountChangePassword = "비밀번호 재설정";
+AccountCheckYourInput = "인증번호 확인";
+Country = "국가/지역 선택";
+SelectCountryCode = "국가번호 설정";
+NumAvoidLabel = "사용자의 전화번호를 입력해주세요.";
+InputSmsCode = " 인증번호";
+ChangePWd = "비밀번호 재설정";
+FindPWD = "비밀번호 재설정";
+
+
+//--侧滑菜单--
+//Menu
+MenuDeviceList = "주변 기기";
+MenuDeviceListAndSee = "주변 기기 검색";
+MenuMyAccount = "계정 관리";
+MenuSettings = "설정";
+MenuProducts = "COWAROBOT 소식";
+MenuAbout = "이용 약관";
+MenuFAQ = "제품 설명";
+MenuSignOut = "로그아웃";
+MenuLanguage = "언어 설정";
+MenuTemperatureUnit = "실외 온도";
+MenuDeviceShowAllDevice = "연결 가능한 주변기기 검색";
+
+BagUse = "캐리어 사용 설명서";
+AppUse = "앱 사용 설명서";
+
+//--设备列表--
+//Device
+DeviceBluetoothConnecting = "블루투스 연결 중";
+DeviceAddANewCOWA = "주변 COWAROBOT 기기검색";
+DeviceRemoved = "등록해제 완료";
+DeviceRemoveFailed = "등록해제 실패";
+DeviceModified = "동기화 완료";
+DeviceModificationFailed = "동기화 실패";
+DeviceConfirm = "확인";
+DeviceConfirmToRemove = "등록해제 확인";
+DeviceRemoveThisDeviceFromDeviceList = "기기 제거";
+DeviceDeviceName = "캐리어 이름";
+DeviceDeviceMacAddress = "Mac Address";
+DeviceEnterTheDeviceName = "캐리어의 이름을 입력해주세요";
+DeviceSaved = "저장완료";
+DeviceSaveFailed = "저장실패";
+DeviceUnowned = "xxx'의 캐리어";
+DeviceNotConnect = "캐리어와 연결되어있지 않음";
+DeviceChangeName = "캐리어 이름 재설정";
+MacAddress = "MacAddress";
+
+//--相关设置--
+//SettingContent
+SettingContentWarning = "알람";
+SettingContentWhenCOWALeaveTheSecurityRange = "가방이 안전거리를 벗어 날 시";
+SettingContentLightForGuest = "항상 LED 불빛 켜기";
+SettingContentLightForGuestSetting = "LED 설정";
+SettingContentLightForGuestColorSetting = "LED 불빛 색상 설정";
+SettingContentLightForGuestColorRed = "빨강";
+SettingContentLightForGuestColorBlue = "파랑";
+SettingContentLightForGuestColorGreen = "초록";
+SettingContentLanguage = "캐리어 이름";
+SettingContentChinese = "中文";
+SettingContentEnglish = "English";
+SettingContentTemperatureUnit = "온도 단위";
+SettingContentC = "°C";
+SettingContentF = "°F";
+SettingContentdegreeCentigradeC = "degree centigrade °C";
+SettingContentFahrenheitDegreeF = "Fahrenheit degree °F";
+SettingDistanceSensorSwitch = "거리 알람 조절";
+SettingAuto = "스마트 잠금";
+SettingMore = "더보기";
+
+//--系统提示语--
+//SystemTip
+SystemTipSorryThatBLEIsNotSupportedByYourPhone = "해당 휴대폰에서 BLE 기능을 지원하지 않습니다";
+SystemTipSearchingDevice = "기기 검색 중…";
+SystemTipFailToRequestBluetoothPermission = "블루투스 연결 실패";
+
+WarningBatteryLow = "배터리 부족";
+WarningCowaFaraway = "사용자님의 Rover가 안전거리를 벗어났습니다";
+WarningCowaDisconnect = "캐리어 연결 해제";
+
+//震动开关
+SnakeWarn = "분실알림";
+SnakeBreathe = "주행알림";
+
+//--首页弹窗信息--
+//HomeToast
+HomeToastitle_are_you_sure_exit_this_account = "로그아웃 하시겠습니까?";
+HomeToastopened = "활성화";
+HomeToastno_open = "비활성화";
+
+HomeToastip_affirmed_cant_scan_for_other_phone = "캐리어는 한대의 휴대폰에만 동기화가 가능합니다 ";
+HomeToastbtn_text_I_know = "확인";
+HomeToastbtn_text_close_function = "활성화";
+HomeToastbtn_text_open_function = "비활성화";
+HomeToastbtn_text_cancel = "취소";
+HomeToastbtn_text_enter = "확인";
+HomeToastbtn_text_enter_add = "확인";
+HomeToastscanning_device = "기기 검색중";
+HomeToastno_found_device = "기기를 찾을 수 업습니다";
+HomeToastplz_insure_ble_open_and_near_bags = "휴대폰의 블루투스 기능을 활성화 한 뒤 캐리어와 가까이 두세요";
+HomeToastmate_new_bags = "주변 COWAROBOT 캐리어 검색";
+HomeToastbig_lock = "주 잠금장치";
+HomeToastsmall_lock = "보조 잠금장치";
+HomeKeepBlueConnect = "블루투스를 활성화 해주세요";
+HomeKeepMobileNearBag = "캐리어 동기화";
+HomePairBLE = "캐리어 동기화";
+
+ChangeNameVCName = "캐리어 이름";
+ChangeNameVCPim = "인증번호";
+ChangeNameVCBtn = "입력";
+ChangeNameVCNameTF = "캐리어의 이름을 입력해주세요";
+ChangeNameVCPinTF = "인증번호를 입력해주세요";
+//--天气类别--
+//Weather
+WeatherBatteryRemainingCapacity = "배터리 잔량";
+WeatherAirplaneMode = "비행기 모드";
+
+//--snack提示信息--
+//SnackTip
+SnackTipEnabled = "활성화";
+SnackTipDisabled = "비활성화";
+SnackTipDeviceAdded = "기기추가 완료";
+SnackTipFailToAddDevice = "기기 추가 실패";
+SnackTipEnterYourPhoneNumber = "전화번호를 입력해주세요";
+SnackTipEnterYourPassword = "비밀번호를 입력해주세요";
+SnackTipEnterThePINYouReceived = "수신 받은 인증번호를 입력해주세요";
+SnackTipPINSent = "인증번호 송부완료";
+SnackTipFailToSentThePINPleaseRetryLater = "인증번호 송부 실패, 다시 시도해주세요";
+SnackTipWrongPIN = "인증번호 오류";
+SnackTipPasswordLengthMustBeOver6Numbers = "비밀번호는 여섯 자 이상이어야 합니다";
+SnackTipRegisterationCompleted = "등록 완료";
+SnackTipRegisterationFailed = "등록 실패";
+SnackTipPasswordReset = "비밀번호 재설정";
+SnackTipFailedToResetPassword = "비밀번호 재설정 실패";
+SnackTipfailedToSignIn = "로그인 실패";
+SnackTipPleaseNameTheDevice = "기기 이름을 설정해주세요";
+
+// 温馨提示
+COWAROBOTAvoid = "COWAROBOT";
+AcceptSmsCode = "SMS 코드를 확인해주세요";
+SmsCodeReplyFalse = "SMS 코드 전송 실패, 다시 시도 해주세요";
+RegisterOK = "등록 완료";
+RegisterFalse = "등록 실패, 재시도 해주세요";
+AlreadyRegister = "이미 등록되어 있는 번호입니다.";
+SmsCheckFalse = "SMS 코드 전송 실패, 다시 시도해주세요.";
+LoginFalse = "로그인 실패, 인터넷 연결 상태를 확인 해주세요";
+MissMatch = "아이디와 비밀번호가 일치하지 않습니다.";
+AttentionSms = "SMS 코드 받기";
+ReplySmsFalse = " SMS 코드 전송 실패, 다시 시도 해주세요";
+SetPwdOK = "비밀번호 재설정 완료";
+SetPwdFalse = "비밀번호 재설정 실패";
+BondAvoid = "위치 정보를 보존하기 위해 동기화 및 해제는 인터넷이 연결되어 있을 때 진행해주세요";
+PwdAvoid = "전자 잠금장치는 다이얼 잠금장치가 잠겨있을 때에 사용이 가능합니다";
+LocationAvoid = "위치정보 확인을 위해 데이터 네트워크에 접속해주세요";
+ChangeNameVCFalse = "인증번호와 캐리어 이름을 입력해주세요";
+ChangeNameOK = "변경 완료";
+MoreBtnAction = "COWAROBOT 관련 정보 업데이트 예정입니다";
+ShowNotBond = "휴대폰과 캐리어가 동기화 되어있지 않습니다. 화면 우측 상단의 동기화 버튼을 눌러주세요";
+SmsCodeWrong = "SMS 코드가 일치하지 않습니다";
+NumAvoid = "전화번호를 입력해주세요";
+Sure = "확인";
+Bond = "동기화";
+BondFalse = "동기화 실패, 다시 시도해주세요";
+DownloadFile = "다운로드중...";
+IsBonding = "동기화중...";
+IsCancelBonding = "동기화 취소...";
+NeedUpdateFile = "어플리케이션 업데이트가 필요합니다. ";
+Update = "업데이트 진행";
+DontUpdate = "취소";
+UpdateFileOK = "업데이트 완료";
+UpdateFileFalse = "업데이트 실패";
+BagIsNotYour = "이 캐리어는 다른 기기와 동기화되어 있습니다.";
+YouHasBondAnBag = "기기 동기화 완료";
+JudgeBondState = "연결중...";
+BindBagOK = "동기화 성공";
+PleaseBondBag = "캐리어를 동기화 해주세요";
+AplyBind = "동기화 시도";
+OpenDistanceAvoid = "거리감지 알람을 사용 하시겠습니까?";
+OpenDistanceDetai = "캐리어가 사용자와 안전거리\n 이상 떨어질 시 알림 받기";
+BreathLamp = "LED 설정";
+DistanceAlerm = "분실 알람";
+None = "없음";
+LampColorSet = "색상 설정";
+BindSetting = "동기화 설정";
+DeleteFriends = "제거...";
+SelectFriend = "동기화된 기기";
+BagUse = "캐리어 매뉴얼";
+AppUse = "어플리케이션 매뉴얼";
+MyBindBags = "내 캐리어";
+CheckingAuth = "인증 중";
+TheBagBeenBindAnother = "이 캐리어는 다른 휴대폰과 동기화되어 있습니다";
+CheckingUpdate = "업데이트 확인중";
+CloseDistanceAvoid = "거리 감지 알람을 끄시겠습니까?";
+CloseDistanceDetail = "캐리어 안전거리 이탈 시 알림 끄기";
+KeepConnecting = "어플리케이션 업데이트 시 캐리어와 블루투스 연결을 하세요";
+GetPinButton = "보내기";
+NoBagsAreScan = "캐리어가 검색되지 않음";
+AddBindFriends = "새로운 사용자 등록";
+AddingFriends = "등록 중";
+ChangeBagsName = "캐리어 이름 재설정";
+ME = "나";
+LoginSuccess = "로그인 성공";
+HasNoUser = "가입되어있지 않은 사용자";
+HasNoVersionInfo = "어플리케이션이 최신 버전입니다";
+AplyBondFalse = "동기화 실패";
+CancelBondFalse = "동기화 해제 실패";
+AuthSuccess = "동기화 연결";
+AuthFalse = "인증 실패";
+ExceptionViod = "Box seems to be dead, please try to reboot box and App";
+MobileNumver = "번호";
+InputNumber = "번호 입력";
+CancelBond = "원격 동기화 해제";
+Get = "전송";
+ReplyBindSub = "캐리어 사용 인증를 위해 최초 등록자에게 인증번호를 발송할 예정입니다";
+CheckUser = "동기화 해제를 위하여 휴대전화로 전송된 PIN을 입력해주세요.";
+AddFriendSub = "캐리어 작동 권한을 갖게 될 사용자의 전화번호를 입력하세요";
+AreYouSureCancelBond = "캐리어 동기화를 해제하시겠습니까?";
+SmsTFPH = "인증번호";
+InputPwdAgain = "새 비밀번호 확인:";
+SettingBagName = "캐리어 이름";
+ReplyBindAvoid = "캐리어 사용 인증를 위해 최초 등록자에게 인증번호를 발송할 예정입니다";
+GiveUp= "취소";
+Edit = "편집";
+Cancel = "취소";
+CancelBind = "동기화 해제";
+RemoteCancelBind = "원격 동기화 해제";
+MyFriends = "사용자 목록";
+Delete = "제거";
+BoxNameCount = "캐리어 이름은 9자 초과할 수 없습니다";
+FlyModeSub = "비행기 탑승모드 활성화 시\n캐리어의 전원이 꺼집니다";
+ShareList = "사용자 목록";
+UserBag = "의 캐리어";
+User = "사용자";
+CancelBondOK = "동기화 해제 성공";
+FeedBack = "고객 문의";
+AdviceFeed = "고객 문의";
+MeetIssue = "(어떠한 문제가 발생하였나요?)";
+IssueText = "고객님의 소중한 의견을 공유해주세요";
+BindIssue = "사용 허가";
+LockIssue = "스마트 잠금";
+HandleRing = "스마트 밴드";
+Wheel = "자율주행 바퀴";
+Handler = "손잡이";
+BLEConnect = "블루투스 연결";
+ChangeNameSub = "새로운 이름을 입력해주세요";
+BoxIssue = "캐리어 기능작동 관련 문의";
+CommitOk = "제출 완료";
+CommitFalse = "제출 실패";
+IsCommiting = "제출중...";
+Commite = "제출";
+PermissonIssue = "어플리케이션 권한이 만료되었습니다";
+IssueType = "어떤 문제를 겪고 계신가요";
+ThxLabel = "문의가 접수 되었습니다. 감사합니다!";
+NoNetWorking = "당신의 인터넷 접속을 검사 해 주십시오";
+HasNotLink = "먼저 캐리어를 동기화 하세요";
+UpdateAvoid = "New firmware for S1, Upgrade?";
+YES = "Yes";
+NO = "No";
+MenuSignOutAvoid = "로그아웃 하시겠습니까?";
+UpdatingAvoid = "Attentiion: Please do not quit the app or run it in the background while the upgrade is going! Click “Confirm” to begin the upgrade.";
+UpdateComfirm = "Confirm";
+Rebooting = "Rebooting S1...";
+UpdateOK = "Congratulations! Upgrade Success!";
+Mingcheng = "별명:";
+MyBag = "내 Suitcase";
+CloseSecuryLock = "주 잠금장치는 다이얼 잠금장치가 잠겨있을 때에 사용이 가능합니다";
+remoteControlButton = "속도";
+remoteControlSwitch = "주 잠금장치를 주행하고자 하는 방 향으로 위치시켜 주세요";
+remoteControlDetail = "원격조종모드 활성화시 비좁은 공간 혹은 혼잡한 공간에서의 사용을 권장하지 않습니다";
+pleaseCloseFollow = "Please Close Follow Mode";
+clickConnectCowa = "캐리어연결";
+
+MyDevices = "My Suitcase";
+MyDevicesSub = "주변 기기 검색";
+parameterSet = "주행반경 설정";
+followDistanceSet = "주행반경 설정";
+breathSet = "LED 색상 설정";
+AlertAvoid = "분실방지 알람 작동거리 설정";
+HasDisconnect = "캐리어 연결 해제";
+
+OpenFlyMode = "비행기 모드 활성화시 블루투스 연동이 해제됩니다.\n 정말로 비행기 모드를 활성화 하시겠습니까?";
+OpenFlySub = "비행기 탑승모드 활성화 시캐리어의 전원이 꺼집니다";
+
+AverageSpeed = "평균 속도";
+Mileage = "총 주행 거리";
+OpenFollow = "자율주행모드";
+CloseFollow = "수동주행모드";
+AccountNameTFPH = "이름";
+
+Capcity = "배터리 잔량";
+
+SettingContentLightForGuestColorRed = "빨강";
+SettingContentLightForGuestColorBlue = "파랑";
+SettingContentLightForGuestColorGreen = "초록";
+
+ChangName = "캐리어 이름 변경";
+PleaseInput = "새로운 이름을 입력해주세요";
+NamePlacehold = "캐리어 이름";
+PINPlacehold = "인증번호";
+ChangeOK = "변경 완료";
+
+
+//意见反馈
+AFaceBack = "이미 회답을";

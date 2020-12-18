@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CountryCodeSelect" customModule="Cowa" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="c0q-H9-91o" id="zJu-NY-4K6"/>
+                <outlet property="titleLabel" destination="pCc-vs-7cz" id="wIj-Q8-48c"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="国家与地区代码选择-背景框.png" translatesAutoresizingMaskIntoConstraints="NO" id="NAN-4a-Hu1">
+                    <rect key="frame" x="24" y="91" width="326" height="485"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="485" id="X44-xE-E3R"/>
+                        <constraint firstAttribute="width" constant="326" id="tTX-om-FJV"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeK-aa-cRm">
+                    <rect key="frame" x="24" y="91" width="326" height="485"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c0q-H9-91o">
+                            <rect key="frame" x="20" y="58" width="286" height="407"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="407" id="D6a-gK-xUk"/>
+                                <constraint firstAttribute="width" constant="286" id="tGc-y2-oxA"/>
+                            </constraints>
+                            <color key="sectionIndexColor" red="0.42745098040000001" green="0.58039215690000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择国家和地区代码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="pCc-vs-7cz">
+                            <rect key="frame" x="73" y="29" width="181" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="181" id="JPk-eg-ohm"/>
+                                <constraint firstAttribute="height" constant="21" id="XHO-Ss-fGJ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" red="0.42745098040000001" green="0.58039215690000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="pCc-vs-7cz" firstAttribute="top" secondItem="KeK-aa-cRm" secondAttribute="top" constant="29" id="06g-Si-HFI"/>
+                        <constraint firstAttribute="height" constant="485" id="1YQ-tl-HE8"/>
+                        <constraint firstAttribute="width" constant="326" id="Avh-uM-D0o"/>
+                        <constraint firstItem="c0q-H9-91o" firstAttribute="centerX" secondItem="KeK-aa-cRm" secondAttribute="centerX" id="eGG-eA-VI3"/>
+                        <constraint firstItem="c0q-H9-91o" firstAttribute="top" secondItem="pCc-vs-7cz" secondAttribute="bottom" constant="8" id="fut-I2-17P"/>
+                        <constraint firstItem="pCc-vs-7cz" firstAttribute="centerX" secondItem="KeK-aa-cRm" secondAttribute="centerX" id="w3Q-yD-Q9j"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="NAN-4a-Hu1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8Ka-FW-5nx"/>
+                <constraint firstItem="KeK-aa-cRm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TE4-zb-Y5a"/>
+                <constraint firstItem="NAN-4a-Hu1" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="pB7-Cs-we8"/>
+                <constraint firstItem="KeK-aa-cRm" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="u4l-OD-6dJ"/>
+            </constraints>
+            <point key="canvasLocation" x="-148" y="-38"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="国家与地区代码选择-背景框.png" width="325" height="485"/>
+    </resources>
+</document>

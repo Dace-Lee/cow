@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="cellid" id="iN0-l3-epB" customClass="BindSettingHeaderViewTwo" customModule="Cowa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="292" height="48"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6WE-2N-oXg">
+                    <rect key="frame" x="8" y="12" width="150" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="fC9-06-qI4"/>
+                        <constraint firstAttribute="width" constant="150" id="wwi-gw-IFd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.42745098039215684" green="0.58039215686274503" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="分割线.png" translatesAutoresizingMaskIntoConstraints="NO" id="7B3-h7-a2P">
+                    <rect key="frame" x="4" y="41.5" width="288" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Nli-vc-l3e"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ax-dD-vgh">
+                    <rect key="frame" x="219" y="8" width="73" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="73" id="35z-V6-dQY"/>
+                        <constraint firstAttribute="height" constant="27" id="h7x-vg-oPa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="编辑" backgroundImage="编辑按钮-新.png"/>
+                    <connections>
+                        <action selector="editBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="rQJ-db-rXI"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7ax-dD-vgh" secondAttribute="trailing" id="7JE-Or-rmM"/>
+                <constraint firstItem="6WE-2N-oXg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="L7b-YC-Bc4"/>
+                <constraint firstAttribute="trailing" secondItem="7B3-h7-a2P" secondAttribute="trailing" id="OMW-UB-X78"/>
+                <constraint firstItem="7ax-dD-vgh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Qx2-L4-Abe"/>
+                <constraint firstItem="7B3-h7-a2P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="TGI-EX-2b5"/>
+                <constraint firstAttribute="bottom" secondItem="7B3-h7-a2P" secondAttribute="bottom" constant="5.5" id="gmW-Ce-n8u"/>
+                <constraint firstItem="7ax-dD-vgh" firstAttribute="centerY" secondItem="6WE-2N-oXg" secondAttribute="centerY" id="l5O-i1-SoJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="editBtn" destination="7ax-dD-vgh" id="rJg-ev-TDd"/>
+                <outlet property="friendLabel" destination="6WE-2N-oXg" id="60H-Ik-AkU"/>
+            </connections>
+            <point key="canvasLocation" x="-268" y="-68"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="分割线.png" width="257" height="1"/>
+        <image name="编辑按钮-新.png" width="73" height="27"/>
+    </resources>
+</document>

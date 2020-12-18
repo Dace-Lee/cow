@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeviceListVC" customModule="Cowa" customModuleProvider="target">
+            <connections>
+                <outlet property="deviceListLabel" destination="vK7-Oe-GrD" id="mPV-Jt-UYb"/>
+                <outlet property="tableView" destination="fSR-3S-0Av" id="8B6-GW-WHl"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="设备列表背景.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vbh-ld-yhw">
+                    <rect key="frame" x="19" y="84" width="336" height="563"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备列表" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vK7-Oe-GrD">
+                    <rect key="frame" x="135" y="118" width="104" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="NRs-UN-CSx"/>
+                        <constraint firstAttribute="width" constant="104" id="VYu-EK-iWn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="0.42745098040000001" green="0.58039215690000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXX-cu-3ga">
+                    <rect key="frame" x="307" y="116" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="3MU-Fy-fXs"/>
+                        <constraint firstAttribute="height" constant="25" id="cQi-WS-cWr"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="关闭图标.png"/>
+                    <connections>
+                        <action selector="cancalBtnAction:" destination="-1" eventType="touchUpInside" id="syU-B7-jwy"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fSR-3S-0Av">
+                    <rect key="frame" x="43" y="155" width="289" height="464"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Vbh-ld-yhw" secondAttribute="bottom" constant="20" id="7SY-dR-bSd"/>
+                <constraint firstItem="Vbh-ld-yhw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="19" id="INt-B3-eiD"/>
+                <constraint firstItem="hXX-cu-3ga" firstAttribute="trailing" secondItem="fSR-3S-0Av" secondAttribute="trailing" id="PAZ-mP-DCV"/>
+                <constraint firstItem="vK7-Oe-GrD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="118" id="QDQ-8V-ie5"/>
+                <constraint firstItem="vK7-Oe-GrD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QGJ-PG-s9A"/>
+                <constraint firstItem="Vbh-ld-yhw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="UJE-X1-Nka"/>
+                <constraint firstAttribute="trailing" secondItem="Vbh-ld-yhw" secondAttribute="trailing" constant="20" id="cEb-gm-NPo"/>
+                <constraint firstAttribute="trailing" secondItem="fSR-3S-0Av" secondAttribute="trailing" constant="43" id="dkk-Z3-O3f"/>
+                <constraint firstAttribute="bottom" secondItem="fSR-3S-0Av" secondAttribute="bottom" constant="48" id="hz2-yC-u9D"/>
+                <constraint firstItem="fSR-3S-0Av" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="43" id="ikK-iH-fwX"/>
+                <constraint firstItem="hXX-cu-3ga" firstAttribute="centerY" secondItem="vK7-Oe-GrD" secondAttribute="centerY" id="n0d-1z-CxZ"/>
+                <constraint firstItem="fSR-3S-0Av" firstAttribute="top" secondItem="hXX-cu-3ga" secondAttribute="bottom" constant="14" id="ynl-2J-w5U"/>
+            </constraints>
+            <point key="canvasLocation" x="-324.5" y="98.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="关闭图标.png" width="25" height="25"/>
+        <image name="设备列表背景.png" width="414" height="665"/>
+    </resources>
+</document>

@@ -1,0 +1,6 @@
+framework module CowaBLELib {
+    umbrella header "CowaBLELib.h"
+    
+    export *
+    module * { export * }
+}

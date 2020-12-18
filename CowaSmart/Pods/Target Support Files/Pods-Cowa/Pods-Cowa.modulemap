@@ -1,0 +1,6 @@
+framework module Pods_Cowa {
+  umbrella header "Pods-Cowa-umbrella.h"
+
+  export *
+  module * { export * }
+}

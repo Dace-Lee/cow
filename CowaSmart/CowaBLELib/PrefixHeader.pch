@@ -1,0 +1,35 @@
+//
+//  PrefixHeader.pch
+//  wearable-ios
+//
+//  Created by MX on 15/9/7.
+//  Copyright (c) 2015年 MX. All rights reserved.
+//
+
+#ifndef wearable_ios_PrefixHeader_pch
+#define wearable_ios_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+//static 
+//**************************************************
+///define block declare
+#define weakify(var) __weak typeof(var) AHKWeak_##var = var;
+
+#define strongify(var) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wshadow\"") \
+__strong typeof(var) var = AHKWeak_##var; \
+_Pragma("clang diagnostic pop")
+//**************************************************
+
+#import "CowaBLELib.h"
+
+#ifdef DEBUG
+#define DLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define DLog( s, ... )
+#endif

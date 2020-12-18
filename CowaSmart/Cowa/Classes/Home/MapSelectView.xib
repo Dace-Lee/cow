@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MapSelectView" customModule="Cowa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="94"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBA-fe-ANv">
+                    <rect key="frame" x="0.0" y="0.0" width="42" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="百度地图-释放.png"/>
+                    <state key="selected" backgroundImage="百度地图-点击.png"/>
+                    <connections>
+                        <action selector="bdMapViewBtnActionWithSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="DHu-V7-iry"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djT-50-P0r">
+                    <rect key="frame" x="0.0" y="53" width="42" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="谷歌地图-释放.png"/>
+                    <state key="selected" backgroundImage="谷歌地图-点击.png"/>
+                    <connections>
+                        <action selector="ggMapViewBtnActionWithSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="ClS-Q5-3WP"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="541" y="515"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="百度地图-点击.png" width="42" height="41"/>
+        <image name="百度地图-释放.png" width="42" height="41"/>
+        <image name="谷歌地图-点击.png" width="42" height="41"/>
+        <image name="谷歌地图-释放.png" width="42" height="41"/>
+    </resources>
+</document>

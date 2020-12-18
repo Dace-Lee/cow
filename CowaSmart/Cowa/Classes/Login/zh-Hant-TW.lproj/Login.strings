@@ -1,0 +1,69 @@
+
+/* Class = "UITextField"; placeholder = "请输入验证码"; ObjectID = "3ZP-p3-vWF"; */
+"3ZP-p3-vWF.placeholder" = "请输入验证码";
+
+/* Class = "UILabel"; text = "验证码:"; ObjectID = "3d8-Iv-bi3"; */
+"3d8-Iv-bi3.text" = "验证码:";
+
+/* Class = "UITextField"; placeholder = "请输入手机号"; ObjectID = "583-gk-Z0R"; */
+"583-gk-Z0R.placeholder" = "请输入手机号";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5Tw-B7-qWa"; */
+"5Tw-B7-qWa.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "请输入密码"; ObjectID = "AYB-Hm-qqN"; */
+"AYB-Hm-qqN.placeholder" = "请输入密码";
+
+/* Class = "UILabel"; text = "密码:"; ObjectID = "BMe-B4-5am"; */
+"BMe-B4-5am.text" = "密码:";
+
+/* Class = "UILabel"; text = "手机:"; ObjectID = "PpF-pQ-Hfq"; */
+"PpF-pQ-Hfq.text" = "手机:";
+
+/* Class = "UILabel"; text = "验证码:"; ObjectID = "Zx4-Ej-tBz"; */
+"Zx4-Ej-tBz.text" = "验证码:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "a1B-pj-Shl"; */
+"a1B-pj-Shl.text" = "Label";
+
+/* Class = "UILabel"; text = "手机:"; ObjectID = "dXe-v7-Bh7"; */
+"dXe-v7-Bh7.text" = "手机:";
+
+/* Class = "UITextField"; placeholder = "请输入手机号"; ObjectID = "fPP-Q0-ygX"; */
+"fPP-Q0-ygX.placeholder" = "请输入手机号";
+
+/* Class = "UILabel"; text = "+86"; ObjectID = "g59-eD-dyL"; */
+"g59-eD-dyL.text" = "+86";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "gyo-ZR-la3"; */
+"gyo-ZR-la3.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "请输入密码"; ObjectID = "jLA-KQ-zwB"; */
+"jLA-KQ-zwB.placeholder" = "请输入密码";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "l9a-Lj-HiE"; */
+"l9a-Lj-HiE.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "忘记密码?立即找回"; ObjectID = "qBf-u7-mW8"; */
+"qBf-u7-mW8.normalTitle" = "忘记密码?立即找回";
+
+/* Class = "UITextField"; placeholder = "请输入新密码"; ObjectID = "rCV-Do-enS"; */
+"rCV-Do-enS.placeholder" = "请输入新密码";
+
+/* Class = "UILabel"; text = "手机:"; ObjectID = "rQz-gd-GQ9"; */
+"rQz-gd-GQ9.text" = "手机:";
+
+/* Class = "UILabel"; text = "新密码:"; ObjectID = "seH-A4-EQe"; */
+"seH-A4-EQe.text" = "新密码:";
+
+/* Class = "UILabel"; text = "密码:"; ObjectID = "w0b-fO-yiR"; */
+"w0b-fO-yiR.text" = "密码:";
+
+/* Class = "UITextField"; placeholder = "请输入手机号"; ObjectID = "xIV-I2-OQq"; */
+"xIV-I2-OQq.placeholder" = "请输入手机号";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xO2-iN-qAX"; */
+"xO2-iN-qAX.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "请输入验证码"; ObjectID = "zY3-c9-fjc"; */
+"zY3-c9-fjc.placeholder" = "请输入验证码";

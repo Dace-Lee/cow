@@ -1,0 +1,369 @@
+/*
+  Localizable.strings
+  Cowa
+
+  Created by MX on 16/5/4.
+  Copyright © 2016年 MX. All rights reserved.
+*/
+welcome = "welcome";
+
+Recommend = "产品推荐";
+
+//PageTitle
+PageTitleLocation = "位置";
+LocationPage = "位置";
+
+//登录注册页面
+//Account
+AccountPhone              = "我的手机";
+AccountPassword           = "我的密码";
+/*AccountNewPassword        = "new password";*/
+/*AccountVerifyCode         = "verify code";*/
+AccountOldPassword        = "旧密码";
+AccountReinputNewPassword = "确认新密码";
+AccountResetPwdSMS = "验证码:";
+AccountRegister = "新用户注册";
+AccountSignIn = "登录";
+AccountPIN = "验证码:";
+AccountSendPIN = "发送验证码";
+AccountSignUp = "注册";
+AccountEnterPhoneNumber = " 请输入手机号";
+AccountEnterPassword = "请输入当前密码";
+AccountEnterNewPassword = "请输入新密码";
+AccountEnterPINYouReceived = "请输入短信收到的验证码";
+AccountForgotPassword = "忘记密码?立即找回";
+AccountResetPassword = "忘记密码";
+AccountName = "我的称呼";
+AccountPhone = "手机:";
+AccountPassword = "密码:";
+AccountEnterYourName = "请输入您新的称呼";
+AccountResetPassword = "忘记密码";
+AccountCurrentPassword = "当前密码:";
+AccountNewPassword = "新密码:";
+AccountConfirmPassword = "请确认密码";
+AccountSave = "保存修改";
+AccountFindPassword = "找回密码";
+AccountChangePassword = "修改密码";
+AccountCheckYourInput = "请检查你的输入";
+Country = "国家/地区";
+SelectCountryCode = "选择国家和地区代码";
+InputPwdAgain = "确认密码:";
+InputSmsCode = " 请输入验证码";
+NumAvoidLabel = "* 用户需在号码前加国家代码,如8210****9898,国家代码后不要加0";
+ChangePWd = "修改密码";
+FindPWD = "重置密码";
+
+//--侧滑菜单--
+//Menu
+MenuDeviceList = "设备列表";
+MenuDeviceListAndSee = "设备列表 查看所有设备";
+MenuMyAccount = "我的账号";
+MenuSettings = "相关设置";
+MenuProducts = "产品推荐";
+MenuAbout = "关于";
+MenuFAQ = "产品使用说明";
+MenuSignOut = "退出";
+MenuLanguage = "语言设置";
+MenuTemperatureUnit = "温度单位";
+MenuDeviceShowAllDevice = "Device List &amp; Show All Device";
+MenuSignOutAvoid = "是否确定要退出该账号？";
+
+BagUse = "行李箱使用";
+AppUse = "App使用";
+
+//--设备列表--
+//Device
+DeviceBluetoothConnecting = "蓝牙连接中";
+DeviceAddANewCOWA = "添加新的旅行箱";
+DeviceRemoved = "删除成功";
+DeviceRemoveFailed = "删除失败";
+DeviceModified = "修改成功";
+DeviceModificationFailed = "修改失败";
+DeviceConfirm = "确认移除";
+DeviceConfirmToRemove = "移除设备";
+DeviceRemoveThisDeviceFromDeviceList = "将从你的设备列表移除该设备";
+DeviceDeviceName = "设备名称";
+DeviceDeviceMacAddress = "设备Mac地址";
+DeviceEnterTheDeviceName = "请设置该设备名称";
+DeviceSaved = "设置成功";
+DeviceSaveFailed = "设置失败";
+DeviceUnowned = "xxx的行李箱";
+DeviceNotConnect = "设备未连接";
+DeviceChangeName = "修改设备名";
+MacAddress = "Mac地址";
+
+//--相关设置--
+//SettingContent
+SettingContentWarning = "提醒";
+SettingContentWhenCOWALeaveTheSecurityRange = "当行李超过安全距离时发出警告";
+SettingContentLightForGuest = "迎宾灯";
+SettingContentLightForGuestSetting = "设置迎宾灯";
+SettingContentLightForGuestColorSetting = "灯光颜色设置";
+SettingContentLightForGuestColorRed = "红色";
+SettingContentLightForGuestColorBlue = "蓝色";
+SettingContentLightForGuestColorGreen = "绿色";
+SettingContentLanguage = "语言设置";
+SettingContentChinese = "中文";
+SettingContentEnglish = "English";
+SettingContentTemperatureUnit = "温度单位";
+SettingContentC = "°C";
+SettingContentF = "°F";
+SettingContentdegreeCentigradeC = "摄氏度 °C";
+SettingContentFahrenheitDegreeF = "华氏度 °F";
+SettingDistanceSensorSwitch = "距离感应开关";
+SettingAuto = "智能锁";
+SettingMore = "更多";
+SettingBagName = "设备名设置";
+
+//--系统提示语--
+//SystemTip
+SystemTipSorryThatBLEIsNotSupportedByYourPhone = "抱歉!您的设备不支持低功耗蓝牙";
+SystemTipSearchingDevice = "设备搜索中…";
+SystemTipFailToRequestBluetoothPermission = "开启蓝牙失败,请开启蓝牙…";
+//Warning
+WarningBatteryLow = "电池电量低";
+WarningCowaFaraway = "主人，你的箱子跟丢了";
+WarningCowaDisconnect = "行李箱断开连接";
+
+//震动开关
+SnakeWarn = "丢失报警";
+SnakeBreathe = "跟随提醒";
+
+    //--首页弹窗信息--
+    //HomeToast
+HomeToastitle_bluetooth = "蓝牙";
+HomeToastitle_tip = "提醒";
+HomeToastitle_air_ticket = "机票";
+HomeToastitle_found_bags = "发现行李箱";
+HomeToastitle_are_you_sure_exit_this_account = "是否确定要退出该账号?";
+HomeToastnow_none = "暂无";
+HomeToastopened = "已开启";
+HomeToastno_open = "未开启";
+HomeToastip_we_need_open_bluetooth_connect_bags = "为与行李箱正常通信请保持蓝牙开启";
+HomeToastip_when_bags_too_far_will_alarm = "当行李箱超过安全距离是发出警报";
+HomeToastip_can_pass_scan_ticket_add_alert = "可通过扫描添加机票和航程提醒";
+HomeToastip_affirmed_cant_scan_for_other_phone = "确认添加后行李箱将无法被其他设备添加";
+HomeToastbtn_text_I_know = "我知道了";
+HomeToastbtn_text_scan_function_will_open = "扫描功能即将开启";
+HomeToastbtn_text_close_function = "关闭该功能";
+HomeToastbtn_text_open_function = "开启该功能";
+HomeToastbtn_text_keep_open = "保持开启";
+HomeToastbtn_text_now_open = "立即开启";
+HomeToastbtn_text_cancel = "取消";
+HomeToastbtn_text_enter = "我知道了";
+HomeToastbtn_text_enter_add = "确认移除";
+HomeToastscanning_device = "设备搜索中";
+HomeToastno_found_device = "未搜索到设备";
+HomeToastplz_insure_ble_open_and_near_bags = "请确保蓝牙保持打开\n并将手机尽量靠近将要添加的行李箱";
+HomeToastmate_new_bags = "添加新的旅行箱";
+HomeToastbig_lock = "主箱体智能锁";
+HomeToastsmall_lock = "电脑仓智能锁";
+HomeKeepBlueConnect = "请打开手机蓝牙";
+HomeKeepMobileNearBag = "点击匹配行李箱";
+HomePairBLE = "匹配行李箱";
+Delete = "删除";
+
+ChangeNameVCName = "设备名";
+ChangeNameVCPim = "PIN 码";
+ChangeNameVCBtn = "提交";
+ChangeNameVCNameTF = "输入行李箱名称";
+ChangeNameVCPinTF = "输入PIN码";
+
+//--天气类别--
+//Weather
+WeatherBatteryRemainingCapacity = "电池剩余电量";
+WeatherAirplaneMode = "飞行模式";
+WeatherAirQualityIsGood = "空气质量优";
+WeatherAirQualityIsModerate = "空气质量良";
+WeatherAirQualityIsUnhealthyForSensitiveGroups = "空气质量轻度污染";
+WeatherAirQualityIsUnhealthy = "空气质量中度污染";
+WeatherAirQualityIsVeryUnhealthy = "空气质量重度污染";
+WeatherAirQualityIsHazardous = "空气质量严重污染";
+WeatherSun = "晴";
+
+//--snack提示信息--
+//SnackTip
+SnackTipEnabled = "已开启";
+SnackTipDisabled = "未开启";
+SnackTipDeviceAdded = "已添加该设备";
+SnackTipFailToAddDevice = "添加设备失败";
+SnackTipEnterYourPhoneNumber = "请输入您的手机号码";
+SnackTipEnterYourPassword = "请输入您的密码";
+SnackTipEnterThePINYouReceived = "请输入您的验证码";
+SnackTipPINSent = "验证码已发送";
+SnackTipFailToSentThePINPleaseRetryLater = "验证码发送失败,请稍后再试";
+SnackTipWrongPIN = "验证码错误";
+SnackTipPasswordLengthMustBeOver6Numbers = "密码必须大于六位";
+SnackTipRegisterationCompleted = "注册成功";
+SnackTipRegisterationFailed = "注册失败";
+SnackTipPasswordReset = "重置密码成功";
+SnackTipFailedToResetPassword = "重置密码失败";
+SnackTipfailedToSignIn = "登录失败";
+SnackTipPleaseNameTheDevice = "设备名不能为空";
+
+// 温馨提示
+COWAROBOTAvoid = "COWAROBOT";
+AcceptSmsCode = "请注意接收验证码!";
+SmsCodeReplyFalse = "验证码请求失败,请稍后重试!";
+RegisterOK = "注册成功!";
+RegisterFalse = "注册失败,请稍后重试!";
+AlreadyRegister = "该号码已被注册";
+SmsCheckFalse = "验证码校验失败,请稍后重试!";
+LoginFalse = "登录失败,请检查您的网络连接并重试!";
+MissMatch = "用户名与密码不匹配!";
+CantfindUser = "您还未注册,请先注册!";
+AttentionSms = "请注意接收验证码!";
+ReplySmsFalse = "验证码请求失败,请稍后重试!";
+SetPwdOK = "密码重置成功!";
+SetPwdFalse = "密码重置失败!";
+BondAvoid = "为了保证您的数据安全,绑定与解绑操作只被允许在有网络连接时操作!";
+PwdAvoid = "电子锁只有在密码锁关闭状态下才可操作!";
+LocationAvoid = "您的本地数据库中无位置信息,请打开手机网络获取实时信息!";
+ChangeNameVCFalse = "请保证您的设备名已输入!";
+ChangeNameOK = "修改成功!";
+MoreBtnAction = "更多科技推送将会在稍后推出，请等待!";
+ShowNotBond = "您的手机还未绑定此行李箱,无法进行开关锁等操作,请先绑定此行李箱!";
+SmsCodeWrong = "验证码填写有误!";
+NumAvoid = "手机号码需以'国家区号+电话号码'形式输入,如86159****4594";
+BondFalse = "绑定失败,请重试!";
+DownloadFile = "正在下载...";
+IsBonding = "正在绑定行李箱";
+IsCancelBonding = "正在解绑行李箱";
+NeedUpdateFile = "检测到行李箱需要更新,是否更新?";
+Update = "更新";
+DontUpdate = "不更新";
+UpdateFileOK = "更新成功";
+UpdateFileFalse = "升级失败";
+BagIsNotYour = "该行李箱已经被别人绑定";
+YouHasBondAnBag = "您已经绑定了其他行李箱";
+JudgeBondState = "正在初始化...";
+MyBag = "我的行李箱";
+UpdateLinkCantLink = "行李箱更新接口访问失败!";
+YouHaveNoBag = "您没有已绑定的行李箱";
+CancelBondOK = "解绑成功";
+Bond = "绑定";
+AreYouSureCancelBond = "是否确定解绑该行李箱";
+Sure = "确定";
+CancelBond = "解绑行李箱";
+CheckUser = "为了您的账号安全，操作前请先进行安全验证，请输入该行李箱所绑定手机号收到的验证码.";
+CountryLabel = "国家";
+CountryTFPH = "如'86''82'";
+SmsTFPH = "请输入验证码";
+AccountNameTFPH = "您的昵称";
+Get = "发送";
+Commite = "提交";
+Wait = "等待";
+FindYourPWD = "忘记密码?立即找回";
+AppUpdate = "App更新提示";
+BindBagOK = "绑定成功";
+PleaseBondBag = "请绑定你的行李箱";
+AplyBind = "申请绑定";
+OpenDistanceAvoid = "确认是否开启距离报警?";
+OpenDistanceDetai = "(当行李箱超过安全距离时发出警告)";
+BreathLamp = "天使眼";
+DistanceAlerm = "丢失报警";
+None = "关闭";
+LampColorSet = "灯光颜色设置";
+BindSetting = "绑定设置";
+DeleteFriends = "正在删除好友";
+SelectFriend = "选定的设备";
+BagUse = "行李箱说明";
+AppUse = "APP说明";
+MyBindBags = "我绑定的设备";
+CheckingAuth = "正在验证授权";
+TheBagBeenBindAnother = "该行李箱已被绑定";
+CheckingUpdate = "正在检测更新";
+CloseDistanceAvoid = "确认是否关闭距离报警";
+CloseDistanceDetail = "(当行李箱超过安全距离时不发出警告)";
+KeepConnecting = "升级过程中请确保手机与行李箱的蓝牙保持连接";
+GetPinButton = "发送";
+NoBagsAreScan = "未搜索到设备";
+AddBindFriends = "添加绑定好友";
+AddingFriends = "正在添加好友";
+ChangeBagsName = "设备名称修改";
+ChangeNameSub = "请输入设备名";
+ME = "我";
+LoginSuccess = "登录成功";
+HasNoUser = "用户尚未注册";
+HasNoVersionInfo = "已是最新版本";
+AplyBondFalse = "申请失败";
+CancelBondFalse = "解绑失败";
+AuthSuccess = "授权成功";
+AuthFalse = "授权失败";
+ExceptionViod = "行李箱似乎罢工了,请尝试重启行李箱与App";
+MobileNumver = "手机号";
+InputNumber = "请输入手机号码";
+ReplyBindSub = "请输入该行李箱主人手机号所接收到的验证码";
+AddFriendSub = "请输入您想添加好友的手机号码";
+ReplyBindAvoid = "您将向行李箱的主人申请操作权限，我们将向其主人发送授权验证码";
+GiveUp= "放弃绑定";
+Edit = "编辑";
+Cancel = "取消";
+CancelBind = "解绑";
+RemoteCancelBind = "远程解绑";
+MyFriends = "我的好友";
+BoxNameCount = "行李箱名称不能超过9个字符";
+FlyModeSub = "开启飞行模式后行李箱将关机";
+ShareList = "共享列表";
+UserBag = "'S Suitcase";
+User = "User";
+FeedBack = "客户服务";
+AdviceFeed = "意见反馈";
+MeetIssue = "(您遇到的问题类型)";
+IssueText = "请留下您的宝贵意见和建议";
+BlueToothIssue = "蓝牙问题";
+BindIssue = "绑定分享";
+LockIssue = "智能锁";
+HandleRing = "手环";
+Wheel = "驱动轮";
+Handler = "拉杆";
+BLEConnect = "蓝牙连接";
+BoxIssue = "箱体问题";
+CommitOk = "提交成功";
+CommitFalse = "提交失败";
+IsCommiting = "正在提交";
+PermissonIssue = "您的使用权限已过期";
+IssueType = "您遇到的问题类型";
+ThxLabel = "我们非常重视您给我们提出的宝贵意见,谢谢!";
+NoNetWorking = "请检查您的网络连接";
+HasNotLink = "请先匹配您的行李箱";
+UpdateAvoid = "发现新的固件版本,是否升级?";
+YES = "是";
+NO = "否";
+UpdatingAvoid = "注意:升级过程需要几分钟时间,在此期间,请不要退出APP或切换APP至后台运行,点击“确定”开始升级!";
+UpdateComfirm = "确定";
+Rebooting = "正在重启...";
+UpdateOK = "升级成功!";
+Mingcheng = "名称:";
+CloseSecuryLock = "请关闭密码锁";
+HasDisconnect = "距离过远，蓝牙已断开";
+remoteControlButton = "遥控";
+remoteControlSwitch = "前进时主锁朝前";
+remoteControlDetail = "遥控模式下，你的行李箱不能随行避开障碍，在狭窄或拥挤空间内请小心操控";
+pleaseCloseFollow = "请关闭跟随模式";
+clickConnectCowa = "连接行李箱";
+
+MyDevices = "我的设备";
+MyDevicesSub = "设备列表 查看所有绑定的设备";
+parameterSet = "参数设置";
+followDistanceSet = "跟随距离设置";
+breathSet = "呼吸灯颜色设置";
+AlertAvoid = "报警提醒";
+
+OpenFlyMode = "确认打开飞行模式?";
+OpenFlySub = "打开飞行模式将关闭行李箱电源";
+
+AverageSpeed = "平均速度";
+Mileage = "累计里程";
+OpenFollow = "开启跟随";
+CloseFollow = "关闭跟随";
+Capcity = "电量";
+
+ChangName = "修改设备名";
+PleaseInput = "请输入设备名";
+NamePlacehold = "设备名";
+PINPlacehold = "PIN码";
+ChangeOK = "修改成功";
+
+//意见反馈
+AFaceBack = "已有回复";
