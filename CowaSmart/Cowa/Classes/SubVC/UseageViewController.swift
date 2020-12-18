@@ -46,7 +46,7 @@ class UseageViewController: SubVC {
         self.navigationController?.navigationBar.barStyle = .blackTranslucent
     }
     
-    func pinch(_ recognizer:UIPinchGestureRecognizer){
+    @objc func pinch(_ recognizer:UIPinchGestureRecognizer){
        
         let scale:CGFloat = recognizer.scale
         //放大情况
@@ -71,7 +71,7 @@ class UseageViewController: SubVC {
        
     }
     
-    func pan(_ recognizer:UIPanGestureRecognizer){
+    @objc func pan(_ recognizer:UIPanGestureRecognizer){
         if recognizer.state == .began || recognizer.state == .changed
         {
             let pt = recognizer.translation(in: self.view)
@@ -81,7 +81,7 @@ class UseageViewController: SubVC {
         
     }
 
-    func segmentAction(_ segmented:UISegmentedControl){
+    @objc func segmentAction(_ segmented:UISegmentedControl){
         
         var urlPath:String = ""
         

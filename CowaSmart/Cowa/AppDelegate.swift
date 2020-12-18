@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , BMKGeneralDelegate , JPU
     
     var remoteInfo:NSDictionary?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window?.backgroundColor = UIColor.white
         NetURL.tool.initUrl()
         _ = AppConfig.sharedConfig
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , BMKGeneralDelegate , JPU
         JPUSHService.setup(withOption: launchOptions, appKey: "fd0161d73be4155ecb4a7d2c", channel: "App Store", apsForProduction: true, advertisingIdentifier: nil)
         
         if launchOptions != nil {
-            if let userInfo = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification]{
+            if let userInfo = launchOptions![UIApplication.LaunchOptionsKey.remoteNotification]{
                 remoteInfo = userInfo as? NSDictionary
             }
         }

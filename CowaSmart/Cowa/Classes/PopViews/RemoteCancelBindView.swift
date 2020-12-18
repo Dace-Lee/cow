@@ -74,7 +74,7 @@ class RemoteCancelBindView: UIView, UITextFieldDelegate{
                     MyInfoTool.tool.showInView(supView: self.superview!, title: NSLocalizedString("SnackTipFailToSentThePINPleaseRetryLater", comment: ""))
 
                     self.restore()
-                    self.smsBtn.setTitle(NSLocalizedString("GetPinButton", comment: ""), for: UIControlState())
+                    self.smsBtn.setTitle(NSLocalizedString("GetPinButton", comment: ""), for: UIControl.State())
                 }
                 
             }
@@ -96,7 +96,7 @@ class RemoteCancelBindView: UIView, UITextFieldDelegate{
         }
     }
     
-    func clockEvent() {
+    @objc func clockEvent() {
         
         update()
         if currentTime <= 0 {

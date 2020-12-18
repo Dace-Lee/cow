@@ -22,7 +22,7 @@ class FaceBackTilteCell: UITableViewCell {
                 titleLabel.text = model.question
                 contentLabel.text = model.opition
                 
-                let titleHeight =  (model.question as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width - 100, height: 990), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont .systemFont(ofSize: 17)], context: nil).size.height
+                let titleHeight =  (model.question as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width - 100, height: 990), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font):UIFont .systemFont(ofSize: 17)]), context: nil).size.height
                 titleImageV.frame = CGRect(x: 35, y: 37, width: 16, height: 16)
                 titleLabel.frame = CGRect(x: 61, y: 30, width: UIScreen.main.bounds.size.width - 110, height: titleHeight + 10)
                 titleLabel.numberOfLines = 0
@@ -48,4 +48,15 @@ class FaceBackTilteCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

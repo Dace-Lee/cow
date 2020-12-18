@@ -51,11 +51,11 @@ class BindSettingVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
     }
     
-    func deleteFriends(){
+    @objc func deleteFriends(){
         tableView.setEditing(true, animated: true)
     }
     
-    func cancelDeleteFriends(){
+    @objc func cancelDeleteFriends(){
         tableView.setEditing(false, animated: true)
     }
     
@@ -74,7 +74,7 @@ class BindSettingVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         self.navigationItem.leftBarButtonItem = item1
     }
     
-    func leftBtnAction(){
+    @objc func leftBtnAction(){
         _ = self.navigationController?.popViewController(animated: true)
     }
     
@@ -236,7 +236,7 @@ class BindSettingVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
     }
 
-    func addBtnAction2(){
+    @objc func addBtnAction2(){
         let v:AddFriendsView = Bundle.main.loadNibNamed("AddFriendsView", owner: self, options: nil)!.last as! AddFriendsView
         v.delegate = self
         v.imeiStr  = self.deviceImei

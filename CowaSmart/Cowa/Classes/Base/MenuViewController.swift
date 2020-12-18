@@ -111,7 +111,7 @@ class MenuViewController: UIViewController {
         
     }
     
-    func SignOutAccount(){
+    @objc func SignOutAccount(){
         if let dev = TBLEManager.sharedManager.dev {
             TBluetooth.share().cancelReconnect(dev.device.peri)
             TBluetooth.share().cancelConnect(dev.device.peri)

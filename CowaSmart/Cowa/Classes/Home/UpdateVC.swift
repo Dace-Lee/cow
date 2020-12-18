@@ -54,10 +54,10 @@ class UpdateVC: UIViewController, URLSessionDownloadDelegate{
     func configUI(){
         self.title = "UPDATE BOX"
         updatingLabel.text = NSLocalizedString("UpdatingAvoid", comment: "")
-        comfirmBtn.setTitle(NSLocalizedString("UpdateComfirm", comment: ""), for: UIControlState())
+        comfirmBtn.setTitle(NSLocalizedString("UpdateComfirm", comment: ""), for: UIControl.State())
     }
     
-    func cancelUpdate(){
+    @objc func cancelUpdate(){
         SVProgressHUD.dismiss()
         MyInfoTool.tool.showInView(supView: self.view, title: "升级失败")
         
@@ -149,14 +149,14 @@ class UpdateVC: UIViewController, URLSessionDownloadDelegate{
         
     }
     
-    func updateIdx(){
+    @objc func updateIdx(){
         let str = NSString(format: "%.2f", Float(idx) / Float(fileData.length))
         let p = str.floatValue
         progressView.progress = p
     }
     
     
-    func sendFileDataWithData(){
+    @objc func sendFileDataWithData(){
        
         
         if endSend {
@@ -225,7 +225,7 @@ class UpdateVC: UIViewController, URLSessionDownloadDelegate{
     }
     
     //发送上一次数据
-    func sendLastData(){
+    @objc func sendLastData(){
         //发送数据
         let dev = TBLEManager.sharedManager.dev
         dev?.status.sendLastData()

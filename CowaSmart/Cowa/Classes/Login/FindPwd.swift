@@ -83,7 +83,7 @@ class FindPwd: UIViewController,CountryCodeDelegate,UITextFieldDelegate {
         self.navigationItem.leftBarButtonItem = item1
     }
     
-    func popViewController(){
+    @objc func popViewController(){
         numTF.resignFirstResponder()
         smsCodeTF.resignFirstResponder()
         newPwdTF.resignFirstResponder()
@@ -164,7 +164,7 @@ class FindPwd: UIViewController,CountryCodeDelegate,UITextFieldDelegate {
     }
     
     func sendCountryCode(_ code: String, country:String) -> String {
-        countryCodeBtn?.setTitle("\(country)(\(code))", for: UIControlState())
+        countryCodeBtn?.setTitle("\(country)(\(code))", for: UIControl.State())
         codeStr = code
         return code
     }
@@ -181,7 +181,7 @@ class FindPwd: UIViewController,CountryCodeDelegate,UITextFieldDelegate {
         }
     }
     
-    func clockEvent() {
+    @objc func clockEvent() {
         
         update()
         if currentTime <= 0 {

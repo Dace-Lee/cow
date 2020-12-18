@@ -122,7 +122,7 @@ class FeedbackVC: UIViewController, UITextViewDelegate {
         title = NSLocalizedString("FeedBack", comment: "")
     }
     
-    func leftBtnAction(){
+    @objc func leftBtnAction(){
         _ = self.navigationController?.popViewController(animated: true)
     }
 

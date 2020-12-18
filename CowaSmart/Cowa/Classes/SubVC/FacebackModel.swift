@@ -19,8 +19,8 @@ struct FacebackModel {
 ////        self.opition = json["opition"].stringValue
         self.question = json["question"].stringValue
         self.opition = json["opition"].stringValue
-       let h1 = (self.question as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width - 100, height: 990), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont .systemFont(ofSize: 17)], context: nil).size.height
-        let h2 = (self.opition as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width - 100, height: 990), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont .systemFont(ofSize: 15)], context: nil).size.height
+       let h1 = (self.question as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width - 100, height: 990), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font):UIFont .systemFont(ofSize: 17)]), context: nil).size.height
+        let h2 = (self.opition as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width - 100, height: 990), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font):UIFont .systemFont(ofSize: 15)]), context: nil).size.height
         rowHeight = h1 + h2 + 80
     }
 }
@@ -30,3 +30,14 @@ struct FacebackModel {
 //
 //}
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}

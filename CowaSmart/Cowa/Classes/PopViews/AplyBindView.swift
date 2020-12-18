@@ -99,7 +99,7 @@ class AplyBindView: UIView, UITextFieldDelegate{
                  MyInfoTool.tool.showInView(supView: self.superview!, title: NSLocalizedString("SnackTipFailToSentThePINPleaseRetryLater", comment: ""))
                
                 self.restore2()
-                self.smsBtn.setTitle(NSLocalizedString("GetPinButton", comment: ""), for: UIControlState())
+                self.smsBtn.setTitle(NSLocalizedString("GetPinButton", comment: ""), for: UIControl.State())
             }
             
         }
@@ -122,18 +122,18 @@ class AplyBindView: UIView, UITextFieldDelegate{
         }
     }
     
-    func clockEvent() {
+    @objc func clockEvent() {
         update()
         if currentTime <= 0 {
             restore2()
-            self.smsBtn.setTitle(NSLocalizedString("GetPinButton", comment: ""), for: UIControlState())
+            self.smsBtn.setTitle(NSLocalizedString("GetPinButton", comment: ""), for: UIControl.State())
             
         }
         currentTime -= 1
     }
     
     @objc fileprivate func update() {
-        smsBtn.setTitle("\(currentTime)s", for: UIControlState())
+        smsBtn.setTitle("\(currentTime)s", for: UIControl.State())
     }
     
     func restore2() {

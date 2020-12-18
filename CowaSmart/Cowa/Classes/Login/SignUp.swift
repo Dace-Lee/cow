@@ -86,7 +86,7 @@ class SignUp: UIViewController,CountryCodeDelegate,UITextFieldDelegate{
         self.navigationItem.leftBarButtonItem = item1
     }
     
-    func popViewController(){
+    @objc func popViewController(){
         numTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
         smsCodeTF.resignFirstResponder()
@@ -224,7 +224,7 @@ class SignUp: UIViewController,CountryCodeDelegate,UITextFieldDelegate{
         }
     }
     
-    func clockEvent() {
+    @objc func clockEvent() {
         
         update()
         if currentTime <= 0 {
@@ -257,7 +257,7 @@ class SignUp: UIViewController,CountryCodeDelegate,UITextFieldDelegate{
     }
     
     func sendCountryCode(_ code: String, country:String) -> String {
-        countryCodeBtn.setTitle("\(country)(\(code))", for: UIControlState())
+        countryCodeBtn.setTitle("\(country)(\(code))", for: UIControl.State())
         countryCodeLabel.text = "+\(code)"
         codeStr = code
         return code

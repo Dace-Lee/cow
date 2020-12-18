@@ -181,7 +181,7 @@ class TBLEManager: NSObject {
                 if (self.dev?.status.followStatus)!{// 目前是跟随状态
                     if followShakeTimer == nil{
                         followShakeTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startShake), userInfo: nil, repeats: true);
-                        RunLoop.current.add(followShakeTimer, forMode: .defaultRunLoopMode)
+                        RunLoop.current.add(followShakeTimer, forMode: RunLoop.Mode.default)
                     }
                     
                 }

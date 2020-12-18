@@ -95,7 +95,7 @@ extension UIViewController {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = dele
     }
     
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    @objc func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if nil != self.navigationController {
             if nil != self.navigationController?.viewControllers {
                 if self.navigationController?.viewControllers.count > 1 {

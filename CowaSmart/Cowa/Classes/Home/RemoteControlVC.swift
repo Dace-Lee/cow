@@ -152,7 +152,7 @@ class RemoteControlVC: UIViewController {
         self.navigationItem.titleView = imageView
     }
     
-    func leftBtnAction(){
+    @objc func leftBtnAction(){
         TBLEManager.sharedManager.dev?.status.wheelUp()
         timer.fireDate = NSDate.distantFuture
         
@@ -162,11 +162,11 @@ class RemoteControlVC: UIViewController {
     func addTimer(){
         
         timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendSpeed), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer, forMode: .commonModes)
+        RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
         timer.fireDate = NSDate.distantPast
     }
     
-    func sendSpeed(){
+    @objc func sendSpeed(){
         if isTouch {
             if let dev = TBLEManager.sharedManager.dev {
                 dev.status.remoteControl(withFloatX: speedx, floatY: speedy)
@@ -277,7 +277,7 @@ class RemoteControlVC: UIViewController {
         }
     }
     
-    func deviceStatusUpdate(){
+    @objc func deviceStatusUpdate(){
         
         if let battery = TBLEManager.sharedManager.dev?.status.battery {
             capcityLabel.text = String.init(format: NSLocalizedString("Capcity", comment: "") + ":%lu%%", battery)

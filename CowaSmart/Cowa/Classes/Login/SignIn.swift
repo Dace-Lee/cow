@@ -73,7 +73,7 @@ class SignIn: UIViewController, UITextFieldDelegate {
         self.navigationItem.leftBarButtonItem = item1
     }
     
-    func popViewController(){
+    @objc func popViewController(){
         numTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
         

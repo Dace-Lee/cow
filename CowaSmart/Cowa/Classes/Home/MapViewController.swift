@@ -73,23 +73,23 @@ class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationServic
         title = NSLocalizedString("LocationPage", comment: "")
     }
     
-    func leftBtnAction(){
+    @objc func leftBtnAction(){
         _ = self.navigationController?.popViewController(animated: true)
     }
     
     func createUpdateBtn(){
         updateBtn = UIButton.init(frame: CGRect(x:0,y:0,width: 25,height: 25))
-        updateBtn?.setImage(UIImage(named: "刷新图标"), for: UIControlState())
+        updateBtn?.setImage(UIImage(named: "刷新图标"), for: UIControl.State())
         updateBtn!.addTarget(self, action: #selector(update), for: .touchUpInside)
         let item1=UIBarButtonItem(customView: updateBtn!)
         self.navigationItem.rightBarButtonItem = item1
     }
     
-    func update(){
+    @objc func update(){
         TCowaLocation.locaTool.work()
     }
     
-    func createGoogleMap(){
+    @objc func createGoogleMap(){
         mapSelectBtn?.isSelected = !(mapSelectBtn?.isSelected)!
         if (mapSelectBtn?.isSelected)! {
             mapSelectView?.isHidden = false
@@ -147,7 +147,7 @@ class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationServic
         
     }
     
-    func showGgMap(){
+    @objc func showGgMap(){
         mapSelectView?.isHidden = true
         mapSelectBtn?.isSelected = false
         
@@ -160,7 +160,7 @@ class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationServic
         }
     }
     
-    func showBdMap(){
+    @objc func showBdMap(){
         mapSelectView?.isHidden = true
         mapSelectBtn?.isSelected = false
         
@@ -170,7 +170,7 @@ class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationServic
     }
     
     
-    func showDevices() {
+    @objc func showDevices() {
         
         
         let all: Array<AnyObject> = bdMapView.annotations as Array<AnyObject>

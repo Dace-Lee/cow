@@ -59,11 +59,11 @@ class DeviceListVC: SubVC,UITableViewDelegate, UITableViewDataSource, CancelBond
         self.navigationItem.titleView = imageView
     }
     
-    func editBtnAction(){
+    @objc func editBtnAction(){
         tableView.setEditing(true, animated: true)
     }
     
-    func editCancelBtnAction(){
+    @objc func editCancelBtnAction(){
         tableView.setEditing(false, animated: true)
     }
     
@@ -158,7 +158,7 @@ class DeviceListVC: SubVC,UITableViewDelegate, UITableViewDataSource, CancelBond
         
     }
     
-    func shareBtnAction(_ sender:UIButton){
+    @objc func shareBtnAction(_ sender:UIButton){
         let host = self.deviceList[sender.tag].isHost as String
         if host == "1" {
             let  vc = BindSettingVC()

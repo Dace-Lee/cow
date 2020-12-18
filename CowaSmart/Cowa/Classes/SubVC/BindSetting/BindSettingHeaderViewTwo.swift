@@ -27,10 +27,10 @@ class BindSettingHeaderViewTwo: UIView {
         let btn = sender as! UIButton
         btn.isSelected = !btn.isSelected
         if btn.isSelected {
-            btn.setTitle(NSLocalizedString("Cancel", comment: ""), for: UIControlState())
+            btn.setTitle(NSLocalizedString("Cancel", comment: ""), for: UIControl.State())
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deleteFriends"), object: nil)
         }else{
-            btn.setTitle(NSLocalizedString("Edit", comment: ""), for: UIControlState())
+            btn.setTitle(NSLocalizedString("Edit", comment: ""), for: UIControl.State())
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "cancelDeleteFriends"), object: nil)
         }
         

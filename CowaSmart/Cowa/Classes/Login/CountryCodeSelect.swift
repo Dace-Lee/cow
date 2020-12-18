@@ -75,7 +75,7 @@ class CountryCodeSelect: UIViewController, UITableViewDelegate, UITableViewDataS
         self.navigationItem.leftBarButtonItem = item1
     }
     
-    func popViewController(){
+    @objc func popViewController(){
         _ = self.navigationController?.popViewController(animated: true)
     }
     

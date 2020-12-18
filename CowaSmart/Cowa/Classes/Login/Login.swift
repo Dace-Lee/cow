@@ -18,12 +18,12 @@ class Login: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let attr = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:TFont.getSystemFont(14)] as [String : Any]
+        let attr = [convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor):UIColor.white,convertFromNSAttributedStringKey(NSAttributedString.Key.font):TFont.getSystemFont(14)] as [String : Any]
         
         
         
-        signIn.setAttributedTitle(NSAttributedString.init(string: NSLocalizedString("AccountSignIn", comment: "Sign In"), attributes: attr), for: UIControlState())
-        signUp.setAttributedTitle(NSAttributedString.init(string: NSLocalizedString("AccountSignUp", comment: "Sign Up"), attributes: attr), for: UIControlState())
+        signIn.setAttributedTitle(NSAttributedString.init(string: NSLocalizedString("AccountSignIn", comment: "Sign In"), attributes: convertToOptionalNSAttributedStringKeyDictionary(attr)), for: UIControl.State())
+        signUp.setAttributedTitle(NSAttributedString.init(string: NSLocalizedString("AccountSignUp", comment: "Sign Up"), attributes: convertToOptionalNSAttributedStringKeyDictionary(attr)), for: UIControl.State())
         
     }
     
@@ -47,4 +47,15 @@ class Login: UIViewController {
         let login = UIStoryboard.init(name: "Login", bundle: nil).instantiateInitialViewController()
         inVc.present(login!, animated: false, completion: nil)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

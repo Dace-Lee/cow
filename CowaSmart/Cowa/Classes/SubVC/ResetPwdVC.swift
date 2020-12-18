@@ -58,7 +58,7 @@ class ResetPwdVC: UIViewController, UITextFieldDelegate{
         self.navigationItem.leftBarButtonItem = item1
     }
     
-    func leftBtnAction(){
+    @objc func leftBtnAction(){
         oldPwdTF.resignFirstResponder()
         newPwdTF.resignFirstResponder()
         surePwdTF.resignFirstResponder()

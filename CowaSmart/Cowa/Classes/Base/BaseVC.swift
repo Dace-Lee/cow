@@ -34,7 +34,7 @@ class BaseVC: RESideMenu, RESideMenuDelegate {
         view.addGestureRecognizer(ge)
     }
     
-    func geAction(){
+    @objc func geAction(){
         self.hideViewController()
     }
     

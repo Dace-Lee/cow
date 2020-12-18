@@ -128,7 +128,7 @@ class HomeControllerVC: UIViewController {
         
         deviceSearchVC = DeviceSearchVC()
         deviceSearchVC!.pageType = DeviceSearchVC.PageType.wicket
-        addChildViewController(deviceSearchVC!)
+        addChild(deviceSearchVC!)
         deviceTableContainer.addSubview(deviceSearchVC!.view)
         deviceSearchVC!.view.snp.makeConstraints { (make) in
             make.left.bottom.right.top.equalTo(deviceTableContainer)
@@ -225,7 +225,7 @@ class HomeControllerVC: UIViewController {
         }
     }
     
-    func startRescan() {
+    @objc func startRescan() {
         if TUser.lastUUID() != "" && (TBLEManager.sharedManager.dev == nil) {
             TBluetooth.share().startScan()
         }
@@ -263,7 +263,7 @@ class HomeControllerVC: UIViewController {
         
     }
     
-    func showAvoidView(){
+    @objc func showAvoidView(){
         avoidBtn?.isSelected = !(avoidBtn?.isSelected)!
         if (avoidBtn?.isSelected)! {
             if avoidView == nil {
@@ -337,7 +337,7 @@ class HomeControllerVC: UIViewController {
         
     }
     
-    func leftBtnAction(){
+    @objc func leftBtnAction(){
         NotificationCenter.default.post(name: Notification.Name(rawValue: kBaseFloatingDrawerNeedChangeSideStatus), object: nil)
         TBLEManager.sharedManager.scan(false)
         exchangeView(false)
@@ -398,11 +398,11 @@ class HomeControllerVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reScan), name: nil, object: nil)
     }
     
-    func showErrorView(){
+    @objc func showErrorView(){
         avoidBtn?.isHidden = false
     }
     
-    func hideScanAndSearchPage () {
+    @objc func hideScanAndSearchPage () {
                 setterBtn?.isHidden = false
                 avoidBtn?.isHidden = true
                 scanView.isHidden = true
@@ -411,7 +411,7 @@ class HomeControllerVC: UIViewController {
                 controlView.isHidden = false
     }
     
-    func reScan(){
+    @objc func reScan(){
         
         if HomeControllerVC.updateFinish{
             
@@ -424,19 +424,19 @@ class HomeControllerVC: UIViewController {
         
     }
     
-    func saveBoxVersion(_ noti:Notification){
+    @objc func saveBoxVersion(_ noti:Notification){
         
         boxVersion = noti.object as! String
         
     }
 
     
-    func HasGetBoxHost(_ noti:Notification){
+    @objc func HasGetBoxHost(_ noti:Notification){
         let hostStr = noti.object as! String
         hostNum = hostStr
     }
     
-    func HasGetImei(_ noti:Notification){
+    @objc func HasGetImei(_ noti:Notification){
         
                     //检查箱子上有没有host
                     if self.hostNum != ""{
@@ -449,38 +449,38 @@ class HomeControllerVC: UIViewController {
         
     }
     
-    func hasDisconnect(){
+    @objc func hasDisconnect(){
         exchangeView(false)
         
         MyInfoTool.tool.showInView(supView: self.view, title: NSLocalizedString("HasDisconnect", comment: ""))
     }
     
-    func changeHomePageDeviceName(){
+    @objc func changeHomePageDeviceName(){
         deviceNameBtn.setTitle(TUser.boxName(), for: .normal)
     }
     
-    func hasSacnDevices(){
+    @objc func hasSacnDevices(){
         if self.deviceSearchVC!.devices.count > 0 {
             ProgressAnimateTool.tool.dismiss()
         }
     }
     
-    func StartCheckAuth(){
+    @objc func StartCheckAuth(){
         ProgressAnimateTool.tool.show(inView: view)
     }
     
-    func showAplyBindView(){
+    @objc func showAplyBindView(){
         let v:AplyBindView = Bundle.main.loadNibNamed("AplyBindView", owner: self, options: nil)!.last as! AplyBindView
         v.hostNum = hostNum
         v.isWorking = true
         PopTool.tool.show(inView: view, withView: v, width: 300, height: 266)
     }
 
-    func addCurrentUserToBox(){
+    @objc func addCurrentUserToBox(){
         TBLEManager.sharedManager.dev?.status.addUser(withNum: TUser.userPhone())
     }
     
-    func boxAuthSuccess(){
+    @objc func boxAuthSuccess(){
         ProgressAnimateTool.tool.dismiss()
         
         PopTool.tool.dismiss()
@@ -527,11 +527,11 @@ class HomeControllerVC: UIViewController {
 //                }
     }
     
-    func deviceSearchViewRemove(){
+    @objc func deviceSearchViewRemove(){
         exchangeView(false)
     }
     
-    func deviceStatusUpdate(){
+    @objc func deviceStatusUpdate(){
      
             deviceNameBtn.setTitle(TUser.boxName()!, for: .normal)
         
@@ -607,11 +607,11 @@ class HomeControllerVC: UIViewController {
         
     }
     
-    func deviceConnectUpdate(){
+    @objc func deviceConnectUpdate(){
         exchangeView(false)
     }
     
-    func showScanView(){
+    @objc func showScanView(){
         exchangeView(false)
     }
     
@@ -655,7 +655,7 @@ class HomeControllerVC: UIViewController {
     }
     
     //弹出绑定手环框
-    func tapSingleDid(){
+    @objc func tapSingleDid(){
         let alertController = UIAlertController(title: "绑定手环",
                                                 message: "请输入手环编码后六位号码", preferredStyle: .alert)
         alertController.addTextField {

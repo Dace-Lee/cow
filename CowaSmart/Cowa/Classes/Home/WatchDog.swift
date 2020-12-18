@@ -36,7 +36,7 @@ class WatchDog: NSObject {
         
     }
     
-    func clockEvent(){
+    @objc func clockEvent(){
         
         if TTL <= 0 {
             
