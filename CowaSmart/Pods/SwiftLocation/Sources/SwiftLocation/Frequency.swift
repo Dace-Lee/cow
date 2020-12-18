@@ -45,6 +45,7 @@ extension CLActivityType: CustomStringConvertible {
 		case .fitness:				return "Fitness"
 		case .other:				return "Other"
 		case .otherNavigation:		return "Navigation"
+            default: return "Automotive Navigation"
 		}
 	}
 }
