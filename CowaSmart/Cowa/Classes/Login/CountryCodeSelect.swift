@@ -81,13 +81,14 @@ class CountryCodeSelect: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func readyData(){
         //初始化数据
-        self.data=NSDictionary.init(contentsOfFile: Bundle.main.path(forResource: "CountryCode", ofType: "plist")!)
-        let dictKeys = (self.data?.allKeys)! as NSArray
-        let resultkArray:NSArray = GJTool.arraySorted(dictKeys as [AnyObject]) as NSArray
-        for item in resultkArray {
-            smallDic = NSMutableDictionary.init(dictionary: self.data?.object(forKey: item as! String) as! NSMutableDictionary)
-            bigArray?.add(smallDic!)
-        }
+//        self.data=NSDictionary.init(contentsOfFile: Bundle.main.path(forResource: "CountryCode", ofType: "plist")!)
+//        let dictKeys = (self.data?.allKeys)! as NSArray
+//        let resultkArray:NSArray = GJTool.arraySorted(dictKeys as [AnyObject]) as NSArray
+//        for item in resultkArray {
+//            smallDic = NSMutableDictionary.init(dictionary: self.data?.object(forKey: item as! String) as! NSMutableDictionary)
+//            bigArray?.add(smallDic!)
+//        }
+        bigArray = NSMutableArray(array: [["Afghanistan":"93","Alaska":"1907","Albania":"355","Algeria":"213","American Samoa":"684","Angola":"244","Anguilla":"1809","Argentina":"54","Aruba":"297","Ascension Island":"247","Australia":"61","Austria":"43"],["Bahamas":"1809","Bahrain":"973","Bangladesh":"880","Barbados":"1809","Belgium":"32","Belize":"501","Benin":"229","Bhutan":"975","Bolivia":"591","Botswana":"267","Brazil":"55","Brunei":"673","Bulgaria":"359","Burkina Faso":"226","Burundi":"257"],["Cambodia":"855","Cameroon":"237","Canada":"1","Cape Verde":"238","Central African Republic":"236","Chad":"235","Chile":"56","China":"86","Christmas Island":"6724","Coate d'Ivoire":"225","Cocos Island":"6722","Colombia":"57","Comoros":"269","Congo":"243","Cook Islands":"682","Costa Rica":"506","Cuba":"53","Cyprus":"357"],["Denmark":"45","Djibouti":"253"],["Ecuador":"593","Egypt":"20","El Salvador":"503","Equatorial Guinea":"240","Ethiopia":"251"],["Faroe Islands":"298","Fiji":"679","Finland":"358","France":"33","French Guiana":"594"],["Gabon":"241","Gambia":"220","Germany":"49","Ghana":"233","Gibraltar":"350","Greece":"30","Greenland":"299","Guam":"671","Guatemala":"502","Guinea":"224","Guinea-Bissau":"245","Guyana":"592"],["Haiti":"509","Hawaii":"1808","Honduras":"504","Hong Kong":"852","Hungary":"336"],["Iceland":"354","India":"91","Indonesia":"62","Iran":"98","Iraq":"964","Ireland":"353","Islas Malvinas":"500","Israel":"972","Italy":"39"],["Jamaica":"1809","Japan":"81","Jordan":"962"],["Kenya":"254","Kiribati":"686","Kuwait":"965"],["Laos":"856","Lebanon":"961","Lesotho":"266","Liberia":"231","Libya":"218","Liechtenstein":"4175","Luxembourg":"352"],["Macao":"853","Madagascar":"261","Malawi":"265","Malaysia":"60","Maldives":"960","Mali":"223","Malta":"356","Martinique":"596","Mauritania":"222","Mauritius":"230","Mexico":"52","Midway Island":"1808","Mongolia":"976","Morocco":"210","Mozambique":"258","Myanmar":"95"],["Namibia":"264","Nauru":"674","Nepal":"977","Netherlands":"31","New Zealand":"64","Nicaragua":"505","Niger":"227","Nigeria":"234","Niue":"683","Norfolk Island":"6723","North Korea":"850","Norway":"47"],["Oman":"968"],["Pakistan":"92","Panama":"507","Paraguay":"595","Peru":"51","Philippines":"63","Poland":"48","Portugal":"351","Principe":"239","Puerto Rico":"1809"],["Qatar":"974"],["Reunion":"262","Romania":"40","Russia":"7","Rwanda":"250"],["Saint Helena":"290","Saint Lucia":"1809","Samoa":"685","San Marino":"223","Sao Tome and Principe":"239","Saudi Arabia":"966","Senegal":"221","Seychelles":"248","Sierra Leone":"232","Singapore":"65","Solomon Islands":"677","Somalia":"252","South Africa":"27","South Korea":"82","Spain":"34","Sri Lanka":"94","Sudan":"249","Suriname":"597","Swaziland":"268","Sweden":"46","Swiss":"41","Syria":"963"],["Taiwan":"886","Tanzania":"255","Thailand":"66","Togo":"228","Tonga":"676","Tunisia":"216","Turkey":"90","Tuvalu":"688"],["USA":"1","Uganda":"256","United Kingdom":"44","Uruguay":"598"],["Vanuatu":"678","Vatican":"396","Venezuela":"58","Vietnam":"84","Virgin Islands":"1809"],["Wake Island":"1808"],["Yugoslavia":"338"],["Zambia":"260","Zimbabwe":"263"]])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
