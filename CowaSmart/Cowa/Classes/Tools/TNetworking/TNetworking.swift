@@ -29,14 +29,14 @@ class TNetworking: NSObject {
             self.reachAbilityHandler!(reachable)
         }
         if reachable {
-            var dicToken:[String:String]!
+            var dicToken:[String:String]?
             if token != nil {
                 dicToken = ["tokenId" : token!, "identity_code":"\(SecurityUtil .encryptAESData("cowaRobot-\(Int(Date().timeIntervalSince1970))", app_key: "Td85wvkoRUX3xTf92trDROs4ioUwjdZ5"))"]
             }
             //print("*****\(SecurityUtil .encryptAESData("cowaRobot-\(Int(NSDate().timeIntervalSince1970))", app_key: "Td85wvkoRUX3xTf92trDROs4ioUwjdZ5"))")
             let manager = Alamofire.Session.default
             manager.session.configuration.timeoutIntervalForRequest = 10
-            manager.request(url, method: .get, parameters: para, encoding: URLEncoding.default, headers: HTTPHeaders.init(dicToken)).response { (response) in
+            manager.request(url, method: .get, parameters: para, encoding: URLEncoding.default, headers: HTTPHeaders.init(dicToken ?? ["":""])).response { (response) in
                 let json : AnyObject! = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as AnyObject?
                 if nil != json {
                     let res = responseData(request: response.request, response: response.response, json: json, error: response.error as NSError?, data: response.data)

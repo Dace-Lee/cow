@@ -45,6 +45,7 @@ class Login: UIViewController {
     
     class func showLogin(_ inVc: UIViewController) {
         let login = UIStoryboard.init(name: "Login", bundle: nil).instantiateInitialViewController()
+        login?.modalPresentationStyle = .fullScreen
         inVc.present(login!, animated: false, completion: nil)
     }
 }

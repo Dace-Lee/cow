@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ReachabilitySwift
+import Reachability
 
 class TNetworkReachability: NSObject {
     static let sharedInstance = TNetworkReachability()
@@ -27,8 +27,12 @@ class TNetworkReachability: NSObject {
     }
     
     fileprivate func setup() {
-        
-        let reach = Reachability()
+        var reach : Reachability?
+        do {
+            reach = try Reachability()
+        } catch {
+            
+        }
         self.reachability = reach
         
         self.reachability?.whenReachable = { [weak self] reachability in
