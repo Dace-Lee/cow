@@ -1,5 +1,15 @@
 PODS:
   - Alamofire (5.4.0)
+  - BaiduWalkNaviKit (6.0.0):
+    - BaiduWalkNaviKit/Base (= 6.0.0)
+    - BaiduWalkNaviKit/Map (= 6.0.0)
+    - BaiduWalkNaviKit/WalkNavi (= 6.0.0)
+  - BaiduWalkNaviKit/Base (6.0.0)
+  - BaiduWalkNaviKit/Map (6.0.0):
+    - BaiduWalkNaviKit/Base
+  - BaiduWalkNaviKit/WalkNavi (6.0.0):
+    - BaiduWalkNaviKit/Base
+    - BaiduWalkNaviKit/Map
   - CCHMapClusterController (1.7.0)
   - DLRadioButton (1.4.9)
   - DynamicButton (6.2.1)
@@ -24,6 +34,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - BaiduWalkNaviKit (~> 6.0.0)
   - CCHMapClusterController
   - DLRadioButton (~> 1.4)
   - DynamicButton (~> 6.2.1)
@@ -45,6 +56,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - BaiduWalkNaviKit
     - CCHMapClusterController
     - DLRadioButton
     - DynamicButton
@@ -67,6 +79,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  BaiduWalkNaviKit: 37d961dae76dab6cd1a8fbb43dcae5f5f99f97c4
   CCHMapClusterController: d8cd12cd5682ec6cd76d911ac7198f981b6cc1b8
   DLRadioButton: 7bb8a6e3768b572469ace553391ab4d2af6f9c19
   DynamicButton: 95f30460793bd3510a5c213ac1b810a5e3d54b6a
@@ -87,6 +100,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 11808bc837868ea77798d91392d5715fc1a35123
+PODFILE CHECKSUM: dafa55836ee5c8be402d1f2c0bb029902e9cf710
 
 COCOAPODS: 1.10.0

@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## BaiduWalkNaviKit
+
+Copyright (c) 2020 BaiduLBS
+
 ## CCHMapClusterController
 
 The MIT License (MIT)

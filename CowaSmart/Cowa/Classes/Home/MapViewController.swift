@@ -12,10 +12,10 @@ import JZLocationConverter
 import GoogleMaps
 import DynamicButton
 
-class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationServiceDelegate{
+class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationManagerDelegate{
     
     let bdMapView = BMKMapView()
-    let bdLocation = BMKLocationService()
+    let bdLocation = BMKLocationManager.init()
     
     var ggMapView = GMSMapView()
     var bounds:GMSCoordinateBounds?
@@ -41,7 +41,18 @@ class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationServic
         bdMapView.frame = CGRect(x:0, y:64, width:self.view.frame.size.width, height:self.view.frame.size.height)
         
         bdLocation.delegate = self
-        bdLocation.startUserLocationService()
+        bdLocation.requestLocation(withReGeocode: true, withNetworkState: true) { (location, state, error) in
+            if error != nil {
+                
+            } else {
+                if location != nil {
+                    let userLocation = BMKUserLocation.init()
+                    userLocation.location = location?.location
+                    self.bdMapView.updateLocationData(userLocation)
+                }
+            }
+        }
+        
         bdMapView.userTrackingMode = BMKUserTrackingModeFollow
         bdMapView.showsUserLocation = true
         
@@ -105,7 +116,7 @@ class MapViewController: UIViewController, BMKMapViewDelegate, BMKLocationServic
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        bdMapView.updateLocationData(bdLocation.userLocation)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -27,6 +27,6 @@ target 'Cowa' do
     pod 'RESideMenu', '~> 4.0.7'
 
     pod 'SwiftLocation', '~> 5.0.2'
-    
+    pod 'BaiduWalkNaviKit', '~> 6.0.0'
 
 end

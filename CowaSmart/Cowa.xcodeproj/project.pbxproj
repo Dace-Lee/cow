@@ -469,12 +469,6 @@
 		E1EBB6951F0CB04200259660 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6941F0CB04200259660 /* Security.framework */; };
 		E1EBB6B51F0F1CE900259660 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6B41F0F1CE900259660 /* OpenGLES.framework */; };
 		E1EBB6B71F0F1D0700259660 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6B61F0F1D0700259660 /* libsqlite3.0.tbd */; };
-		E1EBB6D51F0F2F9B00259660 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6D31F0F2F9B00259660 /* libcrypto.a */; };
-		E1EBB6D61F0F2F9B00259660 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6D41F0F2F9B00259660 /* libssl.a */; };
-		E1EBB6E01F137F1F00259660 /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6DD1F137F1F00259660 /* BaiduMapAPI_Base.framework */; };
-		E1EBB6E11F137F1F00259660 /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6DE1F137F1F00259660 /* BaiduMapAPI_Location.framework */; };
-		E1EBB6E21F137F1F00259660 /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EBB6DF1F137F1F00259660 /* BaiduMapAPI_Map.framework */; };
-		E1EBB6E41F137F3C00259660 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E1EBB6E31F137F3C00259660 /* mapapi.bundle */; };
 		E1F1CDCE1CD9C83300ED2755 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F1CDD01CD9C83300ED2755 /* Localizable.strings */; };
 		E1F1CDEA1CDB263E00ED2755 /* SubVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1CDE91CDB263E00ED2755 /* SubVC.swift */; };
 		E1F487781D7EC31C0021B2F1 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E1F487771D7EC31C0021B2F1 /* README.md */; };
@@ -797,7 +791,8 @@
 		E1FF5FF11F5E932900B08565 /* 设备列表背景@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1FF5EA41F5E932800B08565 /* 设备列表背景@3x.png */; };
 		E1FF5FFA1F5E938B00B08565 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF5FF81F5E938B00B08565 /* MenuViewController.swift */; };
 		E1FF5FFB1F5E938B00B08565 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1FF5FF91F5E938B00B08565 /* MenuViewController.xib */; };
-		EEEF2C01AF6A58C1E7E39670 /* Pods_Cowa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A5FE486B3A396FA15513AA /* Pods_Cowa.framework */; };
+		E9049EE7258DD9EA00902834 /* BMKLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9049EE6258DD9EA00902834 /* BMKLocationKit.framework */; };
+		E9D89132258DDFBB00EE4BBD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D89131258DDFBB00EE4BBD /* AdSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1312,15 +1307,8 @@
 		E1EBB6901F0CB01F00259660 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E1EBB6921F0CB02A00259660 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E1EBB6941F0CB04200259660 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		E1EBB69A1F0CB06000259660 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		E1EBB6B41F0F1CE900259660 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		E1EBB6B61F0F1D0700259660 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		E1EBB6D31F0F2F9B00259660 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		E1EBB6D41F0F2F9B00259660 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
-		E1EBB6DD1F137F1F00259660 /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Base.framework; path = FrameWork/BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
-		E1EBB6DE1F137F1F00259660 /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Location.framework; path = FrameWork/BaiduMapAPI_Location.framework; sourceTree = "<group>"; };
-		E1EBB6DF1F137F1F00259660 /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = FrameWork/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
-		E1EBB6E31F137F3C00259660 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = FrameWork/mapapi.bundle; sourceTree = "<group>"; };
 		E1F1CDC91CD9C68800ED2755 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		E1F1CDCA1CD9C68800ED2755 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		E1F1CDCF1CD9C83300ED2755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1647,6 +1635,8 @@
 		E1FF5EA41F5E932800B08565 /* 设备列表背景@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "设备列表背景@3x.png"; sourceTree = "<group>"; };
 		E1FF5FF81F5E938B00B08565 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E1FF5FF91F5E938B00B08565 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		E9049EE6258DD9EA00902834 /* BMKLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BMKLocationKit.framework; sourceTree = "<group>"; };
+		E9D89131258DDFBB00EE4BBD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		EB1EA6A8246C4BC205F66F20 /* Pods-Cowa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cowa.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cowa/Pods-Cowa.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1655,6 +1645,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1EBB6B71F0F1D0700259660 /* libsqlite3.0.tbd in Frameworks */,
+				E9D89132258DDFBB00EE4BBD /* AdSupport.framework in Frameworks */,
 				E166A3A91DEFFD08006BD47A /* libc++.tbd in Frameworks */,
 				85A35A0D20BBA1F3001D9C4A /* AudioToolbox.framework in Frameworks */,
 				E12BD2A81F568D3400E9C3AB /* ImageIO.framework in Frameworks */,
@@ -1668,19 +1660,14 @@
 				E12BD27E1F4D576800E9C3AB /* CFNetwork.framework in Frameworks */,
 				E12BD27C1F4D573C00E9C3AB /* jpush-ios-3.0.6.a in Frameworks */,
 				E12BD2721F4D3AE900E9C3AB /* UMMobClick.framework in Frameworks */,
-				E1EBB6B71F0F1D0700259660 /* libsqlite3.0.tbd in Frameworks */,
 				E1EBB6B51F0F1CE900259660 /* OpenGLES.framework in Frameworks */,
-				E1EBB6E01F137F1F00259660 /* BaiduMapAPI_Base.framework in Frameworks */,
-				E1EBB6D51F0F2F9B00259660 /* libcrypto.a in Frameworks */,
+				E9049EE7258DD9EA00902834 /* BMKLocationKit.framework in Frameworks */,
 				E12BD2861F4D6F2C00E9C3AB /* jcore-ios-1.1.5.a in Frameworks */,
 				E1EBB6951F0CB04200259660 /* Security.framework in Frameworks */,
 				E1EBB6931F0CB02A00259660 /* QuartzCore.framework in Frameworks */,
-				E1EBB6E11F137F1F00259660 /* BaiduMapAPI_Location.framework in Frameworks */,
-				E1EBB6E21F137F1F00259660 /* BaiduMapAPI_Map.framework in Frameworks */,
 				E1EBB68F1F0CB01200259660 /* Foundation.framework in Frameworks */,
 				E1EBB68D1F0CB00600259660 /* UIKit.framework in Frameworks */,
 				E12BD29E1F568C4100E9C3AB /* GoogleMapsCore.framework in Frameworks */,
-				E1EBB6D61F0F2F9B00259660 /* libssl.a in Frameworks */,
 				E118BF191D86515700CA077E /* CoreLocation.framework in Frameworks */,
 				E166A3B31DEFFD35006BD47A /* CoreTelephony.framework in Frameworks */,
 				E166A3B11DEFFD2B006BD47A /* MobileCoreServices.framework in Frameworks */,
@@ -1692,7 +1679,6 @@
 				E1715A001CFEECB7004AD6E5 /* CoreData.framework in Frameworks */,
 				E1B4D4951CE075E600311E4E /* CoreBluetooth.framework in Frameworks */,
 				E12BD29C1F568C4100E9C3AB /* GoogleMaps.framework in Frameworks */,
-				EEEF2C01AF6A58C1E7E39670 /* Pods_Cowa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1702,6 +1688,8 @@
 		55EC3CF9615A3E6FFE4F529B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9D89131258DDFBB00EE4BBD /* AdSupport.framework */,
+				E9049EE6258DD9EA00902834 /* BMKLocationKit.framework */,
 				85A35A0C20BBA1F3001D9C4A /* AudioToolbox.framework */,
 				E12BD2A71F568D3400E9C3AB /* ImageIO.framework */,
 				E12BD2A51F568D2500E9C3AB /* GLKit.framework */,
@@ -1718,15 +1706,8 @@
 				E12BD2791F4D573C00E9C3AB /* jpush-ios-3.0.6.a */,
 				E12BD27A1F4D573C00E9C3AB /* JPUSHService.h */,
 				E12BD2711F4D3AE900E9C3AB /* UMMobClick.framework */,
-				E1EBB6E31F137F3C00259660 /* mapapi.bundle */,
-				E1EBB6DD1F137F1F00259660 /* BaiduMapAPI_Base.framework */,
-				E1EBB6DE1F137F1F00259660 /* BaiduMapAPI_Location.framework */,
-				E1EBB6DF1F137F1F00259660 /* BaiduMapAPI_Map.framework */,
-				E1EBB6D31F0F2F9B00259660 /* libcrypto.a */,
-				E1EBB6D41F0F2F9B00259660 /* libssl.a */,
 				E1EBB6B61F0F1D0700259660 /* libsqlite3.0.tbd */,
 				E1EBB6B41F0F1CE900259660 /* OpenGLES.framework */,
-				E1EBB69A1F0CB06000259660 /* libstdc++.6.0.9.tbd */,
 				E1EBB6941F0CB04200259660 /* Security.framework */,
 				E1EBB6921F0CB02A00259660 /* QuartzCore.framework */,
 				E1EBB6901F0CB01F00259660 /* CoreGraphics.framework */,
@@ -3121,6 +3102,7 @@
 				E1B658671CD06C310032ED4A /* Frameworks */,
 				E1B658681CD06C310032ED4A /* Resources */,
 				B89546F07C16B59F4D5E099F /* [CP] Embed Pods Frameworks */,
+				003DECB61F615A1DB3E19B54 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3798,7 +3780,6 @@
 				E1C58C581F5FEB4F00A6D40D /* 左滑解绑图标-点击.png in Resources */,
 				E1FF5C961F5CF52F00B08565 /* 顶部栏背景色@3x.png in Resources */,
 				E1FF5CD61F5CF52F00B08565 /* 顶部栏背景.png in Resources */,
-				E1EBB6E41F137F3C00259660 /* mapapi.bundle in Resources */,
 				E1424D311FCEBD0C00F9BAC3 /* 取消按钮-新.png in Resources */,
 				E1FF5EE61F5E932900B08565 /* 绿色未选中按钮@3x.png in Resources */,
 				E1FF5EAC1F5E932800B08565 /* GPS图标@2x.png in Resources */,
@@ -3844,6 +3825,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		003DECB61F615A1DB3E19B54 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cowa/Pods-Cowa-resources.sh",
+				"${PODS_ROOT}/BaiduWalkNaviKit/BaiduWalkNaviKit/BaiduMapAPI_Map.framework/mapapi.bundle",
+				"${PODS_ROOT}/BaiduWalkNaviKit/BaiduWalkNaviKit/BaiduMapAPI_WalkNavi.framework/navigation.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/mapapi.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/navigation.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cowa/Pods-Cowa-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B2E6CB98B03A84CB7E1A27B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4208,6 +4209,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$PODS_ROOT/**/**";
+				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
 			name = Debug;
 		};
@@ -4255,6 +4257,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$PODS_ROOT/**/**";
+				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
 			name = Release;
 		};

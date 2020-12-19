@@ -19,7 +19,8 @@
 #import "MMPDeepSleepPreventer.h"//播放音乐的类
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+//#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+#import <BMKLocationkit/BMKLocationComponent.h>
 #import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 
 #import <UMMobClick/MobClick.h>
