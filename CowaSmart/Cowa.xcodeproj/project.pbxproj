@@ -3123,7 +3123,6 @@
 				E1B658671CD06C310032ED4A /* Frameworks */,
 				E1B658681CD06C310032ED4A /* Resources */,
 				B89546F07C16B59F4D5E099F /* [CP] Embed Pods Frameworks */,
-				C5F6C293F3D6E8A316E941AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3165,6 +3164,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -3870,7 +3870,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cowa/Pods-Cowa-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Cowa/Pods-Cowa-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CCHMapClusterController/CCHMapClusterController.framework",
 				"${BUILT_PRODUCTS_DIR}/DLRadioButton/DLRadioButton.framework",
@@ -3885,7 +3885,7 @@
 				"${BUILT_PRODUCTS_DIR}/RESideMenu/RESideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/RETableViewManager/RETableViewManager.framework",
 				"${BUILT_PRODUCTS_DIR}/REValidation/REValidation.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftLocation/SwiftLocation.framework",
@@ -3908,7 +3908,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RESideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RETableViewManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/REValidation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftLocation.framework",
@@ -3917,22 +3917,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cowa/Pods-Cowa-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C5F6C293F3D6E8A316E941AD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cowa/Pods-Cowa-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cowa/Pods-Cowa-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4209,7 +4194,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cowa/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Cowa/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
@@ -4256,7 +4241,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Cowa/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Cowa/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",

@@ -1,21 +1,21 @@
 project 'Cowa.xcodeproj'
-platform :ios, '9.0'
+platform :ios, '12.0'
 use_frameworks!
 
 target 'Cowa' do
-    pod 'Alamofire'
+    pod 'Alamofire', '~> 5.0.0'
     pod 'INTULocationManager', '~> 4.2.0'
-    pod 'SnapKit'
+    pod 'SnapKit', '~> 4.2.0'
     pod 'JVFloatingDrawer', '~> 0.1.0'
-    pod 'DynamicButton'
+    pod 'DynamicButton', '~> 5.0.0'
     pod 'RETableViewManager'
     pod 'FXBlurView', '~> 1.6.4'
     pod 'FLEX'
 
     pod 'MGSwipeTableCell', '~> 1.5.5'
 
-    pod 'ReachabilitySwift'
-    pod 'Toast-Swift'
+    pod 'ReachabilitySwift', '~> 4.3.0'
+    pod 'Toast-Swift', '~> 4.0.1'
     pod 'DLRadioButton', '~> 1.4'
 
     pod 'SVProgressHUD'
@@ -23,10 +23,10 @@ target 'Cowa' do
     pod 'CCHMapClusterController'
     pod 'JZLocationConverter'
 
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON', '~> 4.0.0'
     pod 'RESideMenu', '~> 4.0.7'
 
-    pod 'SwiftLocation'
+    pod 'SwiftLocation', '~> 3.2.3'
     
 
 end
