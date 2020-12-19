@@ -23,7 +23,7 @@ class DataSycnizeHelper: NSObject {
             if result.code == "2000" || result.code == "2002"{
                 
                 let userArray = NSMutableArray()
-                let data = JSON(data: result.resp!.data!)
+                let data = ViewController.swiftyJsonFromData(data: result.resp!.data!)
                 if data != JSON.null{
                     
                     if result.code == "2000"{

@@ -45,7 +45,7 @@ class AddFriendsView: UIView , UITextFieldDelegate{
     
     @IBAction func commitBtnAction(_ sender: Any) {
         ProgressAnimateTool.tool.show(inView: self.superview!)
-        if numTF.text?.characters.count == 0 || numTF.text == TUser.userPhone() {
+        if numTF.text?.count == 0 || numTF.text == TUser.userPhone() {
             ProgressAnimateTool.tool.dismiss()
             MyInfoTool.tool.showInView(supView: self.superview!, title: NSLocalizedString("AccountCheckYourInput", comment: ""))
         }else{

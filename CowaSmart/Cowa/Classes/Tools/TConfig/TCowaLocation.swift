@@ -55,7 +55,7 @@ class TCowaLocation: NSObject {
         
         _ = TDeviceManager.shared().originGetImeis { (result) in
             if result.code == "2000" {
-                let json = JSON.init(data: result.resp!.data!)
+                let json = ViewController.swiftyJsonFromData(data: result.resp!.data!)
                 let devs = json["result"].array
                 if devs != nil {
                     for dev in devs! {
@@ -90,8 +90,8 @@ class TCowaLocation: NSObject {
         
         url = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         
-        Alamofire.request(url, method: .post, parameters: para, encoding: URLEncoding.default, headers: nil).response { (response) in
-            let json = JSON(data: response.data!)
+        AF.request(url, method: .post, parameters: para, encoding: URLEncoding.default, headers: nil).response { (response) in
+            let json = ViewController.swiftyJsonFromData(data: response.data!)
             let result = json["result"].array
             
             if nil != result {

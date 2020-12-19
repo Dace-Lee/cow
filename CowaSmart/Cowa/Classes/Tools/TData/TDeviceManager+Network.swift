@@ -28,7 +28,7 @@ extension TDeviceManager {
         let para = ["telnumber":TUser.userPhone()]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .get, URL: NetURL.tool.allBag, Parameter: para as [String : AnyObject]?, Token:TUser.userToken()) { (res) in
-            let json = JSON.init(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             var devices = [MDevice]()
             //print("*****获取用户下所有的箱子返回\(json)")
             if JSON.null != json {
@@ -52,7 +52,7 @@ extension TDeviceManager {
         let para = ["telnumber":TUser.userPhone()]
         //print("\(para)")
        _ = TNetworking.requestWithPara(method: .get, URL: NetURL.tool.allBag, Parameter: para as [String : AnyObject]?, Token:TUser.userToken()) { (res) in
-            let json = JSON.init(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("*****获取用户下所有的imeis返回\(json)")
             if JSON.null != json {
                 comp(result(succ: true, mesg: json["msg"].string, resp: res, code:json["code"].string))
@@ -70,7 +70,7 @@ extension TDeviceManager {
         para = ["telnumber":usr as AnyObject,"imei":imei as AnyObject,"type":1 as AnyObject,"box_name":boxName as AnyObject]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******绑定行李箱返回\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -92,7 +92,7 @@ extension TDeviceManager {
         para = ["host_tel":usr as AnyObject,"imei":imei as AnyObject,"type":6 as AnyObject,"telnumber":publicUser as AnyObject,"verify":verify as AnyObject]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******申请授权返回\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -113,7 +113,7 @@ extension TDeviceManager {
         let para = ["telnumber":usr,"verify":verify,"imei":imei]
         //print("远程解绑参数\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******远程解绑返回\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -135,7 +135,7 @@ extension TDeviceManager {
         para = ["host_tel":usr as AnyObject,"imei":imei as AnyObject,"telnumber":publicUser as AnyObject,"type":5 as AnyObject]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******验证当前登录用户是否合法返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -157,7 +157,7 @@ extension TDeviceManager {
         para = ["host_tel":usr as AnyObject,"imei":imei as AnyObject,"telnumber":publicUser as AnyObject,"type":3 as AnyObject]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******添加新朋友返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -177,7 +177,7 @@ extension TDeviceManager {
         let para = ["telnumber":user,"imei":imei]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .get, URL: NetURL.tool.allUser, Parameter: para as [String : AnyObject]?, Token:TUser.userToken()) { (res) in
-            let json = JSON.init(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******获取箱子下的授权用户返回\(json)")
             var frends = [FrendsModel]()
             if JSON.null != json {
@@ -202,7 +202,7 @@ extension TDeviceManager {
         para = ["host_tel":usr as AnyObject,"imei":imei as AnyObject,"telnumber":publicUser as AnyObject,"type":4 as AnyObject]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******取消授权返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -224,7 +224,7 @@ extension TDeviceManager {
         para = ["imei":imei as AnyObject,"telnumber":telnumber as AnyObject,"type":2 as AnyObject]
        // print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
            // print("******解绑返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -246,7 +246,7 @@ extension TDeviceManager {
         para = ["imei":imei as AnyObject,"type":type as AnyObject]
        // print("推送参数\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
            // print("******推送返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -267,7 +267,7 @@ extension TDeviceManager {
         let para = ["type":type,"box_type":"R1"]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             print("******box版本返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -288,7 +288,7 @@ extension TDeviceManager {
         let para = ["imei":imei]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******reset返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -309,7 +309,7 @@ extension TDeviceManager {
         let para = ["imei":imei,"name":name]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******修改箱子信息返回\(json)")
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -330,7 +330,7 @@ extension TDeviceManager {
         let para = ["imei":imei]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******由imei号返回所有使用用户\(json)")
             if JSON.null != json {
                 if "2000" == json["code"].string {
@@ -352,7 +352,7 @@ extension TDeviceManager {
         let para = ["id":id,"telnumber":telnumber,"description":description,"type":type,"mechine":"R1Lite"]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******\(json)")
             if JSON.null != json {
                 if "2000" == json["code"].string {
@@ -373,7 +373,7 @@ extension TDeviceManager {
         let para = ["mes_id":mes_id]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******从后台获取极光推送消息\(json)")
             if JSON.null != json {
                 if "2000" == json["code"].string {

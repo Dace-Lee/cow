@@ -46,7 +46,7 @@ class AplyBindView: UIView, UITextFieldDelegate{
     
     @IBAction func commitAction(_ sender: Any) {
         ProgressAnimateTool.tool.show(inView: self.superview!)
-        if textField.text?.characters.count == 0 {
+        if textField.text?.count == 0 {
             ProgressAnimateTool.tool.dismiss()
             
             MyInfoTool.tool.showInView(supView: self.superview!, title: NSLocalizedString("AccountCheckYourInput", comment: ""))

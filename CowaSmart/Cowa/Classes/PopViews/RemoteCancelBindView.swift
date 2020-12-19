@@ -118,7 +118,7 @@ class RemoteCancelBindView: UIView, UITextFieldDelegate{
     
     @IBAction func commitBtnAction(_ sender: Any) {
         ProgressAnimateTool.tool.show(inView: self.superview!)
-        if (self.textField.text?.characters.count)! > 0 {
+        if (self.textField.text?.count)! > 0 {
           
             _ = TDeviceManager.shared().remoteCancelBond(TUser.userPhone(), verify: self.textField.text, imei: imeiStr, comp: { (result) in
           

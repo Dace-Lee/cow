@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , BMKGeneralDelegate , JPU
             _ = TDeviceManager.shared().getMsgFromJPUSH(id.stringValue) { (result) in
                 if result.code == "2000"{
 
-                    let data = JSON(data: result.resp!.data!)
+                    let data = ViewController.swiftyJsonFromData(data: result.resp!.data!)
 
                     let defs = UserDefaults.standard
                     let languages = defs.object(forKey: "AppleLanguages")

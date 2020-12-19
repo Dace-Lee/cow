@@ -40,7 +40,7 @@ class FacebackInfo: UIViewController {
         let para = ["telnumber":phoneNum]
         _ = TNetworking.requestWithPara(method: .get, URL: url, Parameter: para as [String : AnyObject], Token: tokenId, handler: { (res) in
             
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             if "2000" == json["code"].string {
               self.resourceArr =  json["result"].arrayValue.map({FacebackModel(json: $0)})
                 self.tableView.reloadData()

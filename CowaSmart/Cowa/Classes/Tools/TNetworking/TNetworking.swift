@@ -34,10 +34,10 @@ class TNetworking: NSObject {
                 dicToken = ["tokenId" : token!, "identity_code":"\(SecurityUtil .encryptAESData("cowaRobot-\(Int(Date().timeIntervalSince1970))", app_key: "Td85wvkoRUX3xTf92trDROs4ioUwjdZ5"))"]
             }
             //print("*****\(SecurityUtil .encryptAESData("cowaRobot-\(Int(NSDate().timeIntervalSince1970))", app_key: "Td85wvkoRUX3xTf92trDROs4ioUwjdZ5"))")
-            let manager = Alamofire.SessionManager.default
+            let manager = Alamofire.Session.default
             manager.session.configuration.timeoutIntervalForRequest = 10
-            manager.request(url, method: .get, parameters: para, encoding: URLEncoding.default, headers: dicToken).response { (response) in
-                let json : AnyObject! = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as AnyObject!
+            manager.request(url, method: .get, parameters: para, encoding: URLEncoding.default, headers: HTTPHeaders.init(dicToken)).response { (response) in
+                let json : AnyObject! = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as AnyObject?
                 if nil != json {
                     let res = responseData(request: response.request, response: response.response, json: json, error: response.error as NSError?, data: response.data)
                    
@@ -63,7 +63,7 @@ class TNetworking: NSObject {
 
 extension TNetworking {
     class func showError(_ res:responseData) {
-        let j = JSON(data: res.data!)
+        let j = ViewController.swiftyJsonFromData(data: res.data!)
         if JSON.null != j {
             if nil != j["error"].string {
                 let error = j["error"].string

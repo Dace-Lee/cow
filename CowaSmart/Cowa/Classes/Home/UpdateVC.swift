@@ -131,7 +131,7 @@ class UpdateVC: UIViewController, URLSessionDownloadDelegate{
             
             if let md5 = self.md5File(url: NSURL.init(string: self.filePath)! as URL){
                 TBLEManager.sharedManager.dev?.status.isUpdating = true
-                TBLEManager.sharedManager.dev?.status.sendPreData(self.fileData as Data!, md5Str: md5)
+                TBLEManager.sharedManager.dev?.status.sendPreData(self.fileData as Data?, md5Str: md5)
                 
                 self.updateProgress()
             }

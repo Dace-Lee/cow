@@ -9,6 +9,7 @@
 import UIKit
 import RESideMenu
 import SVProgressHUD
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
@@ -68,7 +69,15 @@ class ViewController: UIViewController {
     }
     
 
-    
+    static func swiftyJsonFromData(data:Data) -> JSON {
+        var json : JSON
+        do {
+            json = try JSON(data: data)
+        } catch {
+            json = JSON.null
+        }
+        return json
+    }
 
     
 }

@@ -81,7 +81,7 @@ class FeedbackVC: UIViewController, UITextViewDelegate {
         let para = ["telnumber":phoneNum]
         _ = TNetworking.requestWithPara(method: .get, URL: url, Parameter: para as [String : AnyObject], Token: tokenId, handler: { (res) in
            
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             if "2000" == json["code"].string {
                 self.resourceArr =  json["result"].arrayValue.map({FacebackModel(json: $0)})
                 let count = UserDefaults.standard.object(forKey: "questionCount") as? Int
@@ -223,7 +223,7 @@ class FeedbackVC: UIViewController, UITextViewDelegate {
                     let session:URLSession = URLSession.shared;
                     session.uploadTask(with: request as URLRequest, from: file as Data, completionHandler: { (data, responseData, error) in
                         
-                        let json = JSON(data:data!)
+                        let json = ViewController.swiftyJsonFromData(data: data!)
                         if json != JSON.null{
                             if json["code"].string == "2000"{
                                 _ = TDeviceManager.shared().pushFeedBack(json["result"]["id"].string, telnumber: TUser.userPhone(), description: self.textView.text, type: type, comp: { (result) in

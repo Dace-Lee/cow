@@ -37,7 +37,7 @@ class LoginRegisterAbstract : NSObject {
         let para = ["username":usr, "password":pwd,"version_ios":vserion]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: nil) { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             print("******登录返回\(json)");
             if JSON.null != json {
                 if "2000" == json["code"].string {
@@ -68,7 +68,7 @@ class LoginRegisterAbstract : NSObject {
         }
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: nil, handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             print("******验证码返回\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -89,7 +89,7 @@ class LoginRegisterAbstract : NSObject {
         let para = ["telnumber":usr,"imei":imei]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******远程解绑验证码\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -110,7 +110,7 @@ class LoginRegisterAbstract : NSObject {
         let para = ["username":usr,"password":pwd,"verify":pinCode,"cid":country]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: nil) { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******注册返回\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -133,7 +133,7 @@ class LoginRegisterAbstract : NSObject {
         let para = ["username" : user, "verify" : pin, "password" : newPwd]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: nil) { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******找回密码返回\(json)");
             if JSON.null != json {
                 if "2000" == json["code"].string {
@@ -158,7 +158,7 @@ class LoginRegisterAbstract : NSObject {
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para as [String : AnyObject]?, Token: TUser.userToken()) { (res) in
             //print("\(res)")
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******重置密码\(json)");
             if JSON.null != json {
                 if "2000" == json["code"].string {
@@ -184,7 +184,7 @@ class LoginRegisterAbstract : NSObject {
         para = ["telnumber":usr as AnyObject,"type":4 as AnyObject,"imei":imei as AnyObject]
        // print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: nil, handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******授权验证码返回\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {
@@ -206,7 +206,7 @@ class LoginRegisterAbstract : NSObject {
        para = ["username":usr as AnyObject,"nickName":name as AnyObject]
         //print("\(para)")
         _ = TNetworking.requestWithPara(method: .post, URL: url, Parameter: para, Token: TUser.userToken(), handler: { (res) in
-            let json = JSON(data: res.data!)
+            let json = ViewController.swiftyJsonFromData(data: res.data!)
             //print("******NICKNAME返回\(json)");
             if JSON.null != json {
                 if "2000" != json["code"].string {

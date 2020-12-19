@@ -38,9 +38,9 @@ class SetDeviceName: UIView , UITextFieldDelegate{
         
         ProgressAnimateTool.tool.show(inView: self.superview!)
         
-        if (nameTF.text?.characters.count)! > 0  {
+        if (nameTF.text?.count)! > 0  {
             
-            if (nameTF.text?.characters.count)! > 9 {
+            if (nameTF.text?.count)! > 9 {
                 ProgressAnimateTool.tool.dismiss()
                 MyInfoTool.tool.showInView(supView: self.superview!, title: NSLocalizedString("BoxNameCount", comment: ""))
              
