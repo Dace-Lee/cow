@@ -11,33 +11,37 @@
 #import "FLEXUtility.h"
 
 @interface FLEXCookiesTableViewController ()
-
-@property (nonatomic, strong) NSArray *cookies;
-
+@property (nonatomic, readonly) NSArray<NSHTTPCookie *> *cookies;
+@property (nonatomic) NSString *headerTitle;
 @end
 
 @implementation FLEXCookiesTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    
-    if (self) {
-        self.title = @"Cookies";
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
-        NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
-        _cookies =[[NSHTTPCookieStorage sharedHTTPCookieStorage].cookies sortedArrayUsingDescriptors:@[nameSortDescriptor]];
-    }
-    
-    return self;
+    NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc]
+        initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)
+    ];
+    _cookies = [NSHTTPCookieStorage.sharedHTTPCookieStorage.cookies
+        sortedArrayUsingDescriptors:@[nameSortDescriptor]
+    ];
+
+    self.title = @"Cookies";
+    [self updateHeaderTitle];
+}
+
+- (void)updateHeaderTitle {
+    self.headerTitle = [NSString stringWithFormat:@"%@ cookies", @(self.cookies.count)];
+    // TODO update header title here when we can search cookies
 }
 
 - (NSHTTPCookie *)cookieForRowAtIndexPath:(NSIndexPath *)indexPath {
     return self.cookies[indexPath.row];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
+
+#pragma mark - Table View Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.cookies.count;
@@ -50,7 +54,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.textLabel.font = [FLEXUtility defaultTableViewCellLabelFont];
         cell.detailTextLabel.font = [FLEXUtility defaultTableViewCellLabelFont];
-        cell.detailTextLabel.textColor = [UIColor grayColor];
+        cell.detailTextLabel.textColor = UIColor.grayColor;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -61,11 +65,29 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.headerTitle;
+}
+
+
+#pragma mark - Table View Delegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSHTTPCookie *cookie = [self cookieForRowAtIndexPath:indexPath];
     UIViewController *cookieViewController = (UIViewController *)[FLEXObjectExplorerFactory explorerViewControllerForObject:cookie];
     
     [self.navigationController pushViewController:cookieViewController animated:YES];
+}
+
+
+#pragma mark - FLEXGlobalsEntry
+
++ (NSString *)globalsEntryTitle:(FLEXGlobalsRow)row {
+    return @"🍪  Cookies";
+}
+
++ (UIViewController *)globalsEntryViewController:(FLEXGlobalsRow)row {
+    return [self new];
 }
 
 @end

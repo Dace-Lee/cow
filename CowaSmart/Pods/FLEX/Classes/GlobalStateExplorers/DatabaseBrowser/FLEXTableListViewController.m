@@ -20,10 +20,11 @@
     NSString *_databasePath;
 }
 
-@property (nonatomic, strong) NSArray *tables;
+@property (nonatomic) NSArray<NSString *> *tables;
+@property (nonatomic) NSArray<NSString *> *filteredTables;
 
-+ (NSArray *)supportedSQLiteExtensions;
-+ (NSArray *)supportedRealmExtensions;
++ (NSArray<NSString *> *)supportedSQLiteExtensions;
++ (NSArray<NSString *> *)supportedRealmExtensions;
 
 @end
 
@@ -45,12 +46,12 @@
 {
     NSString *pathExtension = path.pathExtension.lowercaseString;
     
-    NSArray *sqliteExtensions = [FLEXTableListViewController supportedSQLiteExtensions];
+    NSArray<NSString *> *sqliteExtensions = [FLEXTableListViewController supportedSQLiteExtensions];
     if ([sqliteExtensions indexOfObject:pathExtension] != NSNotFound) {
         return [[FLEXSQLiteDatabaseManager alloc] initWithPath:path];
     }
     
-    NSArray *realmExtensions = [FLEXTableListViewController supportedRealmExtensions];
+    NSArray<NSString *> *realmExtensions = [FLEXTableListViewController supportedRealmExtensions];
     if (realmExtensions != nil && [realmExtensions indexOfObject:pathExtension] != NSNotFound) {
         return [[FLEXRealmDatabaseManager alloc] initWithPath:path];
     }
@@ -60,17 +61,42 @@
 
 - (void)getAllTables
 {
-    NSArray *resultArray = [_dbm queryAllTables];
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSDictionary *dict in resultArray) {
-        [array addObject:dict[@"name"]];
+    NSArray<NSDictionary<NSString *, id> *> *resultArray = [_dbm queryAllTables];
+    NSMutableArray<NSString *> *array = [NSMutableArray array];
+    for (NSDictionary<NSString *, id> *dict in resultArray) {
+        NSString *columnName = (NSString *)dict[@"name"] ?: @"";
+        [array addObject:columnName];
     }
     self.tables = array;
+    self.filteredTables = array;
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.showsSearchBar = YES;
+}
+
+#pragma mark - Search bar
+
+- (void)updateSearchResults:(NSString *)searchText
+{
+    if (searchText.length > 0) {
+        NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", searchText];
+        self.filteredTables = [self.tables filteredArrayUsingPredicate:searchPredicate];
+    } else {
+        self.filteredTables = self.tables;
+    }
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - Table View Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.tables.count;
+    return self.filteredTables.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,38 +106,39 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:@"FLEXTableListViewControllerCell"];
     }
-    cell.textLabel.text = self.tables[indexPath.row];
+    cell.textLabel.text = self.filteredTables[indexPath.row];
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FLEXTableContentViewController *contentViewController = [[FLEXTableContentViewController alloc] init];
+    FLEXTableContentViewController *contentViewController = [FLEXTableContentViewController new];
     
-    contentViewController.contentsArray = [_dbm queryAllDataWithTableName:self.tables[indexPath.row]];
-    contentViewController.columnsArray = [_dbm queryAllColumnsWithTableName:self.tables[indexPath.row]];
+    contentViewController.contentsArray = [_dbm queryAllDataWithTableName:self.filteredTables[indexPath.row]];
+    contentViewController.columnsArray = [_dbm queryAllColumnsWithTableName:self.filteredTables[indexPath.row]];
     
-    contentViewController.title = self.tables[indexPath.row];
+    contentViewController.title = self.filteredTables[indexPath.row];
     [self.navigationController pushViewController:contentViewController animated:YES];
 }
 
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"%lu tables", (unsigned long)self.tables.count];
+    return [NSString stringWithFormat:@"Tables (%lu)", (unsigned long)self.filteredTables.count];
 }
+
+#pragma mark - FLEXTableListViewController
 
 + (BOOL)supportsExtension:(NSString *)extension
 {
     extension = extension.lowercaseString;
     
-    NSArray *sqliteExtensions = [FLEXTableListViewController supportedSQLiteExtensions];
+    NSArray<NSString *> *sqliteExtensions = [FLEXTableListViewController supportedSQLiteExtensions];
     if (sqliteExtensions.count > 0 && [sqliteExtensions indexOfObject:extension] != NSNotFound) {
         return YES;
     }
     
-    NSArray *realmExtensions = [FLEXTableListViewController supportedRealmExtensions];
+    NSArray<NSString *> *realmExtensions = [FLEXTableListViewController supportedRealmExtensions];
     if (realmExtensions.count > 0 && [realmExtensions indexOfObject:extension] != NSNotFound) {
         return YES;
     }
@@ -119,12 +146,12 @@
     return NO;
 }
 
-+ (NSArray *)supportedSQLiteExtensions
++ (NSArray<NSString *> *)supportedSQLiteExtensions
 {
     return @[@"db", @"sqlite", @"sqlite3"];
 }
 
-+ (NSArray *)supportedRealmExtensions
++ (NSArray<NSString *> *)supportedRealmExtensions
 {
     if (NSClassFromString(@"RLMRealm") == nil) {
         return nil;

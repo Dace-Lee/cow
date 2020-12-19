@@ -21,10 +21,10 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
 
 @interface FLEXNetworkRecorder ()
 
-@property (nonatomic, strong) NSCache *responseCache;
-@property (nonatomic, strong) NSMutableArray *orderedTransactions;
-@property (nonatomic, strong) NSMutableDictionary *networkTransactionsForRequestIdentifiers;
-@property (nonatomic, strong) dispatch_queue_t queue;
+@property (nonatomic) NSCache *responseCache;
+@property (nonatomic) NSMutableArray<FLEXNetworkTransaction *> *orderedTransactions;
+@property (nonatomic) NSMutableDictionary<NSString *, FLEXNetworkTransaction *> *networkTransactionsForRequestIdentifiers;
+@property (nonatomic) dispatch_queue_t queue;
 
 @end
 
@@ -34,7 +34,7 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
 {
     self = [super init];
     if (self) {
-        self.responseCache = [[NSCache alloc] init];
+        self.responseCache = [NSCache new];
         NSUInteger responseCacheLimit = [[[NSUserDefaults standardUserDefaults] objectForKey:kFLEXNetworkRecorderResponseCacheLimitDefaultsKey] unsignedIntegerValue];
         if (responseCacheLimit) {
             [self.responseCache setTotalCostLimit:responseCacheLimit];
@@ -56,7 +56,7 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
     static FLEXNetworkRecorder *defaultRecorder = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        defaultRecorder = [[[self class] alloc] init];
+        defaultRecorder = [self new];
     });
     return defaultRecorder;
 }
@@ -74,9 +74,9 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
     [[NSUserDefaults standardUserDefaults] setObject:@(responseCacheByteLimit) forKey:kFLEXNetworkRecorderResponseCacheLimitDefaultsKey];
 }
 
-- (NSArray *)networkTransactions
+- (NSArray<FLEXNetworkTransaction *> *)networkTransactions
 {
-    __block NSArray *transactions = nil;
+    __block NSArray<FLEXNetworkTransaction *> *transactions = nil;
     dispatch_sync(self.queue, ^{
         transactions = [self.orderedTransactions copy];
     });
@@ -95,7 +95,7 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
         [self.orderedTransactions removeAllObjects];
         [self.networkTransactionsForRequestIdentifiers removeAllObjects];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:kFLEXNetworkRecorderTransactionsClearedNotification object:self];
+            [NSNotificationCenter.defaultCenter postNotificationName:kFLEXNetworkRecorderTransactionsClearedNotification object:self];
         });
     });
 }
@@ -104,6 +104,12 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
 
 - (void)recordRequestWillBeSentWithRequestID:(NSString *)requestID request:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
+    for (NSString *host in self.hostBlacklist) {
+        if ([request.URL.host hasSuffix:host]) {
+            return;
+        }
+    }
+    
     NSDate *startDate = [NSDate date];
 
     if (redirectResponse) {
@@ -112,7 +118,7 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
     }
 
     dispatch_async(self.queue, ^{
-        FLEXNetworkTransaction *transaction = [[FLEXNetworkTransaction alloc] init];
+        FLEXNetworkTransaction *transaction = [FLEXNetworkTransaction new];
         transaction.requestID = requestID;
         transaction.request = request;
         transaction.startTime = startDate;
@@ -167,23 +173,23 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
         transaction.transactionState = FLEXNetworkTransactionStateFinished;
         transaction.duration = -[transaction.startTime timeIntervalSinceDate:finishedDate];
 
-        BOOL shouldCache = [responseBody length] > 0;
+        BOOL shouldCache = responseBody.length > 0;
         if (!self.shouldCacheMediaResponses) {
-            NSArray *ignoredMIMETypePrefixes = @[ @"audio", @"image", @"video" ];
+            NSArray<NSString *> *ignoredMIMETypePrefixes = @[ @"audio", @"image", @"video" ];
             for (NSString *ignoredPrefix in ignoredMIMETypePrefixes) {
                 shouldCache = shouldCache && ![transaction.response.MIMEType hasPrefix:ignoredPrefix];
             }
         }
         
         if (shouldCache) {
-            [self.responseCache setObject:responseBody forKey:requestID cost:[responseBody length]];
+            [self.responseCache setObject:responseBody forKey:requestID cost:responseBody.length];
         }
 
         NSString *mimeType = transaction.response.MIMEType;
-        if ([mimeType hasPrefix:@"image/"] && [responseBody length] > 0) {
+        if ([mimeType hasPrefix:@"image/"] && responseBody.length > 0) {
             // Thumbnail image previews on a separate background queue
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSInteger maxPixelDimension = [[UIScreen mainScreen] scale] * 32.0;
+                NSInteger maxPixelDimension = UIScreen.mainScreen.scale * 32.0;
                 transaction.responseThumbnail = [FLEXUtility thumbnailedImageWithMaxPixelDimension:maxPixelDimension fromImageData:responseBody];
                 [self postUpdateNotificationForTransaction:transaction];
             });
@@ -246,16 +252,16 @@ NSString *const kFLEXNetworkRecorderResponseCacheLimitDefaultsKey = @"com.flex.r
 - (void)postNewTransactionNotificationWithTransaction:(FLEXNetworkTransaction *)transaction
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *userInfo = @{ kFLEXNetworkRecorderUserInfoTransactionKey : transaction };
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFLEXNetworkRecorderNewTransactionNotification object:self userInfo:userInfo];
+        NSDictionary<NSString *, id> *userInfo = @{ kFLEXNetworkRecorderUserInfoTransactionKey : transaction };
+        [NSNotificationCenter.defaultCenter postNotificationName:kFLEXNetworkRecorderNewTransactionNotification object:self userInfo:userInfo];
     });
 }
 
 - (void)postUpdateNotificationForTransaction:(FLEXNetworkTransaction *)transaction
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *userInfo = @{ kFLEXNetworkRecorderUserInfoTransactionKey : transaction };
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFLEXNetworkRecorderTransactionUpdatedNotification object:self userInfo:userInfo];
+        NSDictionary<NSString *, id> *userInfo = @{ kFLEXNetworkRecorderUserInfoTransactionKey : transaction };
+        [NSNotificationCenter.defaultCenter postNotificationName:kFLEXNetworkRecorderTransactionUpdatedNotification object:self userInfo:userInfo];
     });
 }
 

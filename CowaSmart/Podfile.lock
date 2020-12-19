@@ -13,7 +13,7 @@ PODS:
   - CCHMapClusterController (1.7.0)
   - DLRadioButton (1.4.9)
   - DynamicButton (6.2.1)
-  - FLEX (2.4.0)
+  - FLEX (3.1.2)
   - FXBlurView (1.6.4)
   - INTULocationManager (4.2.0)
   - JVFloatingDrawer (0.1.0)
@@ -38,7 +38,7 @@ DEPENDENCIES:
   - CCHMapClusterController
   - DLRadioButton (~> 1.4)
   - DynamicButton (~> 6.2.1)
-  - FLEX
+  - FLEX (~> 3.1.0)
   - FXBlurView (~> 1.6.4)
   - INTULocationManager (~> 4.2.0)
   - JVFloatingDrawer (~> 0.1.0)
@@ -83,7 +83,7 @@ SPEC CHECKSUMS:
   CCHMapClusterController: d8cd12cd5682ec6cd76d911ac7198f981b6cc1b8
   DLRadioButton: 7bb8a6e3768b572469ace553391ab4d2af6f9c19
   DynamicButton: 95f30460793bd3510a5c213ac1b810a5e3d54b6a
-  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
+  FLEX: e13e805fc3eec8732cc227d1f7508770d46e9587
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
   JVFloatingDrawer: 4782b1df21411aef2c1818f3b346cace02cc2e24
@@ -100,6 +100,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: dafa55836ee5c8be402d1f2c0bb029902e9cf710
+PODFILE CHECKSUM: 5a7ece39d38b5ab18a47dbcaca343f1c2d0115b6
 
 COCOAPODS: 1.10.0

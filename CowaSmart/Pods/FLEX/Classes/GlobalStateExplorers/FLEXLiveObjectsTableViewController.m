@@ -10,43 +10,50 @@
 #import "FLEXHeapEnumerator.h"
 #import "FLEXInstancesTableViewController.h"
 #import "FLEXUtility.h"
+#import "FLEXScopeCarousel.h"
+#import "FLEXTableView.h"
 #import <objc/runtime.h>
 
 static const NSInteger kFLEXLiveObjectsSortAlphabeticallyIndex = 0;
 static const NSInteger kFLEXLiveObjectsSortByCountIndex = 1;
+static const NSInteger kFLEXLiveObjectsSortBySizeIndex = 2;
 
-@interface FLEXLiveObjectsTableViewController () <UISearchBarDelegate>
+@interface FLEXLiveObjectsTableViewController ()
 
-@property (nonatomic, strong) NSDictionary *instanceCountsForClassNames;
-@property (nonatomic, readonly) NSArray *allClassNames;
-@property (nonatomic, strong) NSArray *filteredClassNames;
-@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic) NSDictionary<NSString *, NSNumber *> *instanceCountsForClassNames;
+@property (nonatomic) NSDictionary<NSString *, NSNumber *> *instanceSizesForClassNames;
+@property (nonatomic, readonly) NSArray<NSString *> *allClassNames;
+@property (nonatomic) NSArray<NSString *> *filteredClassNames;
+@property (nonatomic) NSString *headerTitle;
 
 @end
 
 @implementation FLEXLiveObjectsTableViewController
 
+- (void)loadView
+{
+    self.tableView = [FLEXTableView flexDefaultTableView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+//    self.title = @"Live Objects";
+    self.showsSearchBar = YES;
+    self.searchBarDebounceInterval = kFLEXDebounceInstant;
+    self.showsCarousel = YES;
+    self.carousel.items = @[@"A→Z", @"Count", @"Size"];
     
-    self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.placeholder = [FLEXUtility searchBarPlaceholderText];
-    self.searchBar.delegate = self;
-    self.searchBar.showsScopeBar = YES;
-    self.searchBar.scopeButtonTitles = @[@"Sort Alphabetically", @"Sort by Count"];
-    [self.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchBar;
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(refreshControlDidRefresh:) forControlEvents:UIControlEventValueChanged];
     
     [self reloadTableData];
 }
 
-- (NSArray *)allClassNames
+- (NSArray<NSString *> *)allClassNames
 {
-    return [self.instanceCountsForClassNames allKeys];
+    return self.instanceCountsForClassNames.allKeys;
 }
 
 - (void)reloadTableData
@@ -72,20 +79,23 @@ static const NSInteger kFLEXLiveObjectsSortByCountIndex = 1;
     }];
     
     // Convert our CF primitive dictionary into a nicer mapping of class name strings to counts that we will use as the table's model.
-    NSMutableDictionary *mutableCountsForClassNames = [NSMutableDictionary dictionary];
+    NSMutableDictionary<NSString *, NSNumber *> *mutableCountsForClassNames = [NSMutableDictionary dictionary];
+    NSMutableDictionary<NSString *, NSNumber *> *mutableSizesForClassNames = [NSMutableDictionary dictionary];
     for (unsigned int i = 0; i < classCount; i++) {
         Class class = classes[i];
         NSUInteger instanceCount = (NSUInteger)CFDictionaryGetValue(mutableCountsForClasses, (__bridge const void *)(class));
+        NSString *className = @(class_getName(class));
         if (instanceCount > 0) {
-            NSString *className = @(class_getName(class));
             [mutableCountsForClassNames setObject:@(instanceCount) forKey:className];
         }
+        [mutableSizesForClassNames setObject:@(class_getInstanceSize(class)) forKey:className];
     }
     free(classes);
     
     self.instanceCountsForClassNames = mutableCountsForClassNames;
+    self.instanceSizesForClassNames = mutableSizesForClassNames;
     
-    [self updateTableDataForSearchFilter];
+    [self updateSearchResults:nil];
 }
 
 - (void)refreshControlDidRefresh:(id)sender
@@ -94,74 +104,93 @@ static const NSInteger kFLEXLiveObjectsSortByCountIndex = 1;
     [self.refreshControl endRefreshing];
 }
 
-- (void)updateTitle
+- (void)updateHeaderTitle
 {
-    NSString *title = @"Live Objects";
-    
     NSUInteger totalCount = 0;
+    NSUInteger totalSize = 0;
     for (NSString *className in self.allClassNames) {
-        totalCount += [self.instanceCountsForClassNames[className] unsignedIntegerValue];
+        NSUInteger count = self.instanceCountsForClassNames[className].unsignedIntegerValue;
+        totalCount += count;
+        totalSize += count * self.instanceSizesForClassNames[className].unsignedIntegerValue;
     }
+
     NSUInteger filteredCount = 0;
+    NSUInteger filteredSize = 0;
     for (NSString *className in self.filteredClassNames) {
-        filteredCount += [self.instanceCountsForClassNames[className] unsignedIntegerValue];
+        NSUInteger count = self.instanceCountsForClassNames[className].unsignedIntegerValue;
+        filteredCount += count;
+        filteredSize += count * self.instanceSizesForClassNames[className].unsignedIntegerValue;
     }
     
     if (filteredCount == totalCount) {
         // Unfiltered
-        title = [title stringByAppendingFormat:@" (%lu)", (unsigned long)totalCount];
+        self.headerTitle = [NSString
+            stringWithFormat:@"%@ objects, %@",
+            @(totalCount), [NSByteCountFormatter
+                stringFromByteCount:totalSize
+                countStyle:NSByteCountFormatterCountStyleFile
+            ]
+        ];
     } else {
-        title = [title stringByAppendingFormat:@" (filtered, %lu)", (unsigned long)filteredCount];
+        self.headerTitle = [NSString
+            stringWithFormat:@"%@ of %@ objects, %@",
+            @(filteredCount), @(totalCount), [NSByteCountFormatter
+                stringFromByteCount:filteredSize
+                countStyle:NSByteCountFormatterCountStyleFile
+            ]
+        ];
     }
+}
+
+
+#pragma mark - FLEXGlobalsEntry
+
++ (NSString *)globalsEntryTitle:(FLEXGlobalsRow)row {
+    return @"💩  Heap Objects";
+}
+
++ (UIViewController *)globalsEntryViewController:(FLEXGlobalsRow)row {
+    FLEXLiveObjectsTableViewController *liveObjectsViewController = [self new];
+    liveObjectsViewController.title = [self globalsEntryTitle:row];
+
+    return liveObjectsViewController;
+}
+
+
+#pragma mark - Search bar
+
+- (void)updateSearchResults:(NSString *)filter
+{
+    NSInteger selectedScope = self.selectedScope;
     
-    self.title = title;
-}
-
-
-#pragma mark - Search
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    [self updateTableDataForSearchFilter];
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
-{
-    [self updateTableDataForSearchFilter];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    // Dismiss the keyboard when interacting with filtered results.
-    [self.searchBar endEditing:YES];
-}
-
-- (void)updateTableDataForSearchFilter
-{
-    if ([self.searchBar.text length] > 0) {
-        NSPredicate *searchPreidcate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", self.searchBar.text];
-        self.filteredClassNames = [self.allClassNames filteredArrayUsingPredicate:searchPreidcate];
+    if (filter.length) {
+        NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", filter];
+        self.filteredClassNames = [self.allClassNames filteredArrayUsingPredicate:searchPredicate];
     } else {
         self.filteredClassNames = self.allClassNames;
     }
     
-    if (self.searchBar.selectedScopeButtonIndex == kFLEXLiveObjectsSortAlphabeticallyIndex) {
+    if (selectedScope == kFLEXLiveObjectsSortAlphabeticallyIndex) {
         self.filteredClassNames = [self.filteredClassNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-    } else if (self.searchBar.selectedScopeButtonIndex == kFLEXLiveObjectsSortByCountIndex) {
+    } else if (selectedScope == kFLEXLiveObjectsSortByCountIndex) {
         self.filteredClassNames = [self.filteredClassNames sortedArrayUsingComparator:^NSComparisonResult(NSString *className1, NSString *className2) {
             NSNumber *count1 = self.instanceCountsForClassNames[className1];
             NSNumber *count2 = self.instanceCountsForClassNames[className2];
             // Reversed for descending counts.
             return [count2 compare:count1];
         }];
+    } else if (selectedScope == kFLEXLiveObjectsSortBySizeIndex) {
+        self.filteredClassNames = [self.filteredClassNames sortedArrayUsingComparator:^NSComparisonResult(NSString *className1, NSString *className2) {
+            NSNumber *count1 = self.instanceCountsForClassNames[className1];
+            NSNumber *count2 = self.instanceCountsForClassNames[className2];
+            NSNumber *size1 = self.instanceSizesForClassNames[className1];
+            NSNumber *size2 = self.instanceSizesForClassNames[className2];
+            // Reversed for descending sizes.
+            return [@(count2.integerValue * size2.integerValue) compare:@(count1.integerValue * size1.integerValue)];
+        }];
     }
     
-    [self updateTitle];
+    [self updateHeaderTitle];
     [self.tableView reloadData];
 }
 
@@ -175,24 +204,35 @@ static const NSInteger kFLEXLiveObjectsSortByCountIndex = 1;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.filteredClassNames count];
+    return self.filteredClassNames.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(__kindof UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.font = [FLEXUtility defaultTableViewCellLabelFont];
-    }
-    
+    UITableViewCell *cell = [tableView
+        dequeueReusableCellWithIdentifier:kFLEXDefaultCell
+        forIndexPath:indexPath
+    ];
+
     NSString *className = self.filteredClassNames[indexPath.row];
     NSNumber *count = self.instanceCountsForClassNames[className];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld)", className, (long)[count integerValue]];
+    NSNumber *size = self.instanceSizesForClassNames[className];
+    unsigned long totalSize = count.unsignedIntegerValue * size.unsignedIntegerValue;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld, %@)",
+        className, (long)[count integerValue],
+        [NSByteCountFormatter
+            stringFromByteCount:totalSize
+            countStyle:NSByteCountFormatterCountStyleFile
+        ]
+    ];
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return self.headerTitle;
 }
 
 

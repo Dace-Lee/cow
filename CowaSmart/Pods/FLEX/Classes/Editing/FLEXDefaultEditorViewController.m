@@ -15,7 +15,7 @@
 @interface FLEXDefaultEditorViewController ()
 
 @property (nonatomic, readonly) NSUserDefaults *defaults;
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic) NSString *key;
 
 @end
 
@@ -43,7 +43,10 @@
     self.fieldEditorView.fieldDescription = self.key;
 
     id currentValue = [self.defaults objectForKey:self.key];
-    FLEXArgumentInputView *inputView = [FLEXArgumentInputViewFactory argumentInputViewForTypeEncoding:@encode(id) currentValue:currentValue];
+    FLEXArgumentInputView *inputView = [FLEXArgumentInputViewFactory
+        argumentInputViewForTypeEncoding:FLEXEncodeObject(currentValue)
+        currentValue:currentValue
+    ];
     inputView.backgroundColor = self.view.backgroundColor;
     inputView.inputValue = currentValue;
     self.fieldEditorView.argumentInputViews = @[inputView];
@@ -64,9 +67,19 @@
     self.firstInputView.inputValue = [self.defaults objectForKey:self.key];
 }
 
+- (void)getterButtonPressed:(id)sender
+{
+    [super getterButtonPressed:sender];
+    id returnedObject = [self.defaults objectForKey:self.key];
+    [self exploreObjectOrPopViewController:returnedObject];
+}
+
 + (BOOL)canEditDefaultWithValue:(id)currentValue
 {
-    return [FLEXArgumentInputViewFactory canEditFieldWithTypeEncoding:@encode(id) currentValue:currentValue];
+    return [FLEXArgumentInputViewFactory
+        canEditFieldWithTypeEncoding:FLEXEncodeObject(currentValue)
+        currentValue:currentValue
+    ];
 }
 
 @end

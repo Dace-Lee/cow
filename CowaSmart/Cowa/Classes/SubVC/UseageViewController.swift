@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import WebKit
 
 
 class UseageViewController: SubVC {
 
-    let webView:UIWebView = UIWebView()
+    let webView:WKWebView = WKWebView()
     
     var totalScale:CGFloat = 1.0
     
@@ -102,7 +103,7 @@ class UseageViewController: SubVC {
             }
 
             let url = URL.init(string: urlPath)
-            webView.loadRequest(URLRequest.init(url: url!))
+            webView.load(URLRequest.init(url: url!))
         }else{
 
             let lang = getLocalLanguage()
@@ -119,7 +120,7 @@ class UseageViewController: SubVC {
             }
 
             let url = URL.init(string: urlPath)
-            webView.loadRequest(URLRequest.init(url: url!))
+            webView.load(URLRequest.init(url: url!))
         }
         
     }

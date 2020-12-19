@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class AboutVC: SubVC {
 
@@ -34,9 +35,9 @@ class AboutVC: SubVC {
         
         let url = URL.init(string: urlPa)!
         
-        let webView = UIWebView()
+        let webView = WKWebView()
         webView.frame = CGRect(x: 0,y: 0,width: self.view.frame.size.width,height: self.view.frame.size.height)
-        webView.loadRequest(URLRequest.init(url: url))
+        webView.load(URLRequest.init(url: url))
         view.addSubview(webView)
         
     }

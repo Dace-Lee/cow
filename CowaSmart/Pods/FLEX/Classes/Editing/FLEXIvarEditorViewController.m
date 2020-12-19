@@ -15,7 +15,7 @@
 
 @interface FLEXIvarEditorViewController () <FLEXArgumentInputViewDelegate>
 
-@property (nonatomic, assign) Ivar ivar;
+@property (nonatomic) Ivar ivar;
 
 @end
 
@@ -52,9 +52,23 @@
 - (void)actionButtonPressed:(id)sender
 {
     [super actionButtonPressed:sender];
+
+    // TODO: check mutability and use mutableCopy if necessary;
+    // this currently could and would assign NSArray to NSMutableArray
     
     [FLEXRuntimeUtility setValue:self.firstInputView.inputValue forIvar:self.ivar onObject:self.target];
     self.firstInputView.inputValue = [FLEXRuntimeUtility valueForIvar:self.ivar onObject:self.target];
+    
+    // Pop view controller for consistency;
+    // property setters and method calls also pop on success.
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)getterButtonPressed:(id)sender
+{
+    [super getterButtonPressed:sender];
+    id returnedObject = [FLEXRuntimeUtility valueForIvar:self.ivar onObject:self.target];
+    [self exploreObjectOrPopViewController:returnedObject];
 }
 
 - (void)argumentInputViewValueDidChange:(FLEXArgumentInputView *)argumentInputView

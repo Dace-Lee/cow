@@ -9,16 +9,16 @@
 #import "FLEXLibrariesTableViewController.h"
 #import "FLEXUtility.h"
 #import "FLEXClassesTableViewController.h"
-#import "FLEXClassExplorerViewController.h"
+#import "FLEXObjectExplorerFactory.h"
 #import <objc/runtime.h>
 
-@interface FLEXLibrariesTableViewController () <UISearchBarDelegate>
+@interface FLEXLibrariesTableViewController ()
 
-@property (nonatomic, strong) NSArray *imageNames;
-@property (nonatomic, strong) NSArray *filteredImageNames;
+@property (nonatomic) NSArray<NSString *> *imageNames;
+@property (nonatomic) NSArray<NSString *> *filteredImageNames;
+@property (nonatomic) NSString *headerTitle;
 
-@property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, strong) Class foundClass;
+@property (nonatomic) Class foundClass;
 
 @end
 
@@ -37,11 +37,37 @@
 {
     [super viewDidLoad];
     
-    self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.delegate = self;
-    self.searchBar.placeholder = [FLEXUtility searchBarPlaceholderText];
-    [self.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchBar;
+    self.showsSearchBar = YES;
+    [self updateHeaderTitle];
+}
+
+- (void)updateHeaderTitle
+{
+    if (self.foundClass) {
+        self.headerTitle = @"Looking for this?";
+    } else if (self.imageNames.count == self.filteredImageNames.count) {
+        // Unfiltered
+        self.headerTitle = [NSString stringWithFormat:@"%@ libraries", @(self.imageNames.count)];
+    } else {
+        self.headerTitle = [NSString
+            stringWithFormat:@"%@ of %@ libraries",
+            @(self.filteredImageNames.count), @(self.imageNames.count)
+        ];
+    }
+}
+
+
+#pragma mark - FLEXGlobalsEntry
+
++ (NSString *)globalsEntryTitle:(FLEXGlobalsRow)row {
+    return @"📚  System Libraries";
+}
+
++ (UIViewController *)globalsEntryViewController:(FLEXGlobalsRow)row {
+    FLEXLibrariesTableViewController *librariesViewController = [self new];
+    librariesViewController.title = [self globalsEntryTitle:row];
+
+    return librariesViewController;
 }
 
 
@@ -52,7 +78,7 @@
     unsigned int imageNamesCount = 0;
     const char **imageNames = objc_copyImageNames(&imageNamesCount);
     if (imageNames) {
-        NSMutableArray *imageNameStrings = [NSMutableArray array];
+        NSMutableArray<NSString *> *imageNameStrings = [NSMutableArray array];
         NSString *appImageName = [FLEXUtility applicationImageName];
         for (unsigned int i = 0; i < imageNamesCount; i++) {
             const char *imageName = imageNames[i];
@@ -76,14 +102,14 @@
 
 - (NSString *)shortNameForImageName:(NSString *)imageName
 {
-    NSArray *components = [imageName componentsSeparatedByString:@"/"];
+    NSArray<NSString *> *components = [imageName componentsSeparatedByString:@"/"];
     if (components.count >= 2) {
         return [NSString stringWithFormat:@"%@/%@", components[components.count - 2], components[components.count - 1]];
     }
     return imageName.lastPathComponent;
 }
 
-- (void)setImageNames:(NSArray *)imageNames
+- (void)setImageNames:(NSArray<NSString *> *)imageNames
 {
     if (![_imageNames isEqual:imageNames]) {
         _imageNames = imageNames;
@@ -94,10 +120,10 @@
 
 #pragma mark - Filtering
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)updateSearchResults:(NSString *)searchText
 {
-    if ([searchText length] > 0) {
-        NSPredicate *searchPreidcate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    if (searchText.length) {
+        NSPredicate *searchPredicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary<NSString *, id> *bindings) {
             BOOL matches = NO;
             NSString *shortName = [self shortNameForImageName:evaluatedObject];
             if ([shortName rangeOfString:searchText options:NSCaseInsensitiveSearch].length > 0) {
@@ -105,27 +131,18 @@
             }
             return matches;
         }];
-        self.filteredImageNames = [self.imageNames filteredArrayUsingPredicate:searchPreidcate];
+        self.filteredImageNames = [self.imageNames filteredArrayUsingPredicate:searchPredicate];
     } else {
         self.filteredImageNames = self.imageNames;
     }
     
     self.foundClass = NSClassFromString(searchText);
+    [self updateHeaderTitle];
     [self.tableView reloadData];
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
 }
 
 
 #pragma mark - Table View Data Source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -145,7 +162,7 @@
     NSString *executablePath;
     if (self.foundClass) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = [NSString stringWithFormat:@"Class \"%@\"", self.searchBar.text];
+            cell.textLabel.text = [NSString stringWithFormat:@"Class \"%@\"", self.searchText];
             return cell;
         } else {
             executablePath = self.filteredImageNames[indexPath.row-1];
@@ -158,19 +175,24 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return self.headerTitle;
+}
+
 
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0 && self.foundClass) {
-        FLEXClassExplorerViewController *objectExplorer = [FLEXClassExplorerViewController new];
-        objectExplorer.object = self.foundClass;
-        [self.navigationController pushViewController:objectExplorer animated:YES];
+        [self.navigationController pushViewController:[FLEXObjectExplorerFactory
+            explorerViewControllerForObject:self.foundClass
+        ] animated:YES];
     } else {
-        FLEXClassesTableViewController *classesViewController = [[FLEXClassesTableViewController alloc] init];
-        classesViewController.binaryImageName = self.filteredImageNames[self.foundClass ? indexPath.row-1 : indexPath.row];
-        [self.navigationController pushViewController:classesViewController animated:YES];
+        [self.navigationController pushViewController:[FLEXClassesTableViewController
+            binaryImageName:self.filteredImageNames[self.foundClass ? 0 : indexPath.row]
+        ] animated:YES];
     }
 }
 

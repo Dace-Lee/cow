@@ -12,7 +12,7 @@
 
 @interface FLEXArgumentInputStructView ()
 
-@property (nonatomic, strong) NSArray *argumentInputViews;
+@property (nonatomic) NSArray<FLEXArgumentInputView *> *argumentInputViews;
 
 @end
 
@@ -22,15 +22,15 @@
 {
     self = [super initWithArgumentTypeEncoding:typeEncoding];
     if (self) {
-        NSMutableArray *inputViews = [NSMutableArray array];
-        NSArray *customTitles = [[self class] customFieldTitlesForTypeEncoding:typeEncoding];
+        NSMutableArray<FLEXArgumentInputView *> *inputViews = [NSMutableArray array];
+        NSArray<NSString *> *customTitles = [[self class] customFieldTitlesForTypeEncoding:typeEncoding];
         [FLEXRuntimeUtility enumerateTypesInStructEncoding:typeEncoding usingBlock:^(NSString *structName, const char *fieldTypeEncoding, NSString *prettyTypeEncoding, NSUInteger fieldIndex, NSUInteger fieldOffset) {
             
             FLEXArgumentInputView *inputView = [FLEXArgumentInputViewFactory argumentInputViewForTypeEncoding:fieldTypeEncoding];
             inputView.backgroundColor = self.backgroundColor;
             inputView.targetSize = FLEXArgumentInputViewSizeSmall;
             
-            if (fieldIndex < [customTitles count]) {
+            if (fieldIndex < customTitles.count) {
                 inputView.title = customTitles[fieldIndex];
             } else {
                 inputView.title = [NSString stringWithFormat:@"%@ field %lu (%@)", structName, (unsigned long)fieldIndex, prettyTypeEncoding];
@@ -59,7 +59,7 @@
 {
     if ([inputValue isKindOfClass:[NSValue class]]) {
         const char *structTypeEncoding = [inputValue objCType];
-        if (strcmp([self.typeEncoding UTF8String], structTypeEncoding) == 0) {
+        if (strcmp(self.typeEncoding.UTF8String, structTypeEncoding) == 0) {
             NSUInteger valueSize = 0;
             @try {
                 // NSGetSizeAndAlignment barfs on type encoding for bitfields.
@@ -74,7 +74,7 @@
                     void *fieldPointer = unboxedValue + fieldOffset;
                     FLEXArgumentInputView *inputView = self.argumentInputViews[fieldIndex];
                     
-                    if (fieldTypeEncoding[0] == @encode(id)[0] || fieldTypeEncoding[0] == @encode(Class)[0]) {
+                    if (fieldTypeEncoding[0] == FLEXTypeEncodingObjcObject || fieldTypeEncoding[0] == FLEXTypeEncodingObjcClass) {
                         inputView.inputValue = (__bridge id)fieldPointer;
                     } else {
                         NSValue *boxedField = [FLEXRuntimeUtility valueForPrimitivePointer:fieldPointer objCType:fieldTypeEncoding];
@@ -90,7 +90,7 @@
 - (id)inputValue
 {
     NSValue *boxedStruct = nil;
-    const char *structTypeEncoding = [self.typeEncoding UTF8String];
+    const char *structTypeEncoding = self.typeEncoding.UTF8String;
     NSUInteger structSize = 0;
     @try {
         // NSGetSizeAndAlignment barfs on type encoding for bitfields.
@@ -104,7 +104,7 @@
             void *fieldPointer = unboxedStruct + fieldOffset;
             FLEXArgumentInputView *inputView = self.argumentInputViews[fieldIndex];
             
-            if (fieldTypeEncoding[0] == @encode(id)[0] || fieldTypeEncoding[0] == @encode(Class)[0]) {
+            if (fieldTypeEncoding[0] == FLEXTypeEncodingObjcObject || fieldTypeEncoding[0] == FLEXTypeEncodingObjcClass) {
                 // Object fields
                 memcpy(fieldPointer, (__bridge void *)inputView.inputValue, sizeof(id));
             } else {
@@ -176,18 +176,20 @@
 
 + (BOOL)supportsObjCType:(const char *)type withCurrentValue:(id)value
 {
-    return type && type[0] == '{';
+    return type && type[0] == FLEXTypeEncodingStructBegin;
 }
 
-+ (NSArray *)customFieldTitlesForTypeEncoding:(const char *)typeEncoding
++ (NSArray<NSString *> *)customFieldTitlesForTypeEncoding:(const char *)typeEncoding
 {
-    NSArray *customTitles = nil;
+    NSArray<NSString *> *customTitles = nil;
     if (strcmp(typeEncoding, @encode(CGRect)) == 0) {
         customTitles = @[@"CGPoint origin", @"CGSize size"];
     } else if (strcmp(typeEncoding, @encode(CGPoint)) == 0) {
         customTitles = @[@"CGFloat x", @"CGFloat y"];
     } else if (strcmp(typeEncoding, @encode(CGSize)) == 0) {
         customTitles = @[@"CGFloat width", @"CGFloat height"];
+    } else if (strcmp(typeEncoding, @encode(CGVector)) == 0) {
+        customTitles = @[@"CGFloat dx", @"CGFloat dy"];
     } else if (strcmp(typeEncoding, @encode(UIEdgeInsets)) == 0) {
         customTitles = @[@"CGFloat top", @"CGFloat left", @"CGFloat bottom", @"CGFloat right"];
     } else if (strcmp(typeEncoding, @encode(UIOffset)) == 0) {
@@ -203,6 +205,13 @@
         customTitles = @[@"CGFloat a", @"CGFloat b",
                          @"CGFloat c", @"CGFloat d",
                          @"CGFloat tx", @"CGFloat ty"];
+    } else {
+        if (@available(iOS 11.0, *)) {
+            if (strcmp(typeEncoding, @encode(NSDirectionalEdgeInsets)) == 0) {
+                customTitles = @[@"CGFloat top", @"CGFloat leading",
+                                 @"CGFloat bottom", @"CGFloat trailing"];
+            }
+        }
     }
     return customTitles;
 }

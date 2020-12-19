@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#if !FLEX_AT_LEAST_IOS13_SDK
+@class UIWindowScene;
+#endif
+
+typedef UIViewController *(^FLEXCustomContentViewerFuture)(NSData *data);
+
 @interface FLEXManager : NSObject
 
 + (instancetype)sharedManager;
@@ -19,16 +25,26 @@
 - (void)hideExplorer;
 - (void)toggleExplorer;
 
+/// Use this to present the explorer in a specific scene when the one
+/// it chooses by default is not the one you wish to display it in.
+- (void)showExplorerFromScene:(UIWindowScene *)scene API_AVAILABLE(ios(13.0));
+
 #pragma mark - Network Debugging
 
 /// If this property is set to YES, FLEX will swizzle NSURLConnection*Delegate and NSURLSession*Delegate methods
 /// on classes that conform to the protocols. This allows you to view network activity history from the main FLEX menu.
 /// Full responses are kept temporarily in a size-limited cache and may be pruned under memory pressure.
-@property (nonatomic, assign, getter=isNetworkDebuggingEnabled) BOOL networkDebuggingEnabled;
+@property (nonatomic, getter=isNetworkDebuggingEnabled) BOOL networkDebuggingEnabled;
 
-/// Defaults to 25 MB if never set. Values set here are presisted across launches of the app.
+/// Defaults to 25 MB if never set. Values set here are persisted across launches of the app.
 /// The response cache uses an NSCache, so it may purge prior to hitting the limit when the app is under memory pressure.
-@property (nonatomic, assign) NSUInteger networkResponseCacheByteLimit;
+@property (nonatomic) NSUInteger networkResponseCacheByteLimit;
+
+/// Requests whose host ends with one of the blacklisted entries in this array will be not be recorded (eg. google.com).
+/// Wildcard or subdomain entries are not required (eg. google.com will match any subdomain under google.com).
+/// Useful to remove requests that are typically noisy, such as analytics requests that you aren't interested in tracking.
+@property (nonatomic, copy) NSArray<NSString *> *networkRequestHostBlacklist;
+
 
 #pragma mark - Keyboard Shortcuts
 
@@ -36,7 +52,7 @@
 /// The shortcuts will not fire when there is an active text field, text view, or other responder accepting key input.
 /// You can disable keyboard shortcuts if you have existing keyboard shortcuts that conflict with FLEX, or if you like doing things the hard way ;)
 /// Keyboard shortcuts are always disabled (and support is compiled out) in non-simulator builds
-@property (nonatomic, assign) BOOL simulatorShortcutsEnabled;
+@property (nonatomic) BOOL simulatorShortcutsEnabled;
 
 /// Adds an action to run when the specified key & modifier combination is pressed
 /// @param key A single character string matching a key on the keyboard
@@ -48,6 +64,10 @@
 - (void)registerSimulatorShortcutWithKey:(NSString *)key modifiers:(UIKeyModifierFlags)modifiers action:(dispatch_block_t)action description:(NSString *)description;
 
 #pragma mark - Extensions
+
+/// Default database password is @c nil by default.
+/// Set this to the password you want the databases to open with.
+@property (copy, nonatomic) NSString *defaultSqliteDatabasePassword;
 
 /// Adds an entry at the bottom of the list of Global State items. Call this method before this view controller is displayed.
 /// @param entryName The string to be displayed in the cell.
@@ -66,5 +86,14 @@
 /// @note The passed block will be copied and retain for the duration of the application, you may want to use __weak references.
 - (void)registerGlobalEntryWithName:(NSString *)entryName
           viewControllerFutureBlock:(UIViewController * (^)(void))viewControllerFutureBlock;
+
+/// Sets custom viewer for specific content type.
+/// @param contentType Mime type like application/json
+/// @param viewControllerFutureBlock Viewer (view controller) creation block
+/// @note This method must be called from the main thread.
+/// The viewControllerFutureBlock will be invoked from the main thread and may not return nil.
+/// @note The passed block will be copied and retain for the duration of the application, you may want to use __weak references.
+- (void)setCustomViewerForContentType:(NSString *)contentType
+            viewControllerFutureBlock:(FLEXCustomContentViewerFuture)viewControllerFutureBlock;
 
 @end

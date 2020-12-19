@@ -30,12 +30,12 @@
 
 - (id)inputValue
 {
-    return [FLEXRuntimeUtility valueForNumberWithObjCType:[self.typeEncoding UTF8String] fromInputString:self.inputTextView.text];
+    return [FLEXRuntimeUtility valueForNumberWithObjCType:self.typeEncoding.UTF8String fromInputString:self.inputTextView.text];
 }
 
 + (BOOL)supportsObjCType:(const char *)type withCurrentValue:(id)value
 {
-    static NSArray *primitiveTypes = nil;
+    static NSArray<NSString *> *primitiveTypes = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         primitiveTypes = @[@(@encode(char)),
@@ -49,7 +49,8 @@
                            @(@encode(unsigned long)),
                            @(@encode(unsigned long long)),
                            @(@encode(float)),
-                           @(@encode(double))];
+                           @(@encode(double)),
+                           @(@encode(long double))];
     });
     return type && [primitiveTypes containsObject:@(type)];
 }

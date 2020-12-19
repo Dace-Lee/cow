@@ -6,20 +6,23 @@
 //  Copyright (c) 2014 Flipboard. All rights reserved.
 //
 
+#import "FLEXColor.h"
 #import "FLEXFieldEditorViewController.h"
 #import "FLEXFieldEditorView.h"
 #import "FLEXRuntimeUtility.h"
 #import "FLEXUtility.h"
+#import "FLEXObjectExplorerFactory.h"
 #import "FLEXArgumentInputView.h"
 #import "FLEXArgumentInputViewFactory.h"
+#import "FLEXObjectExplorerViewController.h"
 
 @interface FLEXFieldEditorViewController () <UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic) UIScrollView *scrollView;
 
-@property (nonatomic, strong, readwrite) id target;
-@property (nonatomic, strong, readwrite) FLEXFieldEditorView *fieldEditorView;
-@property (nonatomic, strong, readwrite) UIBarButtonItem *setterButton;
+@property (nonatomic, readwrite) id target;
+@property (nonatomic, readwrite) FLEXFieldEditorView *fieldEditorView;
+@property (nonatomic, readwrite) UIBarButtonItem *setterButton;
 
 @end
 
@@ -30,15 +33,15 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.target = target;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification
@@ -72,7 +75,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [FLEXUtility scrollViewGrayColor];
+    self.view.backgroundColor = [FLEXColor scrollViewBackgroundColor];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.backgroundColor = self.view.backgroundColor;
@@ -80,7 +83,7 @@
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
-    self.fieldEditorView = [[FLEXFieldEditorView alloc] init];
+    self.fieldEditorView = [FLEXFieldEditorView new];
     self.fieldEditorView.backgroundColor = self.view.backgroundColor;
     self.fieldEditorView.targetDescription = [NSString stringWithFormat:@"%@ %p", [self.target class], self.target];
     [self.scrollView addSubview:self.fieldEditorView];
@@ -99,7 +102,7 @@
 
 - (FLEXArgumentInputView *)firstInputView
 {
-    return [[self.fieldEditorView argumentInputViews] firstObject];
+    return [self.fieldEditorView argumentInputViews].firstObject;
 }
 
 - (void)actionButtonPressed:(id)sender
@@ -112,6 +115,18 @@
 {
     // Subclasses can override.
     return @"Set";
+}
+
+- (void)exploreObjectOrPopViewController:(id)objectOrNil {
+    if (objectOrNil) {
+        // For non-nil (or void) return types, push an explorer view controller to display the object
+        FLEXObjectExplorerViewController *explorerViewController = [FLEXObjectExplorerFactory explorerViewControllerForObject:objectOrNil];
+        [self.navigationController pushViewController:explorerViewController animated:YES];
+    } else {
+        // If we didn't get a returned object but the method call succeeded,
+        // pop this view controller off the stack to indicate that the call went through.
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

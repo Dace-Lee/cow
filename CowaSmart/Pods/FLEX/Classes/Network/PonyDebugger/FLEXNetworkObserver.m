@@ -28,7 +28,7 @@ typedef void (^NSURLSessionAsyncCompletion)(id fileURLOrData, NSURLResponse *res
 @interface FLEXInternalRequestState : NSObject
 
 @property (nonatomic, copy) NSURLRequest *request;
-@property (nonatomic, strong) NSMutableData *dataAccumulator;
+@property (nonatomic) NSMutableData *dataAccumulator;
 
 @end
 
@@ -68,8 +68,8 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
 
 @interface FLEXNetworkObserver ()
 
-@property (nonatomic, strong) NSMutableDictionary *requestStatesForRequestIDs;
-@property (nonatomic, strong) dispatch_queue_t queue;
+@property (nonatomic) NSMutableDictionary<NSString *, FLEXInternalRequestState *> *requestStatesForRequestIDs;
+@property (nonatomic) dispatch_queue_t queue;
 
 @end
 
@@ -90,7 +90,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
     }
     
     if (previouslyEnabled != enabled) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFLEXNetworkObserverEnabledStateChangedNotification object:self];
+        [NSNotificationCenter.defaultCenter postNotificationName:kFLEXNetworkObserverEnabledStateChangedNotification object:self];
     }
 }
 
@@ -116,7 +116,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
     static FLEXNetworkObserver *sharedObserver = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedObserver = [[[self class] alloc] init];
+        sharedObserver = [self new];
     });
     return sharedObserver;
 }
@@ -130,10 +130,10 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
 
 /// All swizzled delegate methods should make use of this guard.
 /// This will prevent duplicated sniffing when the original implementation calls up to a superclass implementation which we've also swizzled.
-/// The superclass implementation (and implementations in classes above that) will be executed without inteference if called from the original implementation.
+/// The superclass implementation (and implementations in classes above that) will be executed without interference if called from the original implementation.
 + (void)sniffWithoutDuplicationForObject:(NSObject *)object selector:(SEL)selector sniffingBlock:(void (^)(void))sniffingBlock originalImplementationBlock:(void (^)(void))originalImplementationBlock
 {
-    // If we don't have an object to detect nested calls on, just run the original implmentation and bail.
+    // If we don't have an object to detect nested calls on, just run the original implementation and bail.
     // This case can happen if someone besides the URL loading system calls the delegate methods directly.
     // See https://github.com/Flipboard/FLEX/issues/61 for an example.
     if (!object) {
@@ -172,7 +172,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
             @selector(URLSession:dataTask:didReceiveData:),
             @selector(URLSession:dataTask:didReceiveResponse:completionHandler:),
             @selector(URLSession:task:didCompleteWithError:),
-            @selector(URLSession:dataTask:didBecomeDownloadTask:delegate:),
+            @selector(URLSession:dataTask:didBecomeDownloadTask:),
             @selector(URLSession:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:),
             @selector(URLSession:downloadTask:didFinishDownloadingToURL:)
         };
@@ -280,9 +280,9 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         // In iOS 8 resume lives in NSURLSessionTask
         // In iOS 9 resume lives in __NSCFURLSessionTask
         Class class = Nil;
-        if (![[NSProcessInfo processInfo] respondsToSelector:@selector(operatingSystemVersion)]) {
+        if (![NSProcessInfo.processInfo respondsToSelector:@selector(operatingSystemVersion)]) {
             class = NSClassFromString([@[@"__", @"NSC", @"FLocalS", @"ession", @"Task"] componentsJoinedByString:@""]);
-        } else if ([[NSProcessInfo processInfo] operatingSystemVersion].majorVersion < 9) {
+        } else if ([NSProcessInfo.processInfo operatingSystemVersion].majorVersion < 9) {
             class = [NSURLSessionTask class];
         } else {
             class = NSClassFromString([@[@"__", @"NSC", @"FURLS", @"ession", @"Task"] componentsJoinedByString:@""]);
@@ -293,6 +293,14 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         Method originalResume = class_getInstanceMethod(class, selector);
 
         void (^swizzleBlock)(NSURLSessionTask *) = ^(NSURLSessionTask *slf) {
+            
+             // iOS's internal HTTP parser finalization code is mysteriously not thread safe,
+             // invoke it asynchronously has a chance to cause a `double free` crash.
+             // This line below will ask for HTTPBody synchronously, make the HTTPParser parse the request and cache them in advance,
+             // After that the HTTPParser will be finalized,
+             // make sure other threads inspecting the request won't trigger a race to finalize the parser.
+             [slf.currentRequest HTTPBody];
+
             [[FLEXNetworkObserver sharedObserver] URLSessionTaskWillResume:slf];
             ((void(*)(id, SEL))objc_msgSend)(slf, swizzledSelector);
         };
@@ -318,11 +326,11 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
             if ([FLEXNetworkObserver isEnabled]) {
                 NSString *requestID = [self nextRequestID];
                 [[FLEXNetworkRecorder defaultRecorder] recordRequestWillBeSentWithRequestID:requestID request:request redirectResponse:nil];
-                NSString *mechanism = [self mechansimFromClassMethod:selector onClass:class];
+                NSString *mechanism = [self mechanismFromClassMethod:selector onClass:class];
                 [[FLEXNetworkRecorder defaultRecorder] recordMechanism:mechanism forRequestID:requestID];
                 NSURLConnectionAsyncCompletion completionWrapper = ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                     [[FLEXNetworkRecorder defaultRecorder] recordResponseReceivedWithRequestID:requestID response:response];
-                    [[FLEXNetworkRecorder defaultRecorder] recordDataReceivedWithRequestID:requestID dataLength:[data length]];
+                    [[FLEXNetworkRecorder defaultRecorder] recordDataReceivedWithRequestID:requestID dataLength:data.length];
                     if (connectionError) {
                         [[FLEXNetworkRecorder defaultRecorder] recordLoadingFailedWithRequestID:requestID error:connectionError];
                     } else {
@@ -357,13 +365,13 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
             if ([FLEXNetworkObserver isEnabled]) {
                 NSString *requestID = [self nextRequestID];
                 [[FLEXNetworkRecorder defaultRecorder] recordRequestWillBeSentWithRequestID:requestID request:request redirectResponse:nil];
-                NSString *mechanism = [self mechansimFromClassMethod:selector onClass:class];
+                NSString *mechanism = [self mechanismFromClassMethod:selector onClass:class];
                 [[FLEXNetworkRecorder defaultRecorder] recordMechanism:mechanism forRequestID:requestID];
                 NSError *temporaryError = nil;
                 NSURLResponse *temporaryResponse = nil;
                 data = ((id(*)(id, SEL, id, NSURLResponse **, NSError **))objc_msgSend)(slf, swizzledSelector, request, &temporaryResponse, &temporaryError);
                 [[FLEXNetworkRecorder defaultRecorder] recordResponseReceivedWithRequestID:requestID response:temporaryResponse];
-                [[FLEXNetworkRecorder defaultRecorder] recordDataReceivedWithRequestID:requestID dataLength:[data length]];
+                [[FLEXNetworkRecorder defaultRecorder] recordDataReceivedWithRequestID:requestID dataLength:data.length];
                 if (temporaryError) {
                     [[FLEXNetworkRecorder defaultRecorder] recordLoadingFailedWithRequestID:requestID error:temporaryError];
                 } else {
@@ -410,7 +418,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
             if ([FLEXUtility instanceRespondsButDoesNotImplementSelector:selector class:class]) {
                 // iOS 7 does not implement these methods on NSURLSession. We actually want to
                 // swizzle __NSCFURLSession, which we can get from the class of the shared session
-                class = [[NSURLSession sharedSession] class];
+                class = [NSURLSession.sharedSession class];
             }
 
             NSURLSessionTask *(^asyncDataOrDownloadSwizzleBlock)(Class, id, NSURLSessionAsyncCompletion) = ^NSURLSessionTask *(Class slf, id argument, NSURLSessionAsyncCompletion completion) {
@@ -420,7 +428,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
                 // with nil completion block.
                 if ([FLEXNetworkObserver isEnabled] && completion) {
                     NSString *requestID = [self nextRequestID];
-                    NSString *mechanism = [self mechansimFromClassMethod:selector onClass:class];
+                    NSString *mechanism = [self mechanismFromClassMethod:selector onClass:class];
                     NSURLSessionAsyncCompletion completionWrapper = [self asyncCompletionWrapperForRequestID:requestID mechanism:mechanism completion:completion];
                     task = ((id(*)(id, SEL, id, id))objc_msgSend)(slf, swizzledSelector, argument, completionWrapper);
                     [self setRequestID:requestID forConnectionOrTask:task];
@@ -457,14 +465,14 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
             if ([FLEXUtility instanceRespondsButDoesNotImplementSelector:selector class:class]) {
                 // iOS 7 does not implement these methods on NSURLSession. We actually want to
                 // swizzle __NSCFURLSession, which we can get from the class of the shared session
-                class = [[NSURLSession sharedSession] class];
+                class = [NSURLSession.sharedSession class];
             }
 
             NSURLSessionUploadTask *(^asyncUploadTaskSwizzleBlock)(Class, NSURLRequest *, id, NSURLSessionAsyncCompletion) = ^NSURLSessionUploadTask *(Class slf, NSURLRequest *request, id argument, NSURLSessionAsyncCompletion completion) {
                 NSURLSessionUploadTask *task = nil;
-                if ([FLEXNetworkObserver isEnabled]) {
+                if ([FLEXNetworkObserver isEnabled] && completion) {
                     NSString *requestID = [self nextRequestID];
-                    NSString *mechanism = [self mechansimFromClassMethod:selector onClass:class];
+                    NSString *mechanism = [self mechanismFromClassMethod:selector onClass:class];
                     NSURLSessionAsyncCompletion completionWrapper = [self asyncCompletionWrapperForRequestID:requestID mechanism:mechanism completion:completion];
                     task = ((id(*)(id, SEL, id, id, id))objc_msgSend)(slf, swizzledSelector, request, argument, completionWrapper);
                     [self setRequestID:requestID forConnectionOrTask:task];
@@ -479,7 +487,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
     });
 }
 
-+ (NSString *)mechansimFromClassMethod:(SEL)selector onClass:(Class)class
++ (NSString *)mechanismFromClassMethod:(SEL)selector onClass:(Class)class
 {
     return [NSString stringWithFormat:@"+[%@ %@]", NSStringFromClass(class), NSStringFromSelector(selector)];
 }
@@ -495,7 +503,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         } else if ([fileURLOrData isKindOfClass:[NSData class]]) {
             data = fileURLOrData;
         }
-        [[FLEXNetworkRecorder defaultRecorder] recordDataReceivedWithRequestID:requestID dataLength:[data length]];
+        [[FLEXNetworkRecorder defaultRecorder] recordDataReceivedWithRequestID:requestID dataLength:data.length];
         if (error) {
             [[FLEXNetworkRecorder defaultRecorder] recordLoadingFailedWithRequestID:requestID error:error];
         } else {
@@ -674,7 +682,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         [self sniffWithoutDuplicationForObject:session selector:selector sniffingBlock:^{
             [[FLEXNetworkObserver sharedObserver] URLSession:session task:task willPerformHTTPRedirection:response newRequest:newRequest completionHandler:completionHandler delegate:slf];
         } originalImplementationBlock:^{
-            ((id(*)(id, SEL, id, id, id, id, void(^)()))objc_msgSend)(slf, swizzledSelector, session, task, response, newRequest, completionHandler);
+            ((id(*)(id, SEL, id, id, id, id, void(^)(NSURLRequest *)))objc_msgSend)(slf, swizzledSelector, session, task, response, newRequest, completionHandler);
         }];
     };
 
@@ -755,7 +763,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         [self sniffWithoutDuplicationForObject:session selector:selector sniffingBlock:^{
             [[FLEXNetworkObserver sharedObserver] URLSession:session dataTask:dataTask didReceiveResponse:response completionHandler:completionHandler delegate:slf];
         } originalImplementationBlock:^{
-            ((void(*)(id, SEL, id, id, id, void(^)()))objc_msgSend)(slf, swizzledSelector, session, dataTask, response, completionHandler);
+            ((void(*)(id, SEL, id, id, id, void(^)(NSURLSessionResponseDisposition)))objc_msgSend)(slf, swizzledSelector, session, dataTask, response, completionHandler);
         }];
     };
     
@@ -888,7 +896,7 @@ static char const * const kFLEXRequestIDKey = "kFLEXRequestIDKey";
 {
     self = [super init];
     if (self) {
-        self.requestStatesForRequestIDs = [[NSMutableDictionary alloc] init];
+        self.requestStatesForRequestIDs = [NSMutableDictionary new];
         self.queue = dispatch_queue_create("com.flex.FLEXNetworkObserver", DISPATCH_QUEUE_SERIAL);
     }
     return self;
@@ -907,7 +915,7 @@ static char const * const kFLEXRequestIDKey = "kFLEXRequestIDKey";
 {
     FLEXInternalRequestState *requestState = self.requestStatesForRequestIDs[requestID];
     if (!requestState) {
-        requestState = [[FLEXInternalRequestState alloc] init];
+        requestState = [FLEXInternalRequestState new];
         [self.requestStatesForRequestIDs setObject:requestState forKey:requestID];
     }
     return requestState;
@@ -943,8 +951,8 @@ static char const * const kFLEXRequestIDKey = "kFLEXRequestIDKey";
 
         NSMutableData *dataAccumulator = nil;
         if (response.expectedContentLength < 0) {
-            dataAccumulator = [[NSMutableData alloc] init];
-        } else {
+            dataAccumulator = [NSMutableData new];
+        } else if (response.expectedContentLength < 52428800) {
             dataAccumulator = [[NSMutableData alloc] initWithCapacity:(NSUInteger)response.expectedContentLength];
         }
         requestState.dataAccumulator = dataAccumulator;
@@ -995,7 +1003,7 @@ static char const * const kFLEXRequestIDKey = "kFLEXRequestIDKey";
 {
     [self performBlock:^{
         // Mimic the behavior of NSURLSession which is to create an error on cancellation.
-        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : @"cancelled" };
+        NSDictionary<NSString *, id> *userInfo = @{ NSLocalizedDescriptionKey : @"cancelled" };
         NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:userInfo];
         [self connection:connection didFailWithError:error delegate:nil];
     }];
@@ -1022,7 +1030,7 @@ static char const * const kFLEXRequestIDKey = "kFLEXRequestIDKey";
 
         NSMutableData *dataAccumulator = nil;
         if (response.expectedContentLength < 0) {
-            dataAccumulator = [[NSMutableData alloc] init];
+            dataAccumulator = [NSMutableData new];
         } else {
             dataAccumulator = [[NSMutableData alloc] initWithCapacity:(NSUInteger)response.expectedContentLength];
         }

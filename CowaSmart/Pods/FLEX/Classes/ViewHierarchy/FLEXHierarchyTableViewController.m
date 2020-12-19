@@ -6,30 +6,30 @@
 //  Copyright (c) 2014 Flipboard. All rights reserved.
 //
 
+#import "FLEXColor.h"
 #import "FLEXHierarchyTableViewController.h"
 #import "FLEXUtility.h"
 #import "FLEXHierarchyTableViewCell.h"
 #import "FLEXObjectExplorerViewController.h"
 #import "FLEXObjectExplorerFactory.h"
+#import "FLEXResources.h"
 
 static const NSInteger kFLEXHierarchyScopeViewsAtTapIndex = 0;
 static const NSInteger kFLEXHierarchyScopeFullHierarchyIndex = 1;
 
-@interface FLEXHierarchyTableViewController () <UISearchBarDelegate>
+@interface FLEXHierarchyTableViewController ()
 
-@property (nonatomic, strong) NSArray *allViews;
-@property (nonatomic, strong) NSDictionary *depthsForViews;
-@property (nonatomic, strong) NSArray *viewsAtTap;
-@property (nonatomic, strong) UIView *selectedView;
-@property (nonatomic, strong) NSArray *displayedViews;
-
-@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic) NSArray<UIView *> *allViews;
+@property (nonatomic) NSDictionary<NSValue *, NSNumber *> *depthsForViews;
+@property (nonatomic) NSArray<UIView *> *viewsAtTap;
+@property (nonatomic) UIView *selectedView;
+@property (nonatomic) NSArray<UIView *> *displayedViews;
 
 @end
 
 @implementation FLEXHierarchyTableViewController
 
-- (id)initWithViews:(NSArray *)allViews viewsAtTap:(NSArray *)viewsAtTap selectedView:(UIView *)selectedView depths:(NSDictionary *)depthsForViews
+- (instancetype)initWithViews:(NSArray<UIView *> *)allViews viewsAtTap:(NSArray<UIView *> *)viewsAtTap selectedView:(UIView *)selectedView depths:(NSDictionary<NSValue *, NSNumber *> *)depthsForViews
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
@@ -58,15 +58,14 @@ static const NSInteger kFLEXHierarchyScopeFullHierarchyIndex = 1;
     // Separator inset clashes with persistent cell selection.
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
-    self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.placeholder = [FLEXUtility searchBarPlaceholderText];
-    self.searchBar.delegate = self;
+    self.showsSearchBar = YES;
+    self.pinSearchBar = YES;
+    self.searchBarDebounceInterval = kFLEXDebounceInstant;
+    self.automaticallyShowsSearchBarCancelButton = NO;
     if ([self showScopeBar]) {
-        self.searchBar.showsScopeBar = YES;
-        self.searchBar.scopeButtonTitles = @[@"Views at Tap", @"Full Hierarchy"];
+        self.searchController.searchBar.showsScopeBar = YES;
+        self.searchController.searchBar.scopeButtonTitles = @[@"Views at Tap", @"Full Hierarchy"];
     }
-    [self.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchBar;
     
     [self updateDisplayedViews];
 }
@@ -92,23 +91,23 @@ static const NSInteger kFLEXHierarchyScopeFullHierarchyIndex = 1;
 
 - (void)updateDisplayedViews
 {
-    NSArray *candidateViews = nil;
+    NSArray<UIView *> *candidateViews = nil;
     if ([self showScopeBar]) {
-        if (self.searchBar.selectedScopeButtonIndex == kFLEXHierarchyScopeViewsAtTapIndex) {
+        if (self.selectedScope == kFLEXHierarchyScopeViewsAtTapIndex) {
             candidateViews = self.viewsAtTap;
-        } else if (self.searchBar.selectedScopeButtonIndex == kFLEXHierarchyScopeFullHierarchyIndex) {
+        } else if (self.selectedScope == kFLEXHierarchyScopeFullHierarchyIndex) {
             candidateViews = self.allViews;
         }
     } else {
         candidateViews = self.allViews;
     }
     
-    if ([self.searchBar.text length] > 0) {
-        self.displayedViews = [candidateViews filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *candidateView, NSDictionary *bindings) {
+    if (self.searchText.length) {
+        self.displayedViews = [candidateViews filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(UIView *candidateView, NSDictionary<NSString *, id> *bindings) {
             NSString *title = [FLEXUtility descriptionForView:candidateView includingFrame:NO];
             NSString *candidateViewPointerAddress = [NSString stringWithFormat:@"%p", candidateView];
-            BOOL matchedViewPointerAddress = [candidateViewPointerAddress rangeOfString:self.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound;
-            BOOL matchedViewTitle = [title rangeOfString:self.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound;
+            BOOL matchedViewPointerAddress = [candidateViewPointerAddress rangeOfString:self.searchText options:NSCaseInsensitiveSearch].location != NSNotFound;
+            BOOL matchedViewTitle = [title rangeOfString:self.searchText options:NSCaseInsensitiveSearch].location != NSNotFound;
             return matchedViewPointerAddress || matchedViewTitle;
         }]];
     } else {
@@ -118,32 +117,22 @@ static const NSInteger kFLEXHierarchyScopeFullHierarchyIndex = 1;
     [self.tableView reloadData];
 }
 
+#pragma mark - Search Bar
+
 - (BOOL)showScopeBar
 {
-    return [self.viewsAtTap count] > 0;
+    return self.viewsAtTap.count > 0;
 }
 
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+- (void)updateSearchResults:(NSString *)newText
 {
     [self updateDisplayedViews];
     
     // If the search bar text field is active, don't scroll on selection because we may want to continue typing.
     // Otherwise, scroll so that the selected cell is visible.
-    UITableViewScrollPosition scrollPosition = self.searchBar.isFirstResponder ? UITableViewScrollPositionNone : UITableViewScrollPositionMiddle;
+    UITableViewScrollPosition scrollPosition = self.searchController.searchBar.isFirstResponder ? UITableViewScrollPositionNone : UITableViewScrollPositionMiddle;
     [self trySelectCellForSelectedViewWithScrollPosition:scrollPosition];
 }
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    [self updateDisplayedViews];
-    [self trySelectCellForSelectedViewWithScrollPosition:UITableViewScrollPositionNone];
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
-}
-
 
 #pragma mark - Table View Data Source
 
@@ -154,7 +143,7 @@ static const NSInteger kFLEXHierarchyScopeFullHierarchyIndex = 1;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.displayedViews count];
+    return self.displayedViews.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -173,11 +162,25 @@ static const NSInteger kFLEXHierarchyScopeFullHierarchyIndex = 1;
     cell.viewColor = viewColor;
     cell.viewDepth = [depth integerValue];
     if (view.isHidden || view.alpha < 0.01) {
-        cell.textLabel.textColor = [UIColor lightGrayColor];
-        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        cell.textLabel.textColor = [FLEXColor deemphasizedTextColor];
+        cell.detailTextLabel.textColor = [FLEXColor deemphasizedTextColor];
     } else {
-        cell.textLabel.textColor = [UIColor blackColor];
-        cell.detailTextLabel.textColor = [UIColor blackColor];
+        cell.textLabel.textColor = [FLEXColor primaryTextColor];
+        cell.detailTextLabel.textColor = [FLEXColor primaryTextColor];
+    }
+    
+    // Use a pattern-based colour to simplify application of the checker pattern.
+    static UIColor *checkerPatternColour = nil;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        checkerPatternColour = [UIColor colorWithPatternImage:[FLEXResources checkerPattern]];
+    });
+    
+    UIColor *viewColour = view.backgroundColor;
+    if (!viewColour || [viewColour isEqual:UIColor.clearColor]) {
+        cell.viewBackgroundColorView.backgroundColor = checkerPatternColour;
+    } else {
+        cell.viewBackgroundColorView.backgroundColor = viewColour;
     }
     
     return cell;
@@ -195,7 +198,6 @@ static const NSInteger kFLEXHierarchyScopeFullHierarchyIndex = 1;
     FLEXObjectExplorerViewController *viewExplorer = [FLEXObjectExplorerFactory explorerViewControllerForObject:drillInView];
     [self.navigationController pushViewController:viewExplorer animated:YES];
 }
-
 
 #pragma mark - Button Actions
 
