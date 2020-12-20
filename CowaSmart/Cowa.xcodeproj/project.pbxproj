@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		176FBDADD5B57D887B77CA99 /* Pods_Cowa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A5FE486B3A396FA15513AA /* Pods_Cowa.framework */; };
 		8512C29220C77EF300C76F73 /* MMPSilence.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8512C28F20C77EF200C76F73 /* MMPSilence.wav */; };
 		8512C29320C77EF300C76F73 /* MMPDeepSleepPreventer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8512C29120C77EF300C76F73 /* MMPDeepSleepPreventer.m */; };
 		85A35A0D20BBA1F3001D9C4A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A35A0C20BBA1F3001D9C4A /* AudioToolbox.framework */; };
@@ -1679,6 +1680,7 @@
 				E1715A001CFEECB7004AD6E5 /* CoreData.framework in Frameworks */,
 				E1B4D4951CE075E600311E4E /* CoreBluetooth.framework in Frameworks */,
 				E12BD29C1F568C4100E9C3AB /* GoogleMaps.framework in Frameworks */,
+				176FBDADD5B57D887B77CA99 /* Pods_Cowa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
