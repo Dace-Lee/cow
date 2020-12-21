@@ -28,6 +28,11 @@ THE SOFTWARE.
 
 Copyright (c) 2020 BaiduLBS
 
+## Bugly
+
+Copyright (C) 2017 Tencent Bugly, Inc. All rights reserved.
+
+
 ## CCHMapClusterController
 
 The MIT License (MIT)

@@ -28,5 +28,7 @@ target 'Cowa' do
 
     pod 'SwiftLocation', '~> 5.0.2'
     pod 'BaiduWalkNaviKit', '~> 6.0.0'
+    
+    pod 'Bugly'
 
 end

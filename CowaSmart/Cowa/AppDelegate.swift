@@ -10,6 +10,7 @@ import UIKit
 import CowaBLELib
 import GoogleMaps
 import SwiftyJSON
+import Bugly
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate , BMKGeneralDelegate , JPUSHRegisterDelegate{
@@ -71,6 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , BMKGeneralDelegate , JPU
 //            self.nslogToDocument()
 //        }
         
+        Bugly.start(withAppId: "1a7bd6956b")
         return true
     }
     
