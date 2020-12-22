@@ -3128,7 +3128,7 @@
 					E1B658691CD06C310032ED4A = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 7A6FL3AQ2G;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1220;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
