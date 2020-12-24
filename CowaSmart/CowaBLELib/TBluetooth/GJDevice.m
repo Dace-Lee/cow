@@ -215,8 +215,7 @@
         }
         NSString *buchong = [buchongStr substringToIndex:buchongStr.length-1];
         
-        NSString *dataStr = [NSString stringWithFormat:@"%@",data];
-        dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+        NSString *dataStr = [FFTool dataToHexString:data];
         NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
         [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
         //字符串截取
@@ -232,8 +231,7 @@
         cmdStr = [NSMutableString stringWithFormat:@"03,15,%@,%@,00,00,00,00,%@,%@,%@,%@",seqStr,stateFlag,indexStrHex,dataLenHex,dataString,buchong];
     }else{
         
-        NSString *dataStr = [NSString stringWithFormat:@"%@",data];
-        dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+        NSString *dataStr = [FFTool dataToHexString:data];
         NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
         [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
         //字符串截取

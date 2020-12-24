@@ -31,6 +31,10 @@
 //十六进制字符串转成NSData
 +(NSMutableData *)chengeHexToDataWithString:(NSString *)str withType:(int)type;
 
++ (NSMutableData *)hexStringToData:(NSString *)str;
+
++ (NSString *)dataToHexString:(NSData *)data;
+
 //字符串转十六进制
 + (NSString *)hexStringFromString:(NSString *)string;
 

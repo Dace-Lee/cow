@@ -178,6 +178,7 @@
 -(void)readVersion
 {
     NSMutableData *data = [[DataHandle sharedInstance] getVersion];
+    NSLog(@"%@", [NSString stringWithFormat:@"status readVersion %@" ,data]);
     [self.device send:data];
 }
 
@@ -194,6 +195,7 @@
 -(void)hostSearch
 {
     NSMutableData *data = [[DataHandle sharedInstance] getHost];
+    NSLog(@"%@", [NSString stringWithFormat:@"status hostSearch %@" ,data]);
     [self.device send:data];
 }
 
@@ -309,6 +311,7 @@
 -(void)startGetImei
 {
     NSMutableData *data = [[DataHandle sharedInstance] getImei];
+    NSLog(@"%@", [NSString stringWithFormat:@"status startGetImei %@" ,data]);
     [self.device send:data];
 }
 
@@ -619,11 +622,10 @@
 
 - (void)parseResponse {
     
-    //NSLog(@"response:%@",self.response);
+    NSString *resContent = [FFTool dataToHexString:self.response];
     
-    NSString *resContent = [NSString stringWithFormat:@"%@",self.response];
-    NSString *r1 = [resContent substringWithRange:NSMakeRange(1, resContent.length-2)];
-    NSMutableString *dataStr2 = [NSMutableString stringWithString:r1];
+    NSLog(@"response:%@",resContent);
+    NSMutableString *dataStr2 = [NSMutableString stringWithString:resContent];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr2.length)];
     
     if (self.isUpdating){

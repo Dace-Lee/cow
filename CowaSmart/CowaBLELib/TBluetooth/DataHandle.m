@@ -394,8 +394,7 @@
     
     
     
-    NSString *dataStr = [NSString stringWithFormat:@"%@",data];
-    dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+    NSString *dataStr = [FFTool dataToHexString:data];
     NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
     //字符串截取
@@ -537,8 +536,7 @@
     
     //20个0转ascii
     NSMutableData *cmdData = [@"00000000000000000000" dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *dataStr = [NSString stringWithFormat:@"%@",cmdData];
-    dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+    NSString *dataStr = [FFTool dataToHexString:cmdData];
     NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
     //字符串截取
@@ -607,8 +605,7 @@
     
     //20个0转ascii
     NSMutableData *cmdData = [@"00000000000000000000" dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *dataStr = [NSString stringWithFormat:@"%@",cmdData];
-    dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+    NSString *dataStr = [FFTool dataToHexString:cmdData];
     NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
     //字符串截取
@@ -658,8 +655,7 @@
     NSString *numLengthHex = [FFTool ToHex:num.length];
     
     NSMutableData *cmdData = [[NSString stringWithFormat:@"%@%@",num,zeroStr] dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *dataStr = [NSString stringWithFormat:@"%@",cmdData];
-    dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+    NSString *dataStr = [FFTool dataToHexString:cmdData];
     NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
     //字符串截取
@@ -703,8 +699,7 @@
     
     //20个0转ascii
     NSMutableData *cmdData = [@"00000000000000000000" dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *dataStr = [NSString stringWithFormat:@"%@",cmdData];
-    dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+    NSString *dataStr = [FFTool dataToHexString:cmdData];
     NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
     //字符串截取
@@ -755,8 +750,7 @@
     NSString *numLengthHex = [FFTool ToHex:num.length];
     
     NSMutableData *cmdData = [[NSString stringWithFormat:@"%@%@",num,zeroStr] dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *dataStr = [NSString stringWithFormat:@"%@",cmdData];
-    dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+    NSString *dataStr = [FFTool dataToHexString:cmdData];
     NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
     //字符串截取
@@ -843,8 +837,7 @@
     NSString *numLengthHex = [FFTool ToHex:num.length];
     
     NSMutableData *cmdData = [[NSString stringWithFormat:@"%@%@",num,zeroStr] dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *dataStr = [NSString stringWithFormat:@"%@",cmdData];
-    dataStr = [dataStr substringWithRange:NSMakeRange(1, dataStr.length-2)];
+    NSString *dataStr = [FFTool dataToHexString:cmdData];
     NSMutableString *dataStr2 = [NSMutableString stringWithString:dataStr];
     [dataStr2 replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, dataStr.length)];
     //字符串截取

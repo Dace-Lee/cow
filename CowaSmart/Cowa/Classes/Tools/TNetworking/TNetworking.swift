@@ -37,18 +37,18 @@ class TNetworking: NSObject {
             let manager = Alamofire.Session.default
             manager.session.configuration.timeoutIntervalForRequest = 10
             manager.request(url, method: .get, parameters: para, encoding: URLEncoding.default, headers: HTTPHeaders.init(dicToken ?? ["":""])).response { (response) in
-                let json : AnyObject! = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as AnyObject?
-                if nil != json {
-                    let res = responseData(request: response.request, response: response.response, json: json, error: response.error as NSError?, data: response.data)
-                   
-                        handler(res)
-                        for commonHandler in commonHandlers {
-                            commonHandler(res)
-                        }
+                if response.data != nil {
+                    let json : AnyObject! = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as AnyObject?
+                    if nil != json {
+                        let res = responseData(request: response.request, response: response.response, json: json, error: response.error as NSError?, data: response.data)
+                       
+                            handler(res)
+                            for commonHandler in commonHandlers {
+                                commonHandler(res)
+                            }
+                    }
                 }
-                
             }
-            
             return true
         } else {
             return false
